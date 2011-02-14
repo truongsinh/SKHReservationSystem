@@ -7,6 +7,7 @@ admin.autodiscover()
 urlpatterns = patterns('',
     # Example:
     # (r'^reservation/parking', include('SKHReseravationSystem.foo.urls')),
+    # (r'^reservation/parking/community', include('SKHReseravationSystem.foo.urls')),
 
     # Uncomment the admin/doc line below to enable admin documentation:
     # (r'^admin/doc/', include('django.contrib.admindocs.urls')),
