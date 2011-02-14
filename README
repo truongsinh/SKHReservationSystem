@@ -1,1 +1,12 @@
-This file was created by PyCharm 1.1.1 for binding GitHub repository
+Note:
+	0. username/password: admin
+	1. PyCharm auto saves
+	2. You need to run the sever once
+	3. Data types
+		["a", "list"] Lists are are mutable sequences of items of arbitrary types
+		("a", "tuple") Tuples are immutable sequences of items of arbitrary types
+		{"a", "set"} Sets are mutable containers of items of arbitrary types,
+			which are very much like mathematical sets, useful for operations like set intersection and union.
+		Dictionaries are mutable mappings tying keys and corresponding values
+	4. Indent the whole block
+	5. Run django console
