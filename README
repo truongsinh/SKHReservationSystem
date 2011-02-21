@@ -34,3 +34,4 @@ a = Apartment.objects.get_or_create(community = c, address = "42B", note = "This
 b = Apartment.objects.get(address = "42B")
 v = Profile.objects.get_or_create(apartment = b, plate_no = "TIS-517")
 ====
+8555
