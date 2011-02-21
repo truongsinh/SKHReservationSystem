@@ -10,10 +10,10 @@ Note:
 		Dictionaries are mutable mappings tying keys and corresponding values
 	4. Indent the whole block
 	5. Run django console
-
-	Vinh, just checked it
-	sinh
-	juss
-	sirak is here!again!
-	ok, now Fork1
-	fork2
+	6. Up to now, we have 3 apps:
+		Common
+		Parking
+		Update
+	7a.Keep all your command line codes (example: p = Parking.objects.create(...))
+	7b.Put all your test code into views of app Update, so when we have to reset database, we don't have to manually type those lines
+		only go to http://[path]/update and everything is back!
