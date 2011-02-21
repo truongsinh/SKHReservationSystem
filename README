@@ -19,3 +19,18 @@ Note:
 		only go to http://[path]/update and everything is back! (eg. create user, create parking area, create parking slot...)
 	8. Each object has two instances which will be created later
 	9. Method is_free() is linked to transaction that will be corrected later
+
+	==
+	Jussi
+	00
+	Consolelog
+
+from Common.models import Community, Apartment, Profile
+p = Community (address="ExampleRoad 15 Lahti")
+p.save()
+Apartment.objects.all()
+c = Community.objects.get(address="ExampleRoad 15 Lahti")
+a = Apartment.objects.get_or_create(community = c, address = "42B", note = "This is just a normal note." )
+b = Apartment.objects.get(address = "42B")
+v = Profile.objects.get_or_create(apartment = b, plate_no = "TIS-517")
+==
