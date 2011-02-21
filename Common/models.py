@@ -7,7 +7,7 @@ class Community(models.Model):
 class Apartment(models.Model):
 	community = models.ForeignKey(Community)
 	address = models.CharField(max_length=None)
-	note = models.TextField
+	note = models.TextField()
 
 class Profile(models.Model):
 	apartment = models.ForeignKey(Apartment)
