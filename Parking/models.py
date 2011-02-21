@@ -2,7 +2,7 @@ from django.db import models
 import datetime
 # Create your models here.
 class Community(models.Model):
-		address = models.CharField(max_length=100)
+	address = models.CharField(max_length=100)
 
 class Area(models.Model):
 	community = models.ForeignKey (Community)
@@ -38,4 +38,4 @@ class Transaction(models.Model):
 	paid = models.BooleanField()
 	note = models.TextField(max_length=500)
 	def is_history(self):
-		return self.paid 
+		return True

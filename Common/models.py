@@ -2,7 +2,7 @@ from django.db import models
 
 # Create your models here.
 class Community(models.Model):
-	address = models.CharField(max_length=127)
+	address = models.CharField(max_length = 127)
 
 class Apartment(models.Model):
 	community = models.ForeignKey(Community)
