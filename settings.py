@@ -96,3 +96,5 @@ INSTALLED_APPS = (
     'SKHReseravationSystem.Parking',
     'SKHReseravationSystem.Update',
 )
+
+AUTH_PROFILE_MODULE = 'Common.Profile'
