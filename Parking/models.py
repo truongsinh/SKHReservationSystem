@@ -1,26 +1,26 @@
 from django.db import models
 from django.contrib.auth.models import User
+from ..Common.models import *
 import datetime
 # Create your models here.
-class Community(models.Model):
-	address = models.CharField(max_length=100)
 
 class Area(models.Model):
 	community = models.ForeignKey (Community)
 	need_rental_agreement = models. BooleanField()
-	user_in_charge = models. CharField(max_length=100)
+	user_in_charge = models. CharField(max_length=127)
 	note = models.TextField()
 
 class Type(models.Model):
 	parking_area = models.ForeignKey(Area)
 	price_per_month = models.DecimalField(max_digits=5, decimal_places=2)
-	note = models.CharField(max_length=500)
+	note = models.CharField(max_length=127)
 
 class Slot(models.Model):
 	parking_area = models.ForeignKey(Area)
 	parking_type = models.ForeignKey(Type)
-	note = models.TextField(max_length=500)
+	note = models.TextField(max_length=127)
 	def is_free(self):
+		# Link to transaction ex: return Transaction.end_date ...
 		return True
 
 class Queue(models.Model):
@@ -29,7 +29,7 @@ class Queue(models.Model):
 	register_date = models.DateField('Registered Date')
 	decision_date = models.DateField('Decided Date')
 	decision = models.NullBooleanField()
-	note = models.TextField(max_length=500)
+	note = models.TextField(max_length=127)
 
 class Transaction(models.Model):
 	parking_slot = models.ForeignKey(Slot)
@@ -37,6 +37,6 @@ class Transaction(models.Model):
 	start_date = models.DateField('Start Date')
 	end_date = models.DateField('End Date')
 	paid = models.BooleanField()
-	note = models.TextField(max_length=500)
+	note = models.TextField(max_length=127)
 	def is_history(self):
-		return True
+		return self.end_date is not None
