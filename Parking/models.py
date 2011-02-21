@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from ..Common.models import *
 import datetime
 # Create your models here.
-
+# Each object has two instances which will be created later
 class Area(models.Model):
 	community = models.ForeignKey (Community)
 	need_rental_agreement = models. BooleanField()

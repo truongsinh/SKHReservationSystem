@@ -17,3 +17,5 @@ Note:
 	7a.Keep all your command line codes (example: p = Parking.objects.create(...))
 	7b.Put all your test code into views of app Update, so when we have to reset database, we don't have to manually type those lines
 		only go to http://[path]/update and everything is back! (eg. create user, create parking area, create parking slot...)
+	8. Each object has two instances which will be created later
+	9. Method is_free() is linked to transaction that will be corrected later
