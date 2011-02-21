@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 import datetime
 # Create your models here.
 class Community(models.Model):
@@ -23,7 +24,7 @@ class Slot(models.Model):
 		return True
 
 class Queue(models.Model):
-	user = models.ForeignKey('User')
+	user = models.ForeignKey(User)
 	community = models.ForeignKey(Community)
 	register_date = models.DateField('Registered Date')
 	decision_date = models.DateField('Decided Date')
