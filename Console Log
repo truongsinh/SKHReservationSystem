@@ -1,0 +1,6 @@
+from Common.models import Community, Apartment, Profile
+p = Community (address="ExampleRoad 15 Lahti")
+p.save()
+Apartment.objects.all()
+c = Community.objects.get(address="ExampleRoad 15 Lahti")
+a = Apartment.objects.get_or_create(community = c, address = "42B", note = "This is just a normal note." )
