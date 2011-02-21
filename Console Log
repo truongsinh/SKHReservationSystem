@@ -1,3 +1,5 @@
+Consolelog
+
 from Common.models import Community, Apartment, Profile
 p = Community (address="ExampleRoad 15 Lahti")
 p.save()
