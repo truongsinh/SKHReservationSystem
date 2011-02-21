@@ -13,7 +13,7 @@ class Area(models.Model):
 
 class Type(models.Model):
 	parking_area = models.ForeignKey(Area)
-	price_per_month = models.DecimalField(7,2)
+	price_per_month = models.DecimalField(max_digits=5, decimal_places=2)
 	note = models.CharField(max_length=500)
 
 class Slot(models.Model):
