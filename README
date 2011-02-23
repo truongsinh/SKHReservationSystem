@@ -1,4 +1,5 @@
 Note:
+	*. remeber to run http://.../reservation/update/ , it will flush the database and reload with new instances in the Update/views.py
 	0. username/password: admin
 	1. PyCharm auto saves
 	2. You need to run the sever once
@@ -21,17 +22,3 @@ Note:
 	9. Method is_free() is linked to transaction that will be corrected later
 
 	==
-	Jussi
-	00
-	Consolelog
-
-from Common.models import Community, Apartment, Profile
-p = Community (address="ExampleRoad 15 Lahti")
-p.save()
-Apartment.objects.all()
-c = Community.objects.get(address="ExampleRoad 15 Lahti")
-a = Apartment.objects.get_or_create(community = c, address = "42B", note = "This is just a normal note." )
-b = Apartment.objects.get(address = "42B")
-v = Profile.objects.get_or_create(apartment = b, plate_no = "TIS-517")
-====
-8555
