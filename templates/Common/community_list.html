@@ -1,0 +1,9 @@
+{% if community_list %}
+    <ul>
+    {% for community in community_list %}
+        <li><a href="/community/{{community.id }}/">{{ community.address }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No polls are available.</p>
+{% endif %}

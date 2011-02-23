@@ -15,12 +15,12 @@ from Parking.models import Queue
 
 def community_list(request):
 	# pagination later
-    community_list = Community.objects.all().order_by('-Community_address')
-    return render_to_response('Community/community_list.html', {'community_list': community_list })
+    community_list = Community.objects.all().order_by('address')
+    return render_to_response('Common/community_list.html', {'community_list': community_list })
 
 def community_detail (request, community_id):
     c = get_object_or_404(Community, pk=community_id)
-    return render_to_response('Community/community_detail.html', {'Community':c},
+    return render_to_response('Common/community_detail.html', {'Community':c},
                               context_instance=RequestContext(request))
     
 #def community_detail(request):
