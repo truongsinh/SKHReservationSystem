@@ -1,11 +1,17 @@
 # Create your views here.
 # .../parking/parking_area_id/parking_type_id/parking_slot_id
 
-# common view (read only)
-# 1. index (request, community_id, GET)
-# 2. detail (request, community_id, GET)
-# 3. reservation (request, community_id, GET)
-# 4. queue (request, community_id, GET)
+# 1. community_list (request, community_id, GET)
+#	community_address (list)
+# 2. community_detail (request, community_id, GET)
+#	link to reservation list (3)
+#	link to queue list
+#	form to apply for parking queue
+# 3. reservation_list (request, community_id, GET)
+#	user last name, plate number, star date, end date (each link to reservation_detail - 4)
+# 4. reservation_detail (request, transaction_id, GET)
+#	all the information, link back to???
+# 4. queue_list (request, community_id, GET)
 
 
 # view for admin
