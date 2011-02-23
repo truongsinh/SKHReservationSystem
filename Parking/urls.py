@@ -1,7 +1,8 @@
-from django.conf.urls.defaults import *
+'''from django.conf.urls.defaults import *
 
 urlpatterns = patterns('Parking.views',
-    #(r'^Area/$', index),
-	#(r'^Area/(?P<Area_id>\d+)/$', 'Community')
-	#(r'^Area/(?P<Area_id>\d+)/$', '')
+    url(r'^$', 'reservation_list'),
+	url(r'^(?P<transaction_id>\d+)/$', 'transaction_detail'),
+	url(r'^Area/(?P<Area_id>\d+)/$', ''),
 )
+'''

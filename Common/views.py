@@ -22,7 +22,6 @@ def community_detail (request, community_id):
     c = get_object_or_404(Community, pk=community_id)
     return render_to_response('Common/community_detail.html', {'Community':c},
                               context_instance=RequestContext(request))
-    
-#def community_detail(request):
-#	return HttpResponseRedirect(reverse('Common.community.views.resul', args=(community.id,)))
 
+def profile(request, user_id):
+	return render_to_response('profile.html')

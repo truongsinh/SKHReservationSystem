@@ -55,7 +55,22 @@
 # 3. reservation (request, community_id, GET)
 # 4. cancel (request, community_id, POST)
 # 5. homepageinfo ()
+from django.shortcuts import render_to_response
 
+def index(request, community_id):
+	return render_to_response('index.html')
 
-def index(request):
-    parking
+def queue_list(request, community_id):
+	return render_to_response('queue_list.html')
+
+def queue_detail(request, queue_id):
+	return render_to_response('queue_detail.html')
+
+def reservation_list(request, community_id):
+	return render_to_response('reservation_list.html')
+
+def reservation_add(request):
+	return render_to_response('reservation_add.html')
+
+def reservation_detail(request, transaction_id):
+	return render_to_response('reservation_detail.html')
