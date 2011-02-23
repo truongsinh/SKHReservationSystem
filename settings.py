@@ -1,6 +1,6 @@
 # Django settings for SKHReseravationSystem project.
 
-DEBUG = False
+DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
@@ -80,7 +80,8 @@ ROOT_URLCONF = 'SKHReseravationSystem.urls'
 import os
 dirnames = os.path.dirname(globals()["__file__"])
 TEMPLATE_DIRS = (
-	os.path.join(dirnames, 'templates'),)
+	os.path.join(dirnames, 'templates'),
+)
 
 INSTALLED_APPS = (
     'django.contrib.auth',

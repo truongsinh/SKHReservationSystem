@@ -1,6 +1,8 @@
 from django.conf.urls.defaults import *
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
+import Update
+
 admin.autodiscover()
 
 urlpatterns = patterns('',
@@ -12,9 +14,9 @@ urlpatterns = patterns('',
     # (r'^admin/doc/', include('django.contrib.admindocs.urls')),
 
     (r'^reservation/community/$', 'Common.views.community_list'),
-	url(r'^reservation/community/(?P<community_id>\d+)/$', 'Common.views.community_detail', name = "community_detail"),
+	#url(r'^reservation/community/(?P<community_id>\d+)/$', 'Common.views.community_detail', name = "community_detail"),
     #(r'^reservation/parking/', include('SKHReseravationSystem.Parking.urls')),
     #(r'^reservation/profile/', include('SKHReseravationSystem.Common.urls')),
-    (r'^reservation/update/','Update.views.update'),
-    (r'^reservation/admin/', include(admin.site.urls)),
+    (r'^reservation/update/$', 'Update.views.update'),
+    #(r'^reservation/admin/', include(admin.site.urls)),
 )

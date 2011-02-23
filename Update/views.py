@@ -1,7 +1,6 @@
 # Create your views here.
 from django.http import HttpResponse
 from django.core import management
-management.call_command('flush', verbosity=0, interactive=False)
 from settings import DEBUG
 
 if DEBUG:
