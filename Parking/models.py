@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-from ..Common.models import *
+from Common.models import *
 import datetime
 # Create your models here.
 # Each object has two instances which will be created later

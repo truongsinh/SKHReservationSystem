@@ -57,3 +57,5 @@
 # 5. homepageinfo ()
 
 
+def index(request):
+    parking
