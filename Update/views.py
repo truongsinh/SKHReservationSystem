@@ -33,5 +33,5 @@ if DEBUG:
 		p1 = Profile(apartment = a1, plate_no = "TIS-517");p1.user_id = 1;p1.save()
 		return HttpResponse(response)
 else:
-   #
-	pass
+	def update(request):
+		return HttpResponse("Invalid")
