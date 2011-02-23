@@ -11,8 +11,10 @@ urlpatterns = patterns('',
     # Uncomment the admin/doc line below to enable admin documentation:
     # (r'^admin/doc/', include('django.contrib.admindocs.urls')),
 
-    (r'^reservation/parking/', include('SKHReseravationSystem.Parking.url')),
-    (r'^reservation/profile/', include('SKHReseravationSystem.Common.url')),
-    (r'^reservation/update/', include('SKHReseravationSystem.Update.url')),
+    (r'^reservation/common/$', 'Common.views.community_list'),
+	(r'^reservation/common/(?P<community_id>\d+)/$', 'Common.views.community_detail'),
+    (r'^reservation/parking/', include('SKHReseravationSystem.Parking.urls')),
+    #(r'^reservation/profile/', include('SKHReseravationSystem.Common.urls')),
+    (r'^reservation/update/', include('SKHReseravationSystem.Update.urls')),
     (r'^reservation/admin/', include(admin.site.urls)),
 )

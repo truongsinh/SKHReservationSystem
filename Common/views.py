@@ -13,9 +13,10 @@ from Parking.models import Queue
 #	link to queue list (4)
 #	form to apply for parking queue (send POST request to add_queue (7))
 
-def index(request):
+def community_list(request):
+	# pagination later
     community_list = Community.objects.all().order_by('-Community_address')
-    return render_to_response('Community/index.html', {'community_list': community_list })
+    return render_to_response('Community/community_list.html', {'community_list': community_list })
 
 def community_detail (request, community_id):
     c = get_object_or_404(Community, pk=community_id)
