@@ -58,19 +58,29 @@
 from django.shortcuts import render_to_response
 
 def index(request, community_id):
-	return render_to_response('index.html')
+	return render_to_response('Parking/index.html')
 
 def queue_list(request, community_id):
-	return render_to_response('queue_list.html')
+	return render_to_response('Parking/queue_list.html')
+
+def queue_add(request):
+	return render_to_response('Parking/queue_add.html')
 
 def queue_detail(request, queue_id):
-	return render_to_response('queue_detail.html')
+	return render_to_response('Parking/queue_detail.html')
 
 def reservation_list(request, community_id):
-	return render_to_response('reservation_list.html')
+	return render_to_response('Parking/reservation_list.html')
 
 def reservation_add(request):
-	return render_to_response('reservation_add.html')
+	return render_to_response('Parking/reservation_add.html')
 
 def reservation_detail(request, transaction_id):
-	return render_to_response('reservation_detail.html')
+	return render_to_response('Parking/reservation_detail.html')
+
+
+def area_list(request, community_id):
+	return render_to_response('Parking/area_list.html')
+
+def area_detail(request, area_id):
+	return render_to_response('Parking/area_detail.html')

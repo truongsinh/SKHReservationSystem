@@ -1,8 +1,6 @@
 # Create your views here.
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
-from django.core.urlresolvers import reverse
-from django.http import HttpResponseRedirect, HttpResponse
 
 from Common.models import Community, Apartment, Profile
 from Parking.models import Queue
@@ -18,10 +16,10 @@ def community_list(request):
     community_list = Community.objects.all().order_by('address')
     return render_to_response('Common/community_list.html', {'community_list': community_list })
 
-def community_detail (request, community_id):
+def community_detail(request, community_id):
     c = get_object_or_404(Community, pk=community_id)
     return render_to_response('Common/community_detail.html', {'Community':c},
                               context_instance=RequestContext(request))
 
 def profile(request, user_id):
-	return render_to_response('profile.html')
+	return render_to_response('Common/profile.html')
