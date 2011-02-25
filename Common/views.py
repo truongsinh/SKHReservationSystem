@@ -1,6 +1,8 @@
 # Create your views here.
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
+from django.http import HttpResponseRedirect, HttpResponse
+from django.core.urlresolvers import reverse
 
 from Common.models import Community, Apartment, Profile
 from Parking.models import Queue
@@ -21,5 +23,11 @@ def community_detail(request, community_id):
     return render_to_response('Common/community_detail.html', {'Community':c},
                               context_instance=RequestContext(request))
 
+def community_detail(request, community_id):
+	return HttpResponseRedirect(reverse('<a href="Common/community_detail/1945">Reservation list</a>' ))
+
+
+
+
 def profile(request, user_id):
-	return render_to_response('Common/profile.html')
+	return render_to_response(reverse('Common/profile.html'))
