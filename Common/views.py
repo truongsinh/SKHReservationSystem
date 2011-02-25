@@ -44,11 +44,6 @@ def community_detail(request, community_id):
                               context_instance=RequestContext(request),
 							  )
 
-def community_detail(request, community_id):
-	return HttpResponseRedirect(reverse('<a href="Common/community_detail/1945">Reservation list</a>' ))
-
-
-
 
 def profile(request, user_id):
 	return render_to_response(reverse('Common/profile.html'))
