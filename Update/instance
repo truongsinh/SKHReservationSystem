@@ -1,0 +1,91 @@
+>>> from Parking.models import Area, Slot, Type, Queue, Transaction
+>>> from Common.models import Community
+>>> c = Community.objects.get_or_create(address="ExampleRoad 15")
+>>> c
+(<Community: Community object>, True)
+>>> c = Community.objects.get(address="ExampleRoad 15")
+>>> c
+<Community: Community object>
+>>> c = Community.objects.get(address="ExampleRoad 15")
+>>> c
+<Community: Community object>
+>>> a1 = Area(community = c, )
+>>> a1 = Area(need_rental_agreement = 'Yes')
+ a1 = Area()
+>>> a1.community = c
+>>> a1.need_rental_agreement = True
+>>> from django.contrib.auth.models import User
+>>> u1 = User(first_name = "Jussi")
+>>> u1.last_name = "SDJFJ"
+>>> u1.save()
+>>> u1
+<User: >
+>>> u1.id
+2
+>>> a1.user_in_charge = u1
+>>> a1.community_id = 1
+>>> a1.community
+<Community: Community object>
+>>> a1.save()
+>>> a1.save()
+>>> a1.user_in_charge.add(u1)
+>>> a1.save()
+
+>>> a2 = Area()
+>>> a2.community_id = 2
+>>> a2.need_rental_agreement = False
+>>> a2.user_in_charge = u1
+>>> a2.note = "JDFLDF"
+>>> a2.save()
+>>> a2
+<Area: Area object>
+
+>>> Area.objects.all()
+[<Area: Area object>, <Area: Area object>]
+>>> u2 = User(first_name = "Sinh")
+>>> u2 = User(last_name = "Tran")
+>>> u2.save()
+
+c = Community.objects.get(address="ExampleRoad 15")
+>>> a1
+<Area: Area object>
+>>> roofair = Type()
+>>> roofair.community = c
+>>> roofair.Area = a1
+>>> roofair.parking_area_id = 1
+>>> roofair.price_per_month = "50"
+>>> roofair.note = "SADFDF"
+>>> roofair.save()
+>>> roofair
+<Type: Type object>
+
+>>> c = Community.objects.get(address="ExampleRoad 15")
+>>> a1
+<Area: Area object>
+>>> openair = Type()
+>>> openair.community = c
+>>> openair.Area = a1
+>>> openair.parking_area_id = 2
+>>> openair.price_per_month = "30"
+>>> openair.note = "asdfsdf"
+>>> openair.save()
+>>> openair
+<Type: Type object>
+
+>>> c = Community.objects.get(address="ExampleRoad 15")
+>>> a1
+<Area: Area object>
+>>> openair
+<Type: Type object>
+>>> Slot1 = Slot()
+>>> Slot1.parking_area_id = 2
+>>> openair.id
+2
+>>> Slot1.parking_type_id = 2
+>>> Slot1.note = "ASDFSDF"
+>>> Slot.is_free()
+>>> Slot1.save()
+>>> Slot1
+<Slot: Slot object>
+
+
