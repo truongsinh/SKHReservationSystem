@@ -5,19 +5,19 @@ import datetime
 # Create your models here.
 # Each object has two instances which will be created later
 class Area(models.Model):
-	community = models.ForeignKey (Community)
-	need_rental_agreement = models. BooleanField()
-	user_in_charge = models. CharField(max_length=127)
+	community = models.ForeignKey(Community)
+	need_rental_agreement = models.BooleanField()
+	user_in_charge = models.ManyToManyField(User)
 	note = models.TextField()
 	def __unicode__(self):
-		return self.community
+		return self.note
 
 class Type(models.Model):
 	parking_area = models.ForeignKey(Area)
 	price_per_month = models.DecimalField(max_digits=5, decimal_places=2)
 	note = models.CharField(max_length=127)
 	def __unicode__(self):
-		return self.parking_area
+		return self.note
 
 class Slot(models.Model):
 	parking_area = models.ForeignKey(Area)

@@ -1,6 +1,7 @@
 # Create your views here.
 from django.http import HttpResponse
 from django.core import management
+from Parking.models import Area, Type, Slot
 from settings import DEBUG
 
 if DEBUG:
@@ -10,27 +11,82 @@ if DEBUG:
 		response = ""
 
 		#flush all the data in database
-		response += ">>> manage.py flush<br />"
+		response += "Flushing database<br />"
 		management.call_command('flush', verbosity=1, interactive=False)
 
+		response += 'Creating USER admin<br />'
+		u1 = User()
+		u1.username = "admin"
+		u1.set_password("admin")
+		u1.is_staff = True
+		u1.is_active = True
+		u1.is_superuser = True
+		u1.save()
 
-		#create instances for Common model
+		response += 'Creating USER admin2<br />'
+		u2 = User()
+		u2.username = "admin2"
+		u2.set_password("admin2")
+		u2.is_staff = True
+		u2.is_active = True
+		u2.is_superuser = True
+		u2.save()
 
-
-		response += '>>> u1 = User();u1.username = "admin";u1.is_staff = True;u1.is_active = True;u1.is_superuser = True;u1.set_password("admin");u1.save()<br />'
-		u1 = User();u1.username = "admin";u1.is_staff = True;u1.is_active = True;u1.is_superuser = True;u1.set_password("admin");u1.save()
-
-		response += '>>> u2 = User();u2.username = "admin2";u2.is_staff = True;u2.is_active = True;u2.is_superuser = True;u2.set_password("admin2");u2.save()<br />'
-		u2 = User();u2.username = "admin2";u2.is_staff = True;u2.is_active = True;u2.is_superuser = True;u2.set_password("admin2");u2.save()
-
-		response += '>>> c1 = Community.objects.get_or_create(address="ExampleRoad 15 Lahti")[0]<br />'
+		response += 'Creating COMMUNITY 1<br />'
 		c1 = Community.objects.get_or_create(address="ExampleRoad 15 Lahti")[0]
 
-		response += '>>> a1 = Apartment.objects.get_or_create(community = c1, address = "42B", note = "This is just a normal note." )[0]<br />'
+		response += 'Creating COMMUNITY 2<br />'
+		c2 = Community.objects.get_or_create(address="ExampleRoad 152 Turku")[0]
+
+		response += 'Creating AREA 1<br />'
 		a1 = Apartment.objects.get_or_create(community = c1, address = "42B", note = "This is just a normal note." )[0]
 
-		response += '>>> p1 = Profile.objects.get_or_create(user = u, apartment = a1, plate_no = "TIS-517")[0]<br />'
+		response += 'Creating AREA 2<br />'
+		a2 = Apartment.objects.get_or_create(community = c1, address = "37F", note = "Another note" )[0]
+
+		response += 'Creating PROFILE 1<br />'
 		p1 = Profile(apartment = a1, plate_no = "TIS-517");p1.user_id = 1;p1.save()
+
+		response += 'Creating AREA 1<br />'
+		a1 = Area()
+		a1.community = c1
+		a1.need_rental_agreement = True
+		a1.user_in_charge.add(u1)
+		a1.user_in_charge.add(u2)
+		a1.save()
+
+		response += 'Creating AREA 2<br />'
+		a2 = Area()
+		a2.community_id = 2
+		a2.need_rental_agreement = False
+		a2.user_in_charge.add(u1)
+		a2.note = "JDFLDF"
+		a2.save()
+
+		response += 'Creating TYPE roofair<br />'
+		roofair = Type()
+		roofair.community = c1
+		roofair.Area = a1
+		roofair.parking_area_id = 1
+		roofair.price_per_month = "50"
+		roofair.note = "SADFDF"
+		roofair.save()
+
+		response += 'Creating TYPE openair<br />'
+		openair = Type()
+		openair.community = c1
+		openair.Area = a1
+		openair.parking_area_id = 2
+		openair.price_per_month = "30"
+		openair.note = "asdfsdf"
+		openair.save()
+
+		response += 'Creating SLOT 1<br />'
+		Slot1 = Slot()
+		Slot1.parking_area_id = 2
+		Slot1.note = "ASDFSDF"
+		Slot1.save()
+
 		return HttpResponse(response)
 else:
 	def update(request):
