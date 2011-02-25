@@ -9,11 +9,15 @@ class Area(models.Model):
 	need_rental_agreement = models. BooleanField()
 	user_in_charge = models. CharField(max_length=127)
 	note = models.TextField()
+	def __unicode__(self):
+		return self.community
 
 class Type(models.Model):
 	parking_area = models.ForeignKey(Area)
 	price_per_month = models.DecimalField(max_digits=5, decimal_places=2)
 	note = models.CharField(max_length=127)
+	def __unicode__(self):
+		return self.parking_area
 
 class Slot(models.Model):
 	parking_area = models.ForeignKey(Area)
@@ -22,6 +26,8 @@ class Slot(models.Model):
 	def is_free(self):
 		# Link to transaction ex: return Transaction.end_date ...
 		return True
+	def __unicode__(self):
+		return self.note
 
 class Queue(models.Model):
 	user = models.ForeignKey(User)
@@ -30,6 +36,8 @@ class Queue(models.Model):
 	decision_date = models.DateField('Decided Date', blank=True, null=True)
 	decision = models.NullBooleanField()
 	note = models.TextField(max_length=127)
+	def __unicode__(self):
+		return self.community
 	def link(self):
 		return reverse(Parking.views.queue_detail, args=[self.id])
 
@@ -42,3 +50,5 @@ class Transaction(models.Model):
 	note = models.TextField(max_length=127)
 	def is_history(self):
 		return self.end_date is not None
+	def __unicode__(self):
+		return self.parking_slot
