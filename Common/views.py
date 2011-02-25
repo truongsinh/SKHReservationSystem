@@ -25,17 +25,22 @@ def community_list(request):
 def community_detail(request, community_id):
 	c = get_object_or_404(Community, pk=community_id)
 	class queue_add_form(forms.Form):
-		community = forms.ModelChoiceField(queryset=Common.models.Community.objects.all(), initial=community_id)
+		community = forms.ModelChoiceField(queryset=Community.objects.all(), initial=community_id)
 		note = forms.CharField(widget=forms.Textarea)
 	f = queue_add_form()
 	l = reverse(Parking.views.queue_add)
 	s = 'Register'
-	return render_to_response('Common/community_detail.html',
+	r = reverse('Parking.views.reservation_list', args=[c.id])
+	q = reverse('Parking.views.queue_list', args=[c.id])
+ 	return render_to_response('Common/community_detail.html',
 							  {
 								'community':c,
 								'form':f,
 								'action':l,
-								'submit':s,},
+								'submit':s,
+								'reservation':r,
+								'queue':q,
+								},
                               context_instance=RequestContext(request),
 							  )
 
