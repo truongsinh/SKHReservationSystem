@@ -8,6 +8,8 @@ class Community(models.Model):
 	address = models.CharField(max_length = 127)
 	def link(self):
 		return reverse(Common.views.community_detail, args=[self.id])
+	def __unicode__(self):
+		return self.address
 
 class Apartment(models.Model):
 	community = models.ForeignKey(Community)

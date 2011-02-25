@@ -33,4 +33,6 @@ urlpatterns = patterns('',
     (r'^reservation/update/$', 'Update.views.update'),
     (r'^reservation/admin/doc/', include('django.contrib.admindocs.urls')),
     (r'^reservation/admin/', include(admin.site.urls)),
+
+	#(r'^', 'Common.views.PageNotFound'),
 )

@@ -1,4 +1,6 @@
 from Common.models import *
+from django.core.urlresolvers import reverse
+import Parking.views
 import datetime
 # Create your models here.
 # Each object has two instances which will be created later
@@ -24,16 +26,18 @@ class Slot(models.Model):
 class Queue(models.Model):
 	user = models.ForeignKey(User)
 	community = models.ForeignKey(Community)
-	register_date = models.DateField('Registered Date')
-	decision_date = models.DateField('Decided Date')
+	register_date = models.DateField('Registered Date', auto_now_add=True)
+	decision_date = models.DateField('Decided Date', blank=True, null=True)
 	decision = models.NullBooleanField()
 	note = models.TextField(max_length=127)
+	def link(self):
+		return reverse(Parking.views.queue_detail, args=[self.id])
 
 class Transaction(models.Model):
 	parking_slot = models.ForeignKey(Slot)
 	parking_queue = models.ForeignKey(Queue)
-	start_date = models.DateField('Start Date')
-	end_date = models.DateField('End Date')
+	start_date = models.DateField('Start Date', auto_now_add=True)
+	end_date = models.DateField('End Date', blank=True, null=True)
 	paid = models.BooleanField()
 	note = models.TextField(max_length=127)
 	def is_history(self):
