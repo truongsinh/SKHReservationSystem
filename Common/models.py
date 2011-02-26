@@ -6,6 +6,7 @@ import Common.views
 # Create your models here.
 class Community(models.Model):
 	address = models.CharField(max_length = 127)
+	note = models.TextField()
 	def link(self):
 		return reverse(Common.views.community_detail, args=[self.id])
 	def __unicode__(self):
@@ -22,5 +23,6 @@ class Profile(models.Model):
 	user = models.OneToOneField(User, primary_key=True)
 	apartment = models.ForeignKey(Apartment)
 	plate_no = models.CharField(max_length = 127)
+	note = models.TextField()
 	def __unicode__(self):
 		return self.plate_no

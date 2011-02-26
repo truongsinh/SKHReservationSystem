@@ -13,7 +13,6 @@ class Area(models.Model):
 		return self.note
 
 class Type(models.Model):
-	parking_area = models.ForeignKey(Area)
 	price_per_month = models.DecimalField(max_digits=5, decimal_places=2)
 	note = models.CharField(max_length=127)
 	def __unicode__(self):
