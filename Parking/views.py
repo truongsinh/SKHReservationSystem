@@ -68,19 +68,25 @@ def queue_list(request, community_id, page):
 	return render_to_response('Parking/queue_list.html')
 
 
+class queue_add_form(forms.Form):
+	community = forms.ModelChoiceField(queryset=Community.objects.all())
+	note = forms.CharField(widget=forms.Textarea)
+
 def queue_add(request):
 	if request.method == 'POST':
-		class queue_add_form(forms.Form):
-			community = forms.ModelChoiceField(queryset=Community.objects.all())
-			note = forms.CharField(widget=forms.Textarea)
 		f = queue_add_form(request.POST) # A form bound to the POST data
-        if f.is_valid():
+		if f.is_valid():
 			q = Queue()
 			# what user id?
 			q.user_id = 1
 			q.community = f.cleaned_data['community']
 			q.note = f.cleaned_data['note']
 			q.save()
+			return HttpResponseRedirect(q.link())
+		else:
+			#push error message to message mechanism
+			#set initial value for valid value
+			#redirect to the forms
 			return HttpResponseRedirect(q.link())
 	else:
 		raise Http404
