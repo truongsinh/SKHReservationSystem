@@ -17,7 +17,7 @@ from django import forms
 import Parking
 
 
-def community_list(request):
+def community_list(request, page):
 	# pagination later
 	community_list = Community.objects.all().order_by('address')
 	return render_to_response('Common/community_list.html', {'community_list': community_list })

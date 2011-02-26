@@ -64,7 +64,7 @@ from Parking.models import Queue
 def index(request, community_id):
 	return render_to_response('Parking/index.html')
 
-def queue_list(request, community_id):
+def queue_list(request, community_id, page):
 	return render_to_response('Parking/queue_list.html')
 
 
@@ -90,7 +90,7 @@ def queue_detail(request, queue_id):
 	u = q.user
 	return render_to_response('Parking/queue_detail.html', {'u':u, 'q':q,}, )
 
-def reservation_list(request, community_id):
+def reservation_list(request, community_id, page):
 	return render_to_response('Parking/reservation_list.html')
 
 def reservation_add(request):
@@ -100,7 +100,7 @@ def reservation_detail(request, transaction_id):
 	return render_to_response('Parking/reservation_detail.html')
 
 
-def area_list(request, community_id):
+def area_list(request, community_id, page):
 	return render_to_response('Parking/area_list.html')
 
 def area_detail(request, area_id):
