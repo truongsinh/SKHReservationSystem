@@ -19,6 +19,11 @@ class Apartment(models.Model):
 	note = models.TextField()
 	def __unicode__(self):
 		return u'%s %s' % (self.community, self.address)
+	def _city(self):
+		return self.community.city
+	city = property(_city)
+	#def address2(self):
+		#return self.community.address
 
 
 class Profile(models.Model):
