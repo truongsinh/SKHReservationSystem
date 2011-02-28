@@ -34,7 +34,8 @@ urlpatterns = patterns('',
 
 
 	#url(r'^Area/(?P<Area_id>\d+)/$', ''),
-    (r'^reservation/account/(?P<user_id>\d+)/$', 'Common.views.profile'),
+    (r'^reservation/account/(?P<user_id>\d+)/$', 'Common.views.account'),
+    (r'^reservation/account/profile/$', 'Common.views.profile'),
 	(r'^reservation/account/login/$', 'django.contrib.auth.views.login', {'template_name': 'Common/login.html'}),
 	(r'^reservation/account/logout/$', 'Common.views.logout'),
 

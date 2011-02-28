@@ -1,9 +1,9 @@
-{% if community_list %}
-    <ul>
-    {% for community in community_list %}
-        <li><a href="{{ community.link }}">{{ community.address }}</a></li>
-    {% endfor %}
-    </ul>
-{% else %}
-    <p>There is currently no community.</p>
-{% endif %}
+{% extends "Common/base.html" %}{% block content %}
+
+<ul>{% for community in community_list %}
+	<li><a href="{{ community.link }}">{{ community.address }}</a></li>
+{%  empty %}
+	<li>There is currently no community.</li>
+{% endfor %}</ul>
+
+{% endblock %}

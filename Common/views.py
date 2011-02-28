@@ -1,12 +1,8 @@
 # Create your views here.
-from django.core.urlresolvers import reverse
-from django.forms.widgets import HiddenInput
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
-from django.http import HttpResponseRedirect, HttpResponse
+from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
-
-from Common.models import Community, Apartment, Profile
 from django import forms
 # 1. community_list (request, community_id, GET)
 #	community_address (list)
@@ -14,6 +10,7 @@ from django import forms
 #	link to reservation list (3)
 #	link to queue list (4)
 #	form to apply for parking queue (send POST request to add_queue (7))
+from Common.models import Community
 import Parking
 from  django.contrib.auth.forms import AuthenticationForm
 
@@ -57,14 +54,18 @@ def community_detail(request, community_id):
 							  )
 
 
-def profile(request, user_id):
-	return render_to_response(reverse('Common/profile.html'))
+def account(request, user_id):
+	return render_to_response('Common/profile.html')
+
+def profile(request):
+	user_id = request.user.user_id
+	return render_to_response('Common/profile.html')
 
 def logout(request, next):
 	logout(request)
 	if True:
 		#if anonymous can view previous page
-		HttpResponseRedirect
+		HttpResponseRedirect(next)
 	else:
 		#else redirect to main page
 		HttpResponseRedirect(next)
