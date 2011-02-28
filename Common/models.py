@@ -17,7 +17,8 @@ class Apartment(models.Model):
 	address = models.CharField(max_length = 127)
 	note = models.TextField()
 	def __unicode__(self):
-		return self.address
+		return u'%s %s' % (self.community, self.address)
+
 
 class Profile(models.Model):
 	user = models.OneToOneField(User, primary_key=True)
