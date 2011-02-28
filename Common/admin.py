@@ -12,7 +12,7 @@ class CommunityAdmin (admin.ModelAdmin):
 
 class ApartmentAdmin (admin.ModelAdmin):
 	list_display = ('community', 'address' )
-	#list_filter    = (Community., Community.postal_code)
+	##list_filter    = (Community., Community.postal_code)
 
 fieldsets = [
 	('',				{'fields': ['']}),
