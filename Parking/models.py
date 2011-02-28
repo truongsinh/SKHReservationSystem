@@ -19,14 +19,16 @@ class Type(models.Model):
 		return self.note
 
 class Slot(models.Model):
+	id = models.IntegerField (primary_key=True)
 	parking_area = models.ForeignKey(Area)
 	parking_type = models.ForeignKey(Type)
 	note = models.TextField(max_length=127)
 	def is_free(self):
 		# Link to transaction ex: return Transaction.end_date ...
 		return True
+	is_free.short_description = 'Is free?'
 	def __unicode__(self):
-		return self.note
+		return "%d" % self.id
 
 class Queue(models.Model):
 	user = models.ForeignKey(User)
