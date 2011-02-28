@@ -17,6 +17,10 @@ from django import forms
 import Parking
 from  django.contrib.auth.forms import AuthenticationForm
 
+'''class UserForm:
+	f = AuthenticationForm
+	return f'''
+
 def community_list(request, page):
 	# pagination later
 	community_list = Community.objects.all().order_by('address')
@@ -31,6 +35,7 @@ def community_detail(request, community_id):
 	if request.user.is_authenticated():
     # Do something for authenticated users.
 		a = "Welcome %s" % request.user.last_name
+		a += "Log out"
 	else:
 		a = AuthenticationForm()
     # Do something for anonymous users.
@@ -54,3 +59,13 @@ def community_detail(request, community_id):
 
 def profile(request, user_id):
 	return render_to_response(reverse('Common/profile.html'))
+
+def logout(request, next):
+	logout(request)
+	if True:
+		#if anonymous can view previous page
+		HttpResponseRedirect
+	else:
+		#else redirect to main page
+		HttpResponseRedirect(next)
+    # Redirect to a success page.
