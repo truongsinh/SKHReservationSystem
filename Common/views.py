@@ -15,7 +15,7 @@ from django import forms
 #	link to queue list (4)
 #	form to apply for parking queue (send POST request to add_queue (7))
 import Parking
-
+from  django.contrib.auth.forms import AuthenticationForm
 
 def community_list(request, page):
 	# pagination later
@@ -28,6 +28,12 @@ def community_detail(request, community_id):
 		community = forms.ModelChoiceField(queryset=Community.objects.all(), initial=community_id)
 		note = forms.CharField(widget=forms.Textarea)
 	f = queue_add_form()
+	if request.user.is_authenticated():
+    # Do something for authenticated users.
+		a = "Welcome %s" % request.user.last_name
+	else:
+		a = AuthenticationForm()
+    # Do something for anonymous users.
 	l = reverse(Parking.views.queue_add)
 	s = 'Register'
 	r = reverse('Parking.views.reservation_list', args=[c.id])
@@ -35,6 +41,7 @@ def community_detail(request, community_id):
  	return render_to_response('Common/community_detail.html',
 							  {
 								'community':c,
+								'account':a,
 								'form':f,
 								'action':l,
 								'submit':s,

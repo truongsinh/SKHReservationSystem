@@ -22,7 +22,6 @@ urlpatterns = patterns('',
     (r'^reservation/community/(?P<community_id>\d+)/parking/reservation/$', 'Parking.views.reservation_list', {'page': '1'}),
     (r'^reservation/community/(?P<community_id>\d+)/parking/reservation/page_(?P<page>\d+)$', 'Parking.views.reservation_list'),
 
-    (r'^reservation/profile/(?P<user_id>\d+)/$', 'Common.views.profile'),
 
 
     (r'^reservation/parking/area/(?P<area_id>\d+)/$', 'Parking.views.area_detail'),
@@ -35,12 +34,10 @@ urlpatterns = patterns('',
 
 
 	#url(r'^Area/(?P<Area_id>\d+)/$', ''),
+    (r'^reservation/account/(?P<user_id>\d+)/$', 'Common.views.profile'),
+	(r'^reservation/account/login/$', 'django.contrib.auth.views.login', {'template_name': 'login.html'}),
 
-
-    #(r'^reservation/parking/', include('SKHReseravationSystem.Parking.urls')),
-    (r'^reservation/update/$', 'Update.views.update'),
     (r'^reservation/admin/doc/', include('django.contrib.admindocs.urls')),
     (r'^reservation/admin/', include(admin.site.urls)),
-
-	#(r'^', 'Common.views.PageNotFound'),
+    (r'^reservation/update/$', 'Update.views.update'),
 )
