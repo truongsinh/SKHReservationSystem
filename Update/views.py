@@ -57,7 +57,7 @@ if DEBUG:
 		p1.user_id = 1
 		p1.save()
 
-		#Creating PROFILE for user 2
+		#Creating PROFILE for user 2 fgfgfg
 		response += 'Creating USER admin2<br />'
 		u2 = User()
 		u2.username = "admin2"
