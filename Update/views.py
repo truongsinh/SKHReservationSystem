@@ -16,7 +16,7 @@ if DEBUG:
 
 
 		response += 'Creating COMMUNITY 1<br />'
-		c1 = Community.objects.get_or_create(address="ExampleRoad 15 Lahti")[0]
+		c1 = Community.objects.get_or_create(address="ExampleRoad 15", city="Lahti", postal_code="15110")[0]
 
 		response += 'Creating COMMUNITY 2<br />'
 		c2 = Community.objects.get_or_create(address="ExampleRoad 152 Turku")[0]

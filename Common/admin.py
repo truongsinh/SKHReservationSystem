@@ -12,7 +12,7 @@ class CommunityAdmin (admin.ModelAdmin):
 
 class ApartmentAdmin (admin.ModelAdmin):
 	list_display = ('community', 'address' )
-	list_filter    = ('city', )
+	list_filter    = ('community', )
 	fieldsets = [
 	('Address information',				{'fields': ['community', 'address']}),
 	('Additional information', 				{'fields': ['note']}),
