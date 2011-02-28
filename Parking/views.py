@@ -99,6 +99,7 @@ def queue_detail(request, queue_id):
 def reservation_list(request, community_id, page):
 	return render_to_response('Parking/reservation_list.html')
 
+
 def reservation_add(request):
 	return render_to_response('Parking/reservation_add.html')
 
