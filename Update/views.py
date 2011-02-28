@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from django.core import management
 from Parking.models import Area, Type, Slot, Queue, Transaction
 from settings import DEBUG
+from django.contrib.auth.models import Group, Permission
 
 if DEBUG:
 	#
@@ -26,8 +27,18 @@ if DEBUG:
 		response += 'Creating APARTMENT 2<br />'
 		a2 = Apartment.objects.get_or_create(community = c1, address = "37F", note = "Another note" )[0]
 
-		
 		#creating GROUP??? config permissions
+		response += 'Creating GROUP for users<br />'
+		#creating group name
+		g1 = Group(name = 'SKH Staff/ admin')
+
+		#creating group permissions
+		#p1 = Permission.objects.create('')
+		#add permissions to the group
+		g1.permissions.add(p1)
+		g1.save()
+
+
 		response += 'Creating USER admin<br />'
 		u1 = User()
 		u1.username = "admin"
@@ -38,6 +49,8 @@ if DEBUG:
 		u1.is_staff = True
 		u1.is_active = True
 		u1.is_superuser = True
+		u1.groups.add(g1)
+		u1.user_permissions.add('SKHReservationSystem.add_Community')
 		u1.save()
 		response += 'Creating PROFILE 1<br />'
 		p1 = Profile(apartment = a1, plate_no = "TIS-517")
@@ -197,8 +210,8 @@ if DEBUG:
 		q1 = Queue()
 		q1.community = c1
 		q1.user_id = 1
-		q1.register_date = "10.12.10"
-		q1.decision_date = "12.12.10"
+		q1.register_date = "2011-06-13"
+		q1.decision_date = "2011-06-14"
 		q1.decision = True
 		q1.note = "user 1 is registered"
 		q1.save()
@@ -208,8 +221,8 @@ if DEBUG:
 		q2 = Queue()
 		q2.community = c2
 		q2.user_id = 2
-		q2.register_date = "11.2.11"
-		q2.decision_date = "14.2.11"
+		q2.register_date = "2011-11-04"
+		q2.decision_date = "2011-11-06"
 		q2.decision = True
 		q2.note = "user 2 is registered"
 		q2.save()
@@ -223,8 +236,8 @@ if DEBUG:
 		#t1.queue = q1 # ???? or reservation list
 		t1.type = rooftop
 		t1.slot = Slot1
-		t1.start_date = "13.12.10"
-		t1.end_date = "29.12.10"
+		t1.start_date = "2011-03-08"
+		t1.end_date = "2011-08-09"
 		t1.paid = True
 		t1.note = "u1: already paid"
 		t1.save()
@@ -237,8 +250,8 @@ if DEBUG:
 		#t2.queue = q2 # ???? or reservation list
 		t2.type = openair
 		t2.slot = Slot3
-		t2.start_date = "15.2.11"
-		t2.end_date = "29.3.11"
+		t2.start_date = "2011-11-06"
+		t2.end_date = "2011-12-19"
 		t2.paid = False
 		t2.note = "Reminder for u2 to pay the invoice"
 		t2.save()
