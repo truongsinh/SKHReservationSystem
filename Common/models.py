@@ -6,12 +6,14 @@ import Common.views
 # Create your models here.
 class Community(models.Model):
 	address = models.CharField(max_length = 127)
+	city = models.CharField (max_length = 127)
+	postal_code = models.CharField (max_length = 127)
 	note = models.TextField()
 	def link(self):
 		return reverse(Common.views.community_detail, args=[self.id])
 	def __unicode__(self):
-		return self.address
-
+		return u'%s %s %s' % (self.address, self.city, self.postal_code)
+	
 class Apartment(models.Model):
 	community = models.ForeignKey(Community)
 	address = models.CharField(max_length = 127)
