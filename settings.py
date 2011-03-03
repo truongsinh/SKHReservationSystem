@@ -75,7 +75,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
 )
 
-ROOT_URLCONF = 'SKHReseravationSystem.urls'
+ROOT_URLCONF = 'SKHReservationSystem.urls'
 
 import os
 dirnames = os.path.dirname(globals()["__file__"])
