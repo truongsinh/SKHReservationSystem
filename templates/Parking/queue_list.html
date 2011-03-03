@@ -1,0 +1,9 @@
+{% extends "Common/base.html" %}{% block content %}
+
+<ul>{% for queue in queue_list %}
+	<li><a href="{{ queue.link }}">{{ queue.user.last_name }}</a></li>
+{%  empty %}
+	<li>There is currently no queue.</li>
+{% endfor %}</ul>
+
+{% endblock %}

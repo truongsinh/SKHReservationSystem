@@ -65,7 +65,8 @@ def index(request, community_id):
 	return render_to_response('Parking/index.html')
 
 def queue_list(request, community_id, page):
-	return render_to_response('Parking/queue_list.html')
+	queue_list = Queue.objects.filter(community = community_id).order_by('community')
+	return render_to_response('Parking/queue_list.html',{'queue_list': queue_list })
 
 
 class queue_add_form(forms.Form):
@@ -97,6 +98,7 @@ def queue_detail(request, queue_id):
 	return render_to_response('Parking/queue_detail.html', {'u':u, 'q':q,}, )
 
 def reservation_list(request, community_id, page):
+
 	return render_to_response('Parking/reservation_list.html')
 
 
