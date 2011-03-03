@@ -51,7 +51,6 @@ if DEBUG:
 		u1.is_staff = True
 		u1.is_active = True
 		u1.is_superuser = True
-		u1.groups.add(g1)
 		#u1.user_permissions.add('SKHReservationSystem.add_Community')
 		u1.save()
 		u1.groups.add(g1)
@@ -215,7 +214,6 @@ if DEBUG:
 		q1 = Queue()
 		q1.community = c1
 		q1.user_id = 1
-		q1.register_date = "2011-06-13"
 		q1.decision_date = "2011-06-14"
 		q1.decision = True
 		q1.note = "user 1 is registered"
@@ -226,26 +224,38 @@ if DEBUG:
 		q2 = Queue()
 		q2.community = c2
 		q2.user_id = 2
-		q2.register_date = "2011-11-04"
-		q2.decision_date = "2011-11-06"
-		q2.decision = True
+		q2.decision = False
 		q2.note = "user 2 is registered"
 		q2.save()
 
 		#Creating TRANSACTION
+		'''
+	user = models.ForeignKey(User)
+	community = models.ForeignKey(Community)
+	register_date = models.DateField('Registered Date', auto_now_add=True)
+	decision_date = models.DateField('Decided Date', blank=True, null=True)
+
+	parking_slot = models.ForeignKey(Slot)
+	parking_queue = models.ForeignKey(Queue)
+	start_date = models.DateField('Start Date', auto_now_add=True)
+	end_date = models.DateField('End Date', blank=True, null=True)
+	paid = models.BooleanField()
+	note = models.TextField(max_length=127)'''
+
+
 		#creating transaction for user 1 in community 1
 		t1 = Transaction()
-		t1.community = c1 # Community? Area?
-		t1.area = a1
-		t1.user = u1
+		#t1.parking_slot = Slo
+		#t1.area = a1
+		#t1.user = u1
 		#t1.queue = q1 # ???? or reservation list
 		t1.type = rooftop
-		t1.slot = Slot1
+		t1.parking_slot = Slot1
 		t1.start_date = "2011-03-08"
 		t1.end_date = "2011-08-09"
 		t1.paid = True
 		t1.note = "u1: already paid"
-		t1.save()
+		#t1.save()
 
 		#creating transaction for user 2 community 2
 		t2 = Transaction()
@@ -254,12 +264,12 @@ if DEBUG:
 		t2.user = u2
 		#t2.queue = q2 # ???? or reservation list
 		t2.type = openair
-		t2.slot = Slot3
+		t2.parking_slot = Slot3
 		t2.start_date = "2011-11-06"
 		t2.end_date = "2011-12-19"
 		t2.paid = False
 		t2.note = "Reminder for u2 to pay the invoice"
-		t2.save()
+		#t2.save()
 
 		return HttpResponse(response)
 else:

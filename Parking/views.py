@@ -58,14 +58,14 @@
 from django.http import HttpResponseRedirect, Http404
 from django.shortcuts import render_to_response
 from django import forms
-#from Common.models import Community
-from Parking.models import Queue
+from Common.models import Community
+from Parking.models import Queue, Transaction
 
 def index(request, community_id):
 	return render_to_response('Parking/index.html')
 
 def queue_list(request, community_id, page):
-	queue_list = Queue.objects.filter(community = community_id).order_by('community')
+	queue_list = Queue.objects.filter(community = community_id)
 	return render_to_response('Parking/queue_list.html',{'queue_list': queue_list })
 
 
@@ -104,7 +104,12 @@ def queue_detail(request, queue_id):
 	return render_to_response('Parking/queue_detail.html', {'u':u, 'q':q,}, )
 
 def reservation_list(request, community_id, page):
-
+	queue_list = Queue.objects.filter(community = community_id).exclude(decision_date = None)
+	reservation_list = []
+	for queue in queue_list:
+		tmp = Transaction.objects.get(queue = queue)
+		if not tmp.is_history():
+			reservation_list += [tmp]
 	return render_to_response('Parking/reservation_list.html')
 
 

@@ -35,7 +35,9 @@ class Queue(models.Model):
 	community = models.ForeignKey(Community)
 	register_date = models.DateField('Registered Date', auto_now_add=True)
 	decision_date = models.DateField('Decided Date', blank=True, null=True)
+	#
 	decision = models.NullBooleanField()
+	#
 	note = models.TextField(max_length=127)
 	def __unicode__(self):
 		return self.community
@@ -53,6 +55,3 @@ class Transaction(models.Model):
 		return self.end_date is not None
 	def __unicode__(self):
 		return self.parking_slot
-	def _community(self):
-		return self.parking_queue.id
-	community = property(_community)
