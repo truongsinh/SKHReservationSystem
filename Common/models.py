@@ -25,10 +25,10 @@ class Apartment(models.Model):
 	#def address2(self):
 		#return self.community.address
 
-class Profile(models.Model):
-	user = models.OneToOneField(User, primary_key=True)
-	apartment = models.ForeignKey(Apartment)
+class Profile(User):
+	#user = models.OneToOneField(User, primary_key=True)
+	apartment = models.ForeignKey(Apartment, null=True)
 	plate_no = models.CharField(max_length = 127)
 	note = models.TextField()
 	def __unicode__(self):
-		return self.plate_no
+		return self.get_full_name()

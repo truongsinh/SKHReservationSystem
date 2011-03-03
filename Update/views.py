@@ -40,7 +40,7 @@ if DEBUG:
 
 
 		response += 'Creating USER admin<br />'
-		u1 = User()
+		u1 = Profile()
 		u1.username = "admin"
 		u1.set_password("admin")
 		u1.first_name = "Kari"
@@ -49,19 +49,16 @@ if DEBUG:
 		u1.is_staff = True
 		u1.is_active = True
 		u1.is_superuser = True
+		u1.apartment = a1
+		u1.plate_no = "TIS-517"
 		#u1.user_permissions.add('SKHReservationSystem.add_Community')
 		u1.save()
 		u1.groups.add(g1)
 		u1.has_perm('SKHReservationSystem.add_Common.community')
 
-		response += 'Creating PROFILE 1<br />'
-		p1 = Profile(apartment = a1, plate_no = "TIS-517")
-		p1.user_id = 1
-		p1.save()
-
 		#Creating PROFILE for user 2 fgfgfg
 		response += 'Creating USER admin2<br />'
-		u2 = User()
+		u2 = Profile()
 		u2.username = "admin2"
 		u2.set_password("admin2")
 		u2.first_name = "Vinh"
@@ -74,7 +71,7 @@ if DEBUG:
 
 		#Creating PROFILE for user 3 - SKH staff
 		response += 'Creating USER SKH staff 1<br />'
-		u3 = User()
+		u3 = Profile()
 		u3.username = "skh1"
 		u3.set_password("skh1")
 		u3.first_name = "Jussi"
@@ -87,7 +84,7 @@ if DEBUG:
 		
 		#Creating PROFILE for user 4 - SKH staff
 		response += 'Creating USER SKH staff 2<br />'
-		u4 = User()
+		u4 = Profile()
 		u4.username = "skh2"
 		u4.set_password("skh2")
 		u4.first_name = "Sirak"

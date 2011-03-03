@@ -19,9 +19,9 @@ class ApartmentAdmin (admin.ModelAdmin):
 		]
 
 class ProfileAdmin (admin.ModelAdmin):
-	list_display = ('user', 'apartment', 'plate_no')
+	list_display = ('first_name', 'apartment', 'plate_no')
 	fieldsets = [
-	('User information',				{'fields': ['user','apartment', 'plate_no']}),
+	('User information',				{'fields': ['first_name','apartment', 'plate_no']}),
 	('Additional information', 				{'fields': ['note']}),
 		]
 
