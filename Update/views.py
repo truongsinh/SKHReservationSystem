@@ -28,8 +28,8 @@ if DEBUG:
 		response += 'Creating APARTMENT 2<br />'
 		a2 = Apartment.objects.get_or_create(community = c1, address = "37F", note = "Another note" )[0]
 
-		response += 'Creating USER1 in SKHStaff<br />'
-		u1 = User()
+		response += 'Creating USER1 in SKHStaff/admin<br />'
+		u1 = Profile()
 		u1.username = "admin"
 		u1.set_password("admin")
 		u1.first_name = "Kari"
@@ -37,18 +37,14 @@ if DEBUG:
 		u1.email = "truongsinh.tran@gmail.com"
 		u1.is_staff = True
 		u1.is_active = True
-		u1.is_superuser = False
+		u1.is_superuser = True
+		u1.apartment = a1
+		u1.plate_no = "TIS-517"
 		u1.save()
-		u1.has_perm('SKHReservationSystem.add_Common.community')
-
-		response += 'Creating PROFILE 1<br />'
-		p1 = Profile(apartment = a1, plate_no = "TIS-517")
-		p1.user_id = 1
-		p1.save()
 
 		#Creating PROFILE for user 2
-		response += 'Creating USER2 in SKHStaff<br />'
-		u2 = User()
+		response += 'Creating USER2 in SKHStaff/admin<br />'
+		u2 = Profile()
 		u2.username = "admin2"
 		u2.set_password("admin2")
 		u2.first_name = "Vinh"
@@ -61,7 +57,7 @@ if DEBUG:
 
 		#Creating PROFILE for user 3 - Board of Community
 		response += 'Creating USER3 in Board of Community<br />'
-		u3 = User()
+		u3 = Profile()
 		u3.username = "board1"
 		u3.set_password("board1")
 		u3.first_name = "Jussi"
@@ -74,7 +70,7 @@ if DEBUG:
 		
 		#Creating PROFILE for user 4 - Traffic warden
 		response += 'Creating USER4 in Traffic warden<br />'
-		u4 = User()
+		u4 = Profile()
 		u4.username = "traffic1"
 		u4.set_password("traffic2")
 		u4.first_name = "Sirak"
@@ -87,7 +83,7 @@ if DEBUG:
 
 		#Creating PROFILE for user 5 - Residents
 		response += 'Creating USER5 in Residents<br />'
-		u5 = User()
+		u5 = Profile()
 		u5.username = "resident1"
 		u5.set_password("resident1")
 		u5.first_name = "sadfodjf"
@@ -100,7 +96,7 @@ if DEBUG:
 		'''
 		#Creating PROFILE for user 6 - Guest
 		response += 'Creating USER6 in Residents<br />'
-		u6 = User()
+		u6 = Profile()
 		u6.username = "guest1"
 		u6.set_password("guest1")
 		u6.first_name = "sdf"
