@@ -1,6 +1,5 @@
 from Common.models import *
 from django.core.urlresolvers import reverse
-import Parking.views
 import datetime
 # Create your models here.
 # Each object has two instances which will be created later
@@ -19,7 +18,7 @@ class Type(models.Model):
 		return self.note
 
 class Slot(models.Model):
-	id = models.IntegerField (primary_key=True)
+	name = models.CharField (max_length=127)
 	parking_area = models.ForeignKey(Area)
 	parking_type = models.ForeignKey(Type)
 	note = models.TextField(max_length=127)
@@ -31,27 +30,25 @@ class Slot(models.Model):
 		return "%d" % self.id
 
 class Queue(models.Model):
-	user = models.ForeignKey(User)
-	community = models.ForeignKey(Community)
+	user = models.ForeignKey(User, null=True)
+	community = models.ForeignKey(Community, null=True)
 	register_date = models.DateField('Registered Date', auto_now_add=True)
 	decision_date = models.DateField('Decided Date', blank=True, null=True)
-	#
-	decision = models.NullBooleanField()
-	#
-	note = models.TextField(max_length=127)
+	note_queue = models.TextField(max_length=127)
 	def __unicode__(self):
 		return self.community
 	def link(self):
-		return reverse(Parking.views.queue_detail, args=[self.id])
+		return reverse('Parking.views.queue_detail', args=[self.id])
 
-class Transaction(models.Model):
+class Transaction(Queue):
 	parking_slot = models.ForeignKey(Slot)
-	parking_queue = models.ForeignKey(Queue)
 	start_date = models.DateField('Start Date', auto_now_add=True)
 	end_date = models.DateField('End Date', blank=True, null=True)
 	paid = models.BooleanField()
-	note = models.TextField(max_length=127)
+	note_transaction = models.TextField(max_length=127)
 	def is_history(self):
 		return self.end_date is not None
 	def __unicode__(self):
 		return self.parking_slot
+	def link(self):
+		return reverse('Parking.views.reservation_detail', args=[self.id])

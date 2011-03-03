@@ -25,7 +25,6 @@ class Apartment(models.Model):
 	#def address2(self):
 		#return self.community.address
 
-
 class Profile(models.Model):
 	user = models.OneToOneField(User, primary_key=True)
 	apartment = models.ForeignKey(Apartment)

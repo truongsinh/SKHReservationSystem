@@ -1,16 +1,14 @@
 # Create your views here.
 from django.http import HttpResponse
-from django.core import management
-from Parking.models import Area, Type, Slot, Queue, Transaction
 from settings import DEBUG
-from django.contrib.auth.models import Group, Permission
 
 if DEBUG:
 	#
 	def update(request):
-		from Common.models import Community, Apartment, Profile
-		from Parking.models import Transaction, Queue
-		from django.contrib.auth.models import User
+		from django.core import management
+		from django.contrib.auth.models import User, Group, Permission
+		from Common.models import *
+		from Parking.models import *
 		response = ""
 		#flush all the data in database
 		response += "Flushing database<br />"
@@ -138,9 +136,6 @@ if DEBUG:
 		#creating TYPE in Area 1 in Community 1
 		response += 'Creating TYPE rooftop<br />'
 		rooftop = Type()
-		rooftop.community = c1
-		rooftop.Area = a1
-		rooftop.parking_area_id = 1
 		rooftop.price_per_month = "50"
 		rooftop.note = "SADFDF"
 		rooftop.save()
@@ -148,9 +143,6 @@ if DEBUG:
 		#creating TYPE in Area 2 in Community 1
 		response += 'Creating TYPE openair<br />'
 		openair = Type()
-		openair.community = c1
-		openair.Area = a1
-		openair.parking_area_id = 2
 		openair.price_per_month = "30"
 		openair.note = "asdfsdf"
 		openair.save()
@@ -158,9 +150,6 @@ if DEBUG:
 		#creating TYPE in Area 1 in Community 2
 		response += 'Creating TYPE rooftop<br />'
 		rooftop = Type()
-		rooftop.community = c2
-		rooftop.Area = a3
-		rooftop.parking_area_id = 1
 		rooftop.price_per_month = "50"
 		rooftop.note = "SADFDF"
 		rooftop.save()
@@ -168,9 +157,6 @@ if DEBUG:
 		#creating TYPE in Area 2 in Community 2
 		response += 'Creating TYPE openair<br />'
 		openair = Type()
-		openair.community = c2
-		openair.Area = a4
-		openair.parking_area_id = 2
 		openair.price_per_month = "30"
 		openair.note = "asdfsdf"
 		openair.save()
@@ -178,10 +164,11 @@ if DEBUG:
 		#creating slot1 in parking_area_2
 		response += 'Creating SLOT 1<br />'
 		Slot1 = Slot()
-		Slot1.parking_area_id = 1
+		Slot1.parking_area = a1
 		Slot1.parking_type = rooftop
 		Slot1.note = "ASDFSDF"
 		Slot1.save()
+		response += 'Creating SLOT 1<br />'
 
 		#creating slot2 in parking_area_2
 		response += 'Creating SLOT 2<br />'
@@ -212,12 +199,12 @@ if DEBUG:
 		#creating queue1 for community 1
 		response += 'Creating QUEUE <br />'
 		q1 = Queue()
-		q1.community = c1
 		q1.user_id = 1
+		q1.community = c1
 		q1.decision_date = "2011-06-14"
 		q1.decision = True
-		q1.note = "user 1 is registered"
-		q1.save()
+		q1.note_queue = "user 1 is registered"
+		#q1.save()
 
 		#creating queue2 for community 2
 		response += 'Creating QUEUE <br />'
@@ -225,7 +212,7 @@ if DEBUG:
 		q2.community = c2
 		q2.user_id = 2
 		q2.decision = False
-		q2.note = "user 2 is registered"
+		q2.note_queue = "user 2 is registered"
 		q2.save()
 
 		#Creating TRANSACTION
@@ -245,31 +232,35 @@ if DEBUG:
 
 		#creating transaction for user 1 in community 1
 		t1 = Transaction()
-		#t1.parking_slot = Slo
-		#t1.area = a1
-		#t1.user = u1
-		#t1.queue = q1 # ???? or reservation list
-		t1.type = rooftop
+		#
+		t1.id = q1.id
+		t1.user = q1.user
+		t1.community = q1.community
+		t1.register_date = q1.register_date
+		t1.decision_date = q1.decision_date
+		t1.note_queue = q1.note_queue
+		#
 		t1.parking_slot = Slot1
-		t1.start_date = "2011-03-08"
-		t1.end_date = "2011-08-09"
 		t1.paid = True
-		t1.note = "u1: already paid"
-		#t1.save()
+		t1.note_transaction = "u1: already paid"
+		t1.save()
 
 		#creating transaction for user 2 community 2
 		t2 = Transaction()
-		t2.community = c2 # Community? Area?
-		t2.area = a2
-		t2.user = u2
-		#t2.queue = q2 # ???? or reservation list
-		t2.type = openair
+		#
+		t2.id = q2.id
+		t2.user = q2.user
+		t2.community = q2.community
+		t2.register_date = q2.register_date
+		t2.decision_date = q2.decision_date
+		t2.note_queue = q2.note_queue
+		#
 		t2.parking_slot = Slot3
 		t2.start_date = "2011-11-06"
 		t2.end_date = "2011-12-19"
 		t2.paid = False
-		t2.note = "Reminder for u2 to pay the invoice"
-		#t2.save()
+		t2.note_transaction = "Reminder for u2 to pay the invoice"
+		t2.save()
 
 		return HttpResponse(response)
 else:
