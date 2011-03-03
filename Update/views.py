@@ -297,27 +297,27 @@ if DEBUG:
 		can_view_apartment = Permission(name='Can view apartment', codename='can_view_apartment',
                        content_type=apartment_per)
 		can_view_apartment.save()
-		can_modify_apartment = Permission(name='Can modify apartment', codename='can_modify_apartment',
+		can_change_apartment = Permission(name='Can change apartment', codename='can_change_apartment',
                        content_type=apartment_per)
-		can_modify_apartment.save()
+		can_change_apartment.save()
 
 		#creating permissions for community model
 		community_per = ContentType.objects.get(app_label='Common', model='community')
 		can_view_community = Permission(name='Can view community', codename='can_view_community',
                        content_type=community_per)
 		can_view_community.save()
-		can_modify_community = Permission(name='Can modify community', codename='can_modify_community',
+		can_change_community = Permission(name='Can change community', codename='can_change_community',
                        content_type=community_per)
-		can_modify_community.save()
+		can_change_community.save()
 
 		#creating permissions for profile model
 		profile_per = ContentType.objects.get(app_label='Common', model='profile')
 		can_view_profile = Permission(name='Can view profile', codename='can_view_profile',
                        content_type=profile_per)
 		can_view_profile.save()
-		can_modify_profile = Permission(name='Can modify profile', codename='can_modify_profile',
+		can_change_profile = Permission(name='Can change profile', codename='can_change_profile',
                        content_type=profile_per)
-		can_modify_profile.save()
+		can_change_profile.save()
 
 #creating permissions for models in Parking app
 		#creating permissions for area model
@@ -325,41 +325,41 @@ if DEBUG:
 		can_view_area = Permission(name='Can view area', codename='can_view_area',
                        content_type=area_per)
 		can_view_area.save()
-		can_modify_area = Permission(name='Can modify area', codename='can_modify_area',
+		can_change_area = Permission(name='Can change area', codename='can_change_area',
                        content_type=area_per)
-		can_modify_area.save()
+		can_change_area.save()
 		#creating permissions for type model
 		type_per = ContentType.objects.get(app_label='Parking', model='type')
 		can_view_type = Permission(name='Can view type', codename='can_view_type',
                        content_type=type_per)
 		can_view_type.save()
-		can_modify_type = Permission(name='Can modify type', codename='can_modify_type',
+		can_change_type = Permission(name='Can change type', codename='can_change_type',
                        content_type=type_per)
-		can_modify_type.save()
+		can_change_type.save()
 		#creating permissions for slot model
 		slot_per = ContentType.objects.get(app_label='Parking', model='slot')
 		can_view_slot = Permission(name='Can view slot', codename='can_view_slot',
                        content_type=slot_per)
 		can_view_slot.save()
-		can_modify_slot = Permission(name='Can modify slot', codename='can_modify_slot',
+		can_change_slot = Permission(name='Can change slot', codename='can_change_slot',
                        content_type=slot_per)
-		can_modify_slot.save()
+		can_change_slot.save()
 		#creating permissions for queue model
 		queue_per = ContentType.objects.get(app_label='Parking', model='queue')
 		can_view_queue = Permission(name='Can view queue', codename='can_view_queue',
                        content_type=queue_per)
 		can_view_queue.save()
-		can_modify_queue = Permission(name='Can modify queue', codename='can_modify_queue',
+		can_change_queue = Permission(name='Can change queue', codename='can_change_queue',
                        content_type=queue_per)
-		can_modify_queue.save()
+		can_change_queue.save()
 		#creating permissions for transaction model
 		transaction_per = ContentType.objects.get(app_label='Parking', model='transaction')
 		can_view_transaction = Permission(name='Can view transaction', codename='can_view_transaction',
                        content_type=transaction_per)
 		can_view_transaction.save()
-		can_modify_transaction = Permission(name='Can modify transaction', codename='can_modify_transaction',
+		can_change_transaction = Permission(name='Can change transaction', codename='can_change_transaction',
                        content_type=transaction_per)
-		can_modify_transaction.save()
+		can_change_transaction.save()
 
 		
 		#assigning permission to each group
@@ -372,14 +372,14 @@ if DEBUG:
 		g1.permissions.add(can_view_slot)
 		g1.permissions.add(can_view_queue)
 		g1.permissions.add(can_view_transaction)
-		g1.permissions.add(can_modify_apartment)
-		g1.permissions.add(can_modify_community)
-		g1.permissions.add(can_modify_profile)
-		g1.permissions.add(can_modify_area)
-		g1.permissions.add(can_modify_type)
-		g1.permissions.add(can_modify_slot)
-		g1.permissions.add(can_modify_queue)
-		g1.permissions.add(can_modify_transaction)
+		g1.permissions.add(can_change_apartment)
+		g1.permissions.add(can_change_community)
+		g1.permissions.add(can_change_profile)
+		g1.permissions.add(can_change_area)
+		g1.permissions.add(can_change_type)
+		g1.permissions.add(can_change_slot)
+		g1.permissions.add(can_change_queue)
+		g1.permissions.add(can_change_transaction)
 		#Group 2 - Residents
 		g2.permissions.add(can_view_apartment)
 		g2.permissions.add(can_view_community)
@@ -427,9 +427,9 @@ if DEBUG:
 		#checking user permissions
 		u1.has_perm('Common.can_view_apartment')
 		# True
-		u2.has_perm('Common.can_modify_community')
+		u2.has_perm('Common.can_change_community')
 		#True
-		u3.has_perm('Common.can_modify_area')
+		u3.has_perm('Common.can_change_area')
 		#False
 		u4.has_perm('Common.can_view_apartment')
 		#True
