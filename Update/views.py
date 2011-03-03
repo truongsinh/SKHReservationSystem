@@ -8,7 +8,9 @@ from django.contrib.auth.models import Group, Permission
 if DEBUG:
 	#
 	def update(request):
-		from Common.models import Community, Apartment, Profile;from django.contrib.auth.models import User
+		from Common.models import Community, Apartment, Profile
+		from Parking.models import Transaction, Queue
+		from django.contrib.auth.models import User
 		response = ""
 		#flush all the data in database
 		response += "Flushing database<br />"

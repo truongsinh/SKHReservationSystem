@@ -53,3 +53,6 @@ class Transaction(models.Model):
 		return self.end_date is not None
 	def __unicode__(self):
 		return self.parking_slot
+	def _community(self):
+		return self.parking_queue.id
+	community = property(_community)

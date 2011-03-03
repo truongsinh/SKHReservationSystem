@@ -58,7 +58,7 @@
 from django.http import HttpResponseRedirect, Http404
 from django.shortcuts import render_to_response
 from django import forms
-from Common.models import Community
+#from Common.models import Community
 from Parking.models import Queue
 
 def index(request, community_id):
