@@ -39,7 +39,6 @@ if DEBUG:
 		#g1.permissions.add(p1)
 
 
-
 		response += 'Creating USER admin<br />'
 		u1 = User()
 		u1.username = "admin"
@@ -50,6 +49,8 @@ if DEBUG:
 		u1.is_staff = True
 		u1.is_active = True
 		u1.is_superuser = True
+		u1.groups.add(g1)
+		#u1.user_permissions.add('SKHReservationSystem.add_Community')
 		u1.save()
 		u1.groups.add(g1)
 		u1.has_perm('SKHReservationSystem.add_Common.community')

@@ -59,7 +59,7 @@ def account(request, user_id):
 
 def profile(request):
 	user_id = request.user.user_id
-	return render_to_response('Common/profile.html')
+	return account(request, user_id)
 
 def logout(request, next):
 	logout(request)

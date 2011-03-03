@@ -74,20 +74,26 @@ class queue_add_form(forms.Form):
 	note = forms.CharField(widget=forms.Textarea)
 
 def queue_add(request):
+	# the request is legal if and only if it is 'POST'
 	if request.method == 'POST':
-		f = queue_add_form(request.POST) # A form bound to the POST data
+		# then, bound the request into defined form
+		f = queue_add_form(request.POST)
+		# if the requested form is valid
 		if f.is_valid():
+			# then, add the request into database
 			q = Queue()
 			# what user id?
 			q.user_id = 1
 			q.community = f.cleaned_data['community']
 			q.note = f.cleaned_data['note']
+			# remember to save it!
 			q.save()
+			# and then redirect the browser to the queue_detail, q.link is defined in model
 			return HttpResponseRedirect(q.link())
 		else:
-			#push error message to message mechanism
-			#set initial value for valid value
-			#redirect to the forms
+			# push error message to message mechanism
+			# set initial value for valid value
+			# abd redirect to the forms, for the user to refill
 			return HttpResponseRedirect(q.link())
 	else:
 		raise Http404
