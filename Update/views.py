@@ -95,7 +95,7 @@ if DEBUG:
 		u5.save()
 		'''
 		#Creating PROFILE for user 6 - Guest
-		response += 'Creating USER6 in Residents<br />'
+		response += 'Creating PROFILE 6 in Residents<br />'
 		u6 = Profile()
 		u6.username = "guest1"
 		u6.set_password("guest1")
