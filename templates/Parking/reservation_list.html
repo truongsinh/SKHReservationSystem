@@ -1,0 +1,11 @@
+{% extends "Common/base.html" %}{% block content %}
+
+<ul>{% for transaction in reservation_list %}
+	{% if transaction.end_date == None %}
+	<li><a href="{{ transaction.link }}">{{ transaction.user.last_name}},{{ transaction.start_date}} {{ transaction.note_transaction}}</a></li>
+	{% endif %}
+	{%  empty %}
+	<li>There currently is no reservations</li>
+{% endfor %}</ul>
+
+{% endblock %}

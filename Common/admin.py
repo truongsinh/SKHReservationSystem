@@ -17,14 +17,17 @@ class ApartmentAdmin (admin.ModelAdmin):
 	('Address information',				{'fields': ['community', 'address']}),
 	('Additional information', 				{'fields': ['note']}),
 		]
-
+	#We have to figure out how to search/filter apartments using city names, postal codes or streetnames
 class ProfileAdmin (admin.ModelAdmin):
-	list_display = ('first_name', 'apartment', 'plate_no')
+	list_display = ('last_name', 'first_name', 'apartment', 'plate_no')
 	fieldsets = [
-	('User information',				{'fields': ['first_name','apartment', 'plate_no']}),
-	('Additional information', 				{'fields': ['note']}),
+	('User information',				{'fields': ['first_name','last_name','apartment', 'plate_no', 'username','password','email']}),
+	('Permissions', 					{'fields': ['is_active', 'is_staff', 'is_superuser','user_permissions',]}),
+	('Important dates',					{'fields': ['date_joined', 'last_login',]}),
+	('Groups',							{'fields': ['groups']}),
+	('Additional information', 			{'fields': ['note']}),
 		]
-
+	#Password change form doesn't work when using admin interface and changing the password from Profile
 admin.site.register(Community, CommunityAdmin)
 admin.site.register(Apartment, ApartmentAdmin)
 admin.site.register(Profile, ProfileAdmin)

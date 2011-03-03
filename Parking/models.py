@@ -6,7 +6,7 @@ import datetime
 class Area(models.Model):
 	community = models.ForeignKey(Community)
 	need_rental_agreement = models.BooleanField()
-	user_in_charge = models.ManyToManyField(User)
+	user_in_charge = models.ManyToManyField(Profile)
 	note = models.TextField()
 	def __unicode__(self):
 		return self.note
@@ -30,13 +30,13 @@ class Slot(models.Model):
 		return "%d" % self.id
 
 class Queue(models.Model):
-	user = models.ForeignKey(User, null=True)
+	user = models.ForeignKey(Profile, null=True)
 	community = models.ForeignKey(Community, null=True)
 	register_date = models.DateField('Registered Date', auto_now_add=True)
 	decision_date = models.DateField('Decided Date', blank=True, null=True)
 	note_queue = models.TextField(max_length=127)
 	def __unicode__(self):
-		return self.community
+		return self.user.last_name
 	def link(self):
 		return reverse('Parking.views.queue_detail', args=[self.id])
 
@@ -49,6 +49,6 @@ class Transaction(Queue):
 	def is_history(self):
 		return self.end_date is not None
 	def __unicode__(self):
-		return self.parking_slot
+		return self.user.plate_no
 	def link(self):
 		return reverse('Parking.views.reservation_detail', args=[self.id])

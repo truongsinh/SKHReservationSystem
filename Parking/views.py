@@ -104,19 +104,15 @@ def queue_detail(request, queue_id):
 	return render_to_response('Parking/queue_detail.html', {'u':u, 'q':q,}, )
 
 def reservation_list(request, community_id, page):
-	queue_list = Queue.objects.filter(community = community_id).exclude(decision_date = None)
-	reservation_list = []
-	for queue in queue_list:
-		tmp = Transaction.objects.get(queue = queue)
-		if not tmp.is_history():
-			reservation_list += [tmp]
-	return render_to_response('Parking/reservation_list.html')
+	reservation_list = Transaction.objects.filter(community = community_id)
+	return render_to_response('Parking/reservation_list.html', {'reservation_list': reservation_list })
 
 
 def reservation_add(request):
 	return render_to_response('Parking/reservation_add.html')
 
 def reservation_detail(request, transaction_id):
+	
 	return render_to_response('Parking/reservation_detail.html')
 
 
