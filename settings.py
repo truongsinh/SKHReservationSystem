@@ -1,4 +1,4 @@
-# Django settings for SKHReseravationSystem project.
+# Django settings for SKHReservationSystem project.
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -93,9 +93,9 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     'django.contrib.admindocs',
-    'SKHReseravationSystem.Common',
-    'SKHReseravationSystem.Parking',
-    'SKHReseravationSystem.Update',
+    'SKHReservationSystem.Common',
+    'SKHReservationSystem.Parking',
+    'SKHReservationSystem.Update',
 )
 
 AUTH_PROFILE_MODULE = 'Common.Profile'
