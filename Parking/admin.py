@@ -9,7 +9,9 @@ fieldsets = [
 	('', 				{'fields': ['']}),
 		]
 class TransactionAdmin(admin.ModelAdmin):
-	list_display = ('community', 'user', 'parking_slot', 'start_date', 'paid', 'is_history')
+	#list_display = ('parking_queue__community', 'user', 'parking_slot', 'start_date', 'paid', 'is_history')
+
+	list_display = ('parking_slot', 'start_date', 'paid', 'is_history', 'is_current')
 fieldsets = [
 	('',				{'fields': ['']}),
 	('', 				{'fields': ['']}),

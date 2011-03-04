@@ -104,7 +104,7 @@ def queue_detail(request, queue_id):
 	return render_to_response('Parking/queue_detail.html', {'u':u, 'q':q,}, )
 
 def reservation_list(request, community_id, page):
-	reservation_list = Transaction.objects.filter(community = community_id)
+	reservation_list = Transaction.objects.filter(parking_queue__community = community_id)
 	return render_to_response('Parking/reservation_list.html', {'reservation_list': reservation_list })
 
 

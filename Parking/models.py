@@ -36,7 +36,7 @@ class Queue(models.Model):
 	decision_date = models.DateField('Decided Date', blank=True, null=True)
 	note_queue = models.TextField(max_length=127)
 	def __unicode__(self):
-		return self.user.last_name
+		return self.user.plate_no
 	def link(self):
 		return reverse('Parking.views.queue_detail', args=[self.id])
 	class Meta:
@@ -45,15 +45,18 @@ class Queue(models.Model):
 			("view_queue_limited", "Can see queue limited"),
 		)
 
-class Transaction(Queue):
+class Transaction(models.Model):
+	parking_queue = models.OneToOneField(Queue)
 	parking_slot = models.ForeignKey(Slot)
 	start_date = models.DateField('Start Date', auto_now_add=True)
 	end_date = models.DateField('End Date', blank=True, null=True)
 	paid = models.BooleanField()
 	note_transaction = models.TextField(max_length=127)
 	def is_history(self):
-		return self.end_date is not None
+		return self.end_date is not None and self.end_date < datetime.date.today()
+	def is_current(self):
+		return not self.is_history()
 	def __unicode__(self):
-		return self.user.plate_no
+		return self.parking_queue.user.plate_no
 	def link(self):
 		return reverse('Parking.views.reservation_detail', args=[self.id])
