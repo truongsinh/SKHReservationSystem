@@ -317,8 +317,7 @@ if DEBUG:
 		profile_per = ContentType.objects.get(app_label='Common', model='profile')
 		view_profile = Permission.objects.get_or_create(name='Can view profile', codename='view_profile',
                        content_type=profile_per)[0]
-		change_profile = Permission.objects.get_or_create(name='Can change profile', codename='change_profile',
-                       content_type=profile_per)[0]
+		change_profile = Permission.objects.get_or_create(name='Can change profile', codename='change_profile', content_type=profile_per)[0]
 
 #creating permissions for models in Parking app
 		#creating permissions for area model
