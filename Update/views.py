@@ -2,7 +2,6 @@
 from django.http import HttpResponse
 from settings import DEBUG
 from django.contrib.auth.models import User, Group, Permission
-from django.contrib.contenttypes.models import ContentType
 from Common.models import *
 from Parking.models import *
 
@@ -67,7 +66,7 @@ if DEBUG:
 		u3.is_active = True
 		u3.is_superuser = False
 		u3.save()
-		
+
 		#Creating PROFILE for user 4 - Traffic warden
 		response += 'Creating USER4 in Traffic warden<br />'
 		u4 = Profile()
@@ -300,16 +299,12 @@ if DEBUG:
 		#	view_last_name
 		#	view_something
 		#creating permissions for apartment model
-		apartment_per = ContentType.objects.get(app_label='Common', model='apartment')
-		view_apartment = Permission.objects.get_or_create(name='Can view apartment', codename='view_apartment',
-                       content_type=apartment_per)[0]
-		change_apartment = Permission.objects.get_or_create(name='Can change apartment', codename='change_apartment',
-                       content_type=apartment_per)[0]
+		view_apartment	= Permission.objects.get(codename='view_apartment')
+		change_apartment= Permission.objects.get(codename='change_apartment')
 
 		#creating permissions for community model
-		community_per = ContentType.objects.get(app_label='Common', model='community')
-		view_community = Permission.objects.get_or_create(name='Can view community', codename='view_community',
-                       content_type=community_per)[0]
+		view_community	= Permission.objects.get(codename='view_community')
+		'''
 		change_community = Permission.objects.get_or_create(name='Can change community', codename='change_community',
                        content_type=community_per)[0]
 
@@ -399,13 +394,6 @@ if DEBUG:
 		g4.permissions.add(view_queue)
 		g4.permissions.add(view_transaction)
 		'''		# Group 5 - Guests
-		g5.permissions.add(view_apartment)
-		g5.permissions.add(view_community)
-		g5.permissions.add(view_area)
-		g5.permissions.add(view_type)
-		g5.permissions.add(view_slot)
-		g5.permissions.add(view_queue)
-'''
 		#assigning users to each group
 		u1.groups.add(g1)
 		u2.groups.add(g1)
@@ -424,9 +412,6 @@ if DEBUG:
 		u4.has_perm('Common.view_apartment')
 		#True
 		u5.has_perm('Common.view_queue')
-		#True
-		#u6.has_perm('Common.view_type')
-		#True
 
 		return HttpResponse(response)
 else:
