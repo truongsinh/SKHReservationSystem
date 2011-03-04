@@ -56,7 +56,13 @@ class Transaction(models.Model):
 		return self.end_date is not None and self.end_date < datetime.date.today()
 	def is_current(self):
 		return not self.is_history()
+	def slot_name(self):
+		return self.parking_slot.name
 	def __unicode__(self):
 		return self.parking_queue.user.plate_no
 	def link(self):
 		return reverse('Parking.views.reservation_detail', args=[self.id])
+	def community_name (self):
+		return self.parking_queue.community.address
+	def user_name (self):
+		return self.parking_queue.user.last_name

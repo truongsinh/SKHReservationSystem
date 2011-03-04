@@ -12,12 +12,9 @@ class CommunityAdmin (admin.ModelAdmin):
 	]
 class ApartmentAdmin (admin.ModelAdmin):
 	list_display = ('community', 'address' )
+	list_filter = ('community__address', 'community__city', 'community__postal_code','address')
 	search_fields = ('community__address', 'community__city', 'community__postal_code','address')
 
-	#community_fk_filter_by = 'city'
-	#community_fk_filter_name = 'city'
-
-	#list_filter    = ('community__city',)
 	fieldsets = [
 	('Address information',				{'fields': ['community', 'address']}),
 	('Additional information', 				{'fields': ['note']}),

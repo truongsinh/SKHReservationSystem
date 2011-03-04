@@ -112,6 +112,8 @@ def reservation_add(request):
 	return render_to_response('Parking/reservation_add.html')
 
 def reservation_detail(request, transaction_id):
+	#t = Transaction.parking_queue.
+	
 	
 	return render_to_response('Parking/reservation_detail.html')
 
