@@ -39,6 +39,11 @@ class Queue(models.Model):
 		return self.user.last_name
 	def link(self):
 		return reverse('Parking.views.queue_detail', args=[self.id])
+	class Meta:
+		permissions = (
+			("view_queue_full", "Can see queue full"),
+			("view_queue_limited", "Can see queue limited"),
+		)
 
 class Transaction(Queue):
 	parking_slot = models.ForeignKey(Slot)

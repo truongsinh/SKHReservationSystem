@@ -1,3 +1,4 @@
+from django.contrib.auth.admin import UserAdmin
 from Common.models import Community, Apartment, Profile
 from django.contrib import admin
 
@@ -19,14 +20,54 @@ class ApartmentAdmin (admin.ModelAdmin):
 		]
 	#We have to figure out how to search/filter apartments using city names, postal codes or streetnames
 class ProfileAdmin (admin.ModelAdmin):
+#class ProfileAdmin (UserAdmin):
 	list_display = ('last_name', 'first_name', 'apartment', 'plate_no')
 	fieldsets = [
-	('User information',				{'fields': ['first_name','last_name','apartment', 'plate_no', 'username','password','email']}),
-	('Permissions', 					{'fields': ['is_active', 'is_staff', 'is_superuser','user_permissions',]}),
-	('Important dates',					{'fields': ['date_joined', 'last_login',]}),
-	('Groups',							{'fields': ['groups']}),
-	('Additional information', 			{'fields': ['note']}),
-		]
+					('User information',
+						{
+							'fields': [
+								'first_name',
+								'last_name',
+								'apartment',
+								'plate_no',
+								'username',
+								'email',
+							]
+						}
+					),
+					('Permissions',
+						{
+							'fields': [
+								'is_active',
+								'is_staff',
+								'is_superuser',
+								'user_permissions',
+							]
+						}
+					),
+					('Important dates',
+						{
+							'fields': [
+								'date_joined',
+								'last_login',
+							]
+						}
+					),
+					('Groups',
+						{
+							'fields': [
+								'groups',
+							]
+						}
+					),
+					('Additional information',
+						{
+							'fields': [
+								'note'
+							]
+						}
+					),
+				]
 	#Password change form doesn't work when using admin interface and changing the password from Profile
 admin.site.register(Community, CommunityAdmin)
 admin.site.register(Apartment, ApartmentAdmin)

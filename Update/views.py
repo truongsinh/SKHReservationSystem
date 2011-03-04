@@ -72,7 +72,7 @@ if DEBUG:
 		response += 'Creating USER4 in Traffic warden<br />'
 		u4 = Profile()
 		u4.username = "traffic1"
-		u4.set_password("traffic2")
+		u4.set_password("traffic1")
 		u4.first_name = "Sirak"
 		u4.last_name = "Kebele"
 		u4.email = "sirak77@gmail.fi"
@@ -289,132 +289,123 @@ if DEBUG:
 		g3.save()
 		g4 = Group(name = 'Traffic warden')
 		g4.save()
-		g5 = Group(name = 'Guest')
-		g5.save()
-#creating permissions for models in Common app
+		#g5 = Group(name = 'Guest')
+		#g5.save()
+		#creating permissions for models in Common app
+		#add
+		#change
+		#delete
+		#view
+		#	view_full
+		#	view_last_name
+		#	view_something
 		#creating permissions for apartment model
 		apartment_per = ContentType.objects.get(app_label='Common', model='apartment')
-		can_view_apartment = Permission(name='Can view apartment', codename='can_view_apartment',
-                       content_type=apartment_per)
-		can_view_apartment.save()
-		can_change_apartment = Permission(name='Can change apartment', codename='can_change_apartment',
-                       content_type=apartment_per)
-		can_change_apartment.save()
+		view_apartment = Permission.objects.get_or_create(name='Can view apartment', codename='view_apartment',
+                       content_type=apartment_per)[0]
+		change_apartment = Permission.objects.get_or_create(name='Can change apartment', codename='change_apartment',
+                       content_type=apartment_per)[0]
 
 		#creating permissions for community model
 		community_per = ContentType.objects.get(app_label='Common', model='community')
-		can_view_community = Permission(name='Can view community', codename='can_view_community',
-                       content_type=community_per)
-		can_view_community.save()
-		can_change_community = Permission(name='Can change community', codename='can_change_community',
-                       content_type=community_per)
-		can_change_community.save()
+		view_community = Permission.objects.get_or_create(name='Can view community', codename='view_community',
+                       content_type=community_per)[0]
+		change_community = Permission.objects.get_or_create(name='Can change community', codename='change_community',
+                       content_type=community_per)[0]
 
 		#creating permissions for profile model
 		profile_per = ContentType.objects.get(app_label='Common', model='profile')
-		can_view_profile = Permission(name='Can view profile', codename='can_view_profile',
-                       content_type=profile_per)
-		can_view_profile.save()
-		can_change_profile = Permission(name='Can change profile', codename='can_change_profile',
-                       content_type=profile_per)
-		can_change_profile.save()
+		view_profile = Permission.objects.get_or_create(name='Can view profile', codename='view_profile',
+                       content_type=profile_per)[0]
+		change_profile = Permission.objects.get_or_create(name='Can change profile', codename='change_profile',
+                       content_type=profile_per)[0]
 
 #creating permissions for models in Parking app
 		#creating permissions for area model
 		area_per = ContentType.objects.get(app_label='Parking', model='area')
-		can_view_area = Permission(name='Can view area', codename='can_view_area',
-                       content_type=area_per)
-		can_view_area.save()
-		can_change_area = Permission(name='Can change area', codename='can_change_area',
-                       content_type=area_per)
-		can_change_area.save()
+		view_area = Permission.objects.get_or_create(name='Can view area', codename='view_area',
+                       content_type=area_per)[0]
+		change_area = Permission.objects.get_or_create(name='Can change area', codename='change_area',
+                       content_type=area_per)[0]
 		#creating permissions for type model
 		type_per = ContentType.objects.get(app_label='Parking', model='type')
-		can_view_type = Permission(name='Can view type', codename='can_view_type',
-                       content_type=type_per)
-		can_view_type.save()
-		can_change_type = Permission(name='Can change type', codename='can_change_type',
-                       content_type=type_per)
-		can_change_type.save()
+		view_type = Permission.objects.get_or_create(name='Can view type', codename='view_type',
+                       content_type=type_per)[0]
+		change_type = Permission.objects.get_or_create(name='Can change type', codename='change_type',
+                       content_type=type_per)[0]
 		#creating permissions for slot model
 		slot_per = ContentType.objects.get(app_label='Parking', model='slot')
-		can_view_slot = Permission(name='Can view slot', codename='can_view_slot',
-                       content_type=slot_per)
-		can_view_slot.save()
-		can_change_slot = Permission(name='Can change slot', codename='can_change_slot',
-                       content_type=slot_per)
-		can_change_slot.save()
+		view_slot = Permission.objects.get_or_create(name='Can view slot', codename='view_slot',
+                       content_type=slot_per)[0]
+		change_slot = Permission.objects.get_or_create(name='Can change slot', codename='change_slot',
+                       content_type=slot_per)[0]
 		#creating permissions for queue model
 		queue_per = ContentType.objects.get(app_label='Parking', model='queue')
-		can_view_queue = Permission(name='Can view queue', codename='can_view_queue',
-                       content_type=queue_per)
-		can_view_queue.save()
-		can_change_queue = Permission(name='Can change queue', codename='can_change_queue',
-                       content_type=queue_per)
-		can_change_queue.save()
+		view_queue = Permission.objects.get_or_create(name='Can view queue', codename='view_queue',
+                       content_type=queue_per)[0]
+		change_queue = Permission.objects.get_or_create(name='Can change queue', codename='change_queue',
+                       content_type=queue_per)[0]
 		#creating permissions for transaction model
 		transaction_per = ContentType.objects.get(app_label='Parking', model='transaction')
-		can_view_transaction = Permission(name='Can view transaction', codename='can_view_transaction',
-                       content_type=transaction_per)
-		can_view_transaction.save()
-		can_change_transaction = Permission(name='Can change transaction', codename='can_change_transaction',
-                       content_type=transaction_per)
-		can_change_transaction.save()
+		view_transaction = Permission.objects.get_or_create(name='Can view transaction', codename='view_transaction',
+                       content_type=transaction_per)[0]
+		change_transaction = Permission.objects.get_or_create(name='Can change transaction', codename='change_transaction',
+                       content_type=transaction_per)[0]
 
 		
 		#assigning permission to each group
 		#Group 1 - SKHStaff
-		g1.permissions.add(can_view_apartment)
-		g1.permissions.add(can_view_community)
-		g1.permissions.add(can_view_profile)
-		g1.permissions.add(can_view_area)
-		g1.permissions.add(can_view_type)
-		g1.permissions.add(can_view_slot)
-		g1.permissions.add(can_view_queue)
-		g1.permissions.add(can_view_transaction)
-		g1.permissions.add(can_change_apartment)
-		g1.permissions.add(can_change_community)
-		g1.permissions.add(can_change_profile)
-		g1.permissions.add(can_change_area)
-		g1.permissions.add(can_change_type)
-		g1.permissions.add(can_change_slot)
-		g1.permissions.add(can_change_queue)
-		g1.permissions.add(can_change_transaction)
+		g1.permissions.add(view_apartment)
+		g1.permissions.add(view_community)
+		g1.permissions.add(view_profile)
+		g1.permissions.add(view_area)
+		g1.permissions.add(view_type)
+		g1.permissions.add(view_slot)
+		g1.permissions.add(view_queue)
+		g1.permissions.add(view_transaction)
+		g1.permissions.add(change_apartment)
+		g1.permissions.add(change_community)
+		g1.permissions.add(change_profile)
+		g1.permissions.add(change_area)
+		g1.permissions.add(change_type)
+		g1.permissions.add(change_slot)
+		g1.permissions.add(change_queue)
+		g1.permissions.add(change_transaction)
 		#Group 2 - Residents
-		g2.permissions.add(can_view_apartment)
-		g2.permissions.add(can_view_community)
-		g2.permissions.add(can_view_profile)
-		g2.permissions.add(can_view_area)
-		g2.permissions.add(can_view_type)
-		g2.permissions.add(can_view_slot)
-		g2.permissions.add(can_view_queue)
-		g2.permissions.add(can_view_transaction)
+		g2.permissions.add(view_apartment)
+		g2.permissions.add(view_community)
+		g2.permissions.add(view_profile)
+		g2.permissions.add(view_area)
+		g2.permissions.add(view_type)
+		g2.permissions.add(view_slot)
+		g2.permissions.add(view_queue)
+		g2.permissions.add(view_transaction)
 
 		# Group 3 - Board of Community
-		g3.permissions.add(can_view_apartment)
-		g3.permissions.add(can_view_community)
-		g3.permissions.add(can_view_profile)
-		g3.permissions.add(can_view_area)
-		g3.permissions.add(can_view_type)
-		g3.permissions.add(can_view_slot)
-		g3.permissions.add(can_view_queue)
-		g3.permissions.add(can_view_transaction)
+		g3.permissions.add(view_apartment)
+		g3.permissions.add(view_community)
+		g3.permissions.add(view_profile)
+		g3.permissions.add(view_area)
+		g3.permissions.add(view_type)
+		g3.permissions.add(view_slot)
+		g3.permissions.add(view_queue)
+		g3.permissions.add(view_transaction)
 		# Group 4 - Traffic warden
-		g4.permissions.add(can_view_apartment)
-		g4.permissions.add(can_view_community)
-		g4.permissions.add(can_view_profile)
-		g4.permissions.add(can_view_area)
-		g4.permissions.add(can_view_type)
-		g4.permissions.add(can_view_slot)
-		g4.permissions.add(can_view_queue)
-		g4.permissions.add(can_view_transaction)
+		g4.permissions.add(view_apartment)
+		g4.permissions.add(view_community)
+		g4.permissions.add(view_profile)
+		g4.permissions.add(view_area)
+		g4.permissions.add(view_type)
+		g4.permissions.add(view_slot)
+		g4.permissions.add(view_queue)
+		g4.permissions.add(view_transaction)
 		'''		# Group 5 - Guests
-		g5.permissions.add(can_view_apartment)
-		g5.permissions.add(can_view_community)
-		g5.permissions.add(can_view_area)
-		g5.permissions.add(can_view_type)
-		g5.permissions.add(can_view_slot)
-		g5.permissions.add(can_view_queue)
+		g5.permissions.add(view_apartment)
+		g5.permissions.add(view_community)
+		g5.permissions.add(view_area)
+		g5.permissions.add(view_type)
+		g5.permissions.add(view_slot)
+		g5.permissions.add(view_queue)
 '''
 		#assigning users to each group
 		u1.groups.add(g1)
@@ -425,17 +416,17 @@ if DEBUG:
 		#u6.groups.add(g5)
 
 		#checking user permissions
-		u1.has_perm('Common.can_view_apartment')
+		u1.has_perm('Common.view_apartment')
 		# True
-		u2.has_perm('Common.can_change_community')
+		u2.has_perm('Common.change_community')
 		#True
-		u3.has_perm('Common.can_change_area')
+		u3.has_perm('Common.change_area')
 		#False
-		u4.has_perm('Common.can_view_apartment')
+		u4.has_perm('Common.view_apartment')
 		#True
-		u5.has_perm('Common.can_view_queue')
+		u5.has_perm('Common.view_queue')
 		#True
-		#u6.has_perm('Common.can_view_type')
+		#u6.has_perm('Common.view_type')
 		#True
 
 		return HttpResponse(response)
