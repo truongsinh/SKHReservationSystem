@@ -39,11 +39,6 @@ class Queue(models.Model):
 		return self.user.plate_no
 	def link(self):
 		return reverse('Parking.views.queue_detail', args=[self.id])
-	class Meta:
-		permissions = (
-			("view_queue_full", "Can see queue full"),
-			("view_queue_limited", "Can see queue limited"),
-		)
 
 class Transaction(models.Model):
 	parking_queue = models.OneToOneField(Queue)
@@ -52,10 +47,13 @@ class Transaction(models.Model):
 	end_date = models.DateField('End Date', blank=True, null=True)
 	paid = models.BooleanField()
 	note_transaction = models.TextField(max_length=127)
-	def is_history(self):
-		return self.end_date is not None and self.end_date < datetime.date.today()
 	def is_current(self):
-		return not self.is_history()
+		return self.end_date is None or self.end_date > datetime.date.today()
+	def status(self):
+		if self.is_current():
+			return "Current"
+		else:
+			return "History"
 	def slot_name(self):
 		return self.parking_slot.name
 	def __unicode__(self):
