@@ -127,6 +127,7 @@ if DEBUG:
 		#creating area 1 in community 2
 		response += 'Creating AREA 21<br />'
 		a3 = Area()
+		a3.name = "name 1"
 		a3.community = c2
 		a3.need_rental_agreement = True
 		a3.note = "AREA21"
@@ -135,6 +136,7 @@ if DEBUG:
 		#creating area 2 in community 2
 		response += 'Creating AREA 22<br />'
 		a4 = Area()
+		a4.name = "name 2"
 		a4.community = c2
 		a4.need_rental_agreement = False
 		a4.note = "AREA22"
@@ -192,6 +194,7 @@ if DEBUG:
 		#creating slot2 in parking_area_2
 		response += 'Creating SLOT 2<br />'
 		Slot2 = Slot()
+		Slot2.name = "name 1"
 		Slot2.parking_area_id = 1
 		Slot2.parking_type = openair
 		Slot2.note = "ASDOFNDFKF464"
@@ -208,6 +211,7 @@ if DEBUG:
 		#creating slot2 in parking_area_2
 		response += 'Creating SLOT 4<br />'
 		Slot4 = Slot()
+		Slot4.name = "name 1"
 		Slot4.parking_area_id = 2
 		Slot4.parking_type = openair
 		Slot4.note = "ASDdfd44616"

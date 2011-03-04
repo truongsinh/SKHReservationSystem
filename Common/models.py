@@ -11,19 +11,14 @@ class Community(models.Model):
 	def link(self):
 		return reverse('Common.views.community_detail', args=[self.id])
 	def __unicode__(self):
-		return u'%s %s %s' % (self.address, self.city, self.postal_code)
+		return u'%s %s %s' % (self.address, self.postal_code, self.city,)
 	
 class Apartment(models.Model):
 	community = models.ForeignKey(Community)
 	address = models.CharField(max_length = 127)
 	note = models.TextField()
 	def __unicode__(self):
-		return u'%s %s' % (self.community, self.address)
-	def _city(self):
-		return self.community.city
-	city = property(_city)
-	#def address2(self):
-		#return self.community.address
+		return u'%s - %s' % (self.address, self.community, )
 
 class Profile(User):
 	#user = models.OneToOneField(User, primary_key=True)
@@ -31,4 +26,4 @@ class Profile(User):
 	plate_no = models.CharField(max_length = 127)
 	note = models.TextField()
 	def __unicode__(self):
-		return self.get_full_name()
+		return u'%s (%s)' % (self.get_full_name(), self.username, )

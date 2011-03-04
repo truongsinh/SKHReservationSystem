@@ -6,8 +6,8 @@ class SlotAdmin(admin.ModelAdmin):
 	list_display = ('parking_area', 'parking_type', 'note', 'id', 'is_free')
 
 class TransactionAdmin(admin.ModelAdmin):
-	list_display = ('slot_name', 'community_name', 'user_name', 'start_date', 'paid', 'is_history')
-	list_filter = ('parking_queue__community__city',)
+	list_display = ('slot_name', 'community_name', 'user_name', 'start_date', 'end_date', 'paid', 'is_current')
+	list_filter = ('parking_queue__community__city', 'end_date', 'paid',)
 
 
 class AreaAdmin (admin.ModelAdmin):
