@@ -13,7 +13,7 @@ class TransactionAdmin(admin.ModelAdmin):
 		#('Slot information',				{'fields': ['slot_name', 'community_name']}),
 		#('User information', 				{'fields': ['slot_name',]}),
 		('Date information',				{'fields': ['end_date', ]}),  #start_date
-		('Additional information',			{'fields': ['note_transaction', 'paid']}),
+		('Additional information',			{'fields': ['note', 'paid']}),
 		]
 class AreaAdmin (admin.ModelAdmin):
 	list_display = ('community', 'need_rental_agreement')
@@ -22,7 +22,7 @@ class TypeAdmin (admin.ModelAdmin):
 	list_display = ('note', 'price_per_month')
 
 class QueueAdmin (admin.ModelAdmin):
-	list_display = ('community', 'user', 'note_queue')
+	list_display = ('community', 'user', 'note')
 
 
 admin.site.register(Area, AreaAdmin)

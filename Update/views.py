@@ -257,7 +257,7 @@ if DEBUG:
 	start_date = models.DateField('Start Date', auto_now_add=True)
 	end_date = models.DateField('End Date', blank=True, null=True)
 	paid = models.BooleanField()
-	note = models.TextField(max_length=127)'''
+	note = models.TextField(blank=True)'''
 
 
 		#creating transaction for user 1 in community 1

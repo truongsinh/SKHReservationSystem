@@ -10,7 +10,7 @@ class Area(models.Model):
 	user_in_charge = models.ManyToManyField(Profile,
 											limit_choices_to = {'is_staff': True}
 											)
-	note = models.TextField()
+	note = models.TextField(blank=True)
 	class Meta:
 		unique_together = (
 			("name", "community"),
@@ -29,15 +29,15 @@ class Slot(models.Model):
 	name = models.CharField(max_length=127)
 	parking_area = models.ForeignKey(Area)
 	parking_type = models.ForeignKey(Type)
-	note = models.TextField(max_length=127)
+	note = models.TextField(blank=True)
 	def is_free(self):
-		obj = Transaction.objects.filter(parking_slot = self.id).exclude(end_date__lt = datetime.date.today())
+		obj = self.transaction_set.exclude(end_date__lt = datetime.date.today())
 		if obj.count() > 0:
 			return False
 		else:
 			return True
 	#is_free.short_description = 'Is free?'
-	free = models.BooleanField()
+	free = models.BooleanField(editable=False)
 	class Meta:
 		unique_together = (
 			("name", "parking_area"),
@@ -52,7 +52,6 @@ class Slot(models.Model):
 			models.Model.save(self, force_insert, force_update, using)
 
 
-
 class Queue(models.Model):
 	user = models.ForeignKey(Profile, null=True)
 	community = models.ForeignKey(Community, null=True)
@@ -60,7 +59,7 @@ class Queue(models.Model):
 									 auto_now_add=True)
 	decision_date = models.DateField(#'Decided Date',
 									 blank=True, null=True)
-	note_queue = models.TextField(max_length=127)
+	note = models.TextField(blank=True)
 	class Meta:
 		unique_together = (
 			("user", "community"),
@@ -69,6 +68,14 @@ class Queue(models.Model):
 		return u'%s - %s' % (self.user, self.community)
 	def link(self):
 		return reverse('Parking.views.queue_detail', args=[self.id])
+	def get_status(self):
+		if self.decision_date is None:
+			return None
+		elif self.transaction.count() > 0:
+			return True
+		else:
+			return False
+	get_status.boolean = True
 
 class Transaction(models.Model):
 	parking_queue = models.OneToOneField(Queue,
@@ -80,7 +87,8 @@ class Transaction(models.Model):
 	start_date = models.DateField('Start Date', auto_now_add=True)
 	end_date = models.DateField('End Date', blank=True, null=True)
 	paid = models.BooleanField()
-	note_transaction = models.TextField(max_length=127)
+	note = models.TextField(blank=True)
+	note = models.TextField(blank=True)
 	def __unicode__(self):
 		return u'%s - %s' % (self.parking_slot, self.parking_queue)
 	def is_current(self):
