@@ -10,6 +10,8 @@ class Community(models.Model):
 	note = models.TextField(blank=True)
 	def link(self):
 		return reverse('Common.views.community_detail', args=[self.id])
+	class Meta:
+		verbose_name_plural = "communities"
 	def __unicode__(self):
 		return u'%s %s %s' % (self.address, self.postal_code, self.city,)
 	
