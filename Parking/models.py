@@ -88,6 +88,7 @@ class Transaction(models.Model):
 	end_date = models.DateField('End Date', blank=True, null=True)
 	paid = models.BooleanField()
 	note = models.TextField(blank=True)
+
 	def __unicode__(self):
 		return u'%s - %s' % (self.parking_slot, self.parking_queue)
 	def is_current(self):

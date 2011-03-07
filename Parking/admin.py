@@ -15,6 +15,7 @@ class TransactionAdmin(admin.ModelAdmin):
 		('Date information',				{'fields': ['end_date', ]}),  #start_date
 		('Additional information',			{'fields': ['note', 'paid']}),
 		]
+	readonly_fields = ('start_date',)
 class AreaAdmin (admin.ModelAdmin):
 	list_display = ('community', 'name', 'need_rental_agreement')
 
