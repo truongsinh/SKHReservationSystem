@@ -7,7 +7,9 @@ class Area(models.Model):
 	name = models.CharField (max_length=127)
 	community = models.ForeignKey(Community)
 	need_rental_agreement = models.BooleanField()
-	user_in_charge = models.ManyToManyField(Profile)
+	user_in_charge = models.ManyToManyField(Profile,
+											limit_choices_to = {'is_staff': True}
+											)
 	note = models.TextField()
 	class Meta:
 		unique_together = (
@@ -35,19 +37,29 @@ class Slot(models.Model):
 		else:
 			return True
 	#is_free.short_description = 'Is free?'
-	is_free.boolean = True
+	free = models.BooleanField()
 	class Meta:
 		unique_together = (
 			("name", "parking_area"),
 		)
 	def __unicode__(self):
 		return u'%s - %s' % (self.name, self.parking_area)
+	def save(self, force_insert=False, force_update=False, using=None):
+		if self.id is None:
+			models.Model.save(self, force_insert, force_update, using)
+		if self.is_free() != self.free:
+			self.free = not self.free
+			models.Model.save(self, force_insert, force_update, using)
+
+
 
 class Queue(models.Model):
 	user = models.ForeignKey(Profile, null=True)
 	community = models.ForeignKey(Community, null=True)
-	register_date = models.DateField('Registered Date', auto_now_add=True)
-	decision_date = models.DateField('Decided Date', blank=True, null=True)
+	register_date = models.DateField(#'Registered Date',
+									 auto_now_add=True)
+	decision_date = models.DateField(#'Decided Date',
+									 blank=True, null=True)
 	note_queue = models.TextField(max_length=127)
 	class Meta:
 		unique_together = (
@@ -59,8 +71,12 @@ class Queue(models.Model):
 		return reverse('Parking.views.queue_detail', args=[self.id])
 
 class Transaction(models.Model):
-	parking_queue = models.OneToOneField(Queue)
-	parking_slot = models.ForeignKey(Slot)
+	parking_queue = models.OneToOneField(Queue,
+										 limit_choices_to = {'decision_date': None}
+										 )
+	parking_slot = models.ForeignKey(Slot,
+									 limit_choices_to = {'free': True}
+									 )
 	start_date = models.DateField('Start Date', auto_now_add=True)
 	end_date = models.DateField('End Date', blank=True, null=True)
 	paid = models.BooleanField()
@@ -78,3 +94,7 @@ class Transaction(models.Model):
 		return self.parking_queue.community.address
 	def user_name (self):
 		return self.parking_queue.user.last_name
+	def save(self, force_insert=False, force_update=False, using=None):
+		self.parking_queue.decision_date = datetime.date.today()
+		self.parking_queue.save()
+		models.Model.save(self, force_insert, force_update, using)

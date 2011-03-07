@@ -1,12 +1,9 @@
 from django.conf.urls.defaults import *
-# Uncomment the next two lines to enable the admin:
 from django.contrib import admin
 
 admin.autodiscover()
 
 urlpatterns = patterns('',
-    # Uncomment the admin/doc line below to enable admin documentation:
-
     (r'^reservation/community/$', 'Common.views.community_list', {'page': '1'}),
     (r'^reservation/community/page_(?P<page>\d+)$', 'Common.views.community_list'),
 	(r'^reservation/community/(?P<community_id>\d+)/$', 'Common.views.community_detail'),
