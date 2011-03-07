@@ -80,7 +80,10 @@ ROOT_URLCONF = 'SKHReservationSystem.urls'
 import os
 dirnames = os.path.dirname(globals()["__file__"])
 TEMPLATE_DIRS = (
-	os.path.join(dirnames, 'templates'),
+	os.path.join(dirnames, 'Templates'),
+)
+FIXTURE_DIRS = (
+	os.path.join(dirnames, 'Fixtures'),
 )
 
 INSTALLED_APPS = (

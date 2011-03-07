@@ -3,7 +3,7 @@ from Parking.models import Area, Type, Slot, Queue, Transaction
 from django.contrib import admin
 
 class SlotAdmin(admin.ModelAdmin):
-	list_display = ('parking_area', 'parking_type', 'note', 'id', 'is_free')
+	list_display = ('parking_area', 'parking_type', 'note', 'id', 'is_free', 'free')
 
 class TransactionAdmin(admin.ModelAdmin):
 	list_display = ('slot_name', 'community_name', 'user_name', 'start_date', 'end_date', 'paid', 'is_current')
