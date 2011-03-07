@@ -25,7 +25,7 @@ class Apartment(models.Model):
 class Profile(User):
 	#user = models.OneToOneField(User, primary_key=True)
 	apartment = models.ForeignKey(Apartment, null=True)
-	plate_no = models.CharField(max_length = 127)
+	plate_no = models.CharField(max_length = 127, blank=True)
 	note = models.TextField(blank=True)
 	def __unicode__(self):
 		return u'%s (%s)' % (self.get_full_name(), self.username, )
