@@ -21,4 +21,4 @@ Note:
 	8. Each object has two instances which will be created later
 	9. Method is_free() is linked to transaction that will be corrected later
 	10. Slot.is_free is always up to date, while Slot.free is only cache!
-	abc
+	abcs
