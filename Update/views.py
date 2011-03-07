@@ -19,7 +19,8 @@ if DEBUG:
 		c1 = Community.objects.get_or_create(address="ExampleRoad 15", city="Lahti", postal_code="15110")[0]
 
 		response += 'Creating COMMUNITY 2<br />'
-		c2 = Community.objects.get_or_create(address="ExampleRoad 152 Turku")[0]
+		c2 = Community.objects.get_or_create(address="ExampleRoad 152", city="Turku", postal_code="15220" )[0]
+
 
 		response += 'Creating APARTMENT 1<br />'
 		a1 = Apartment.objects.get_or_create(community = c1, address = "42B", note = "This is just a normal note." )[0]
@@ -52,6 +53,8 @@ if DEBUG:
 		u2.is_staff = True
 		u2.is_active = True
 		u2.is_superuser = False
+		u2.apartment = a2
+		u2.plate_no = "VIN-8"
 		u2.save()
 
 		#Creating PROFILE for user 3 - Board of Community
@@ -109,6 +112,7 @@ if DEBUG:
 		#creating area 1 in community 1
 		response += 'Creating AREA 11<br />'
 		a1 = Area()
+		a1.name = "Name4"
 		a1.community = c1
 		a1.note = "AREA 11"
 		a1.need_rental_agreement = True
@@ -118,6 +122,7 @@ if DEBUG:
 		#creating area 2 in community 1
 		response += 'Creating AREA 12<br />'
 		a2 = Area()
+		a2.name = "Name3"
 		a2.community_id = 2
 		a2.need_rental_agreement = False
 		a2.note = "AREA12"
@@ -186,6 +191,7 @@ if DEBUG:
 		#creating slot1 in parking_area_2
 		response += 'Creating SLOT 1<br />'
 		Slot1 = Slot()
+		Slot1.name = "sName 2"
 		Slot1.parking_area_id = 1
 		Slot1.parking_type = rooftop
 		Slot1.note = "ASDFSDF"
@@ -203,6 +209,7 @@ if DEBUG:
 		#creating slot3 in parking_area_1
 		response += 'Creating SLOT 3<br />'
 		Slot3 = Slot()
+		Slot3.name = "sName 3"
 		Slot3.parking_area_id = 2
 		Slot3.parking_type = openair
 		Slot3.note = "Aadsf979912"

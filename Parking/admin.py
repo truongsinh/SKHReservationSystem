@@ -9,7 +9,12 @@ class TransactionAdmin(admin.ModelAdmin):
 	list_display = ('slot_name', 'community_name', 'user_name', 'start_date', 'end_date', 'paid', 'is_current')
 	list_filter = ('parking_queue__community__city', 'end_date', 'paid',)
 
-
+	fieldsets = [
+		#('Slot information',				{'fields': ['slot_name', 'community_name']}),
+		#('User information', 				{'fields': ['slot_name',]}),
+		('Date information',				{'fields': ['end_date', ]}),  #start_date
+		('Additional information',			{'fields': ['note_transaction', 'paid']}),
+		]
 class AreaAdmin (admin.ModelAdmin):
 	list_display = ('community', 'need_rental_agreement')
 
