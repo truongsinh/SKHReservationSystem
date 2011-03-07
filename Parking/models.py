@@ -44,12 +44,12 @@ class Slot(models.Model):
 		)
 	def __unicode__(self):
 		return u'%s - %s' % (self.name, self.parking_area)
-	def save(self, force_insert=False, force_update=False, using=None):
+	def save(self, *args, **kwargs):
 		if self.id is None:
-			models.Model.save(self, force_insert, force_update, using)
+			super(Slot, self).save(*args, **kwargs)
 		if self.is_free() != self.free:
 			self.free = not self.free
-			models.Model.save(self, force_insert, force_update, using)
+			super(Slot, self).save(*args, **kwargs)
 
 
 class Queue(models.Model):
@@ -102,7 +102,7 @@ class Transaction(models.Model):
 		return self.parking_queue.community.address
 	def user_name (self):
 		return self.parking_queue.user.last_name
-	def save(self, force_insert=False, force_update=False, using=None):
+	def save(self, *args, **kwargs):
 		self.parking_queue.decision_date = datetime.date.today()
 		self.parking_queue.save()
-		models.Model.save(self, force_insert, force_update, using)
+		super(Transaction, self).save(*args, **kwargs)
