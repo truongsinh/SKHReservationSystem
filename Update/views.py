@@ -151,6 +151,7 @@ if DEBUG:
 		#creating TYPE in Area 1 in Community 1
 		response += 'Creating TYPE rooftop<br />'
 		rooftop = Type()
+		rooftop.name = "Rooftop"
 		rooftop.community = c1
 		rooftop.Area = a1
 		rooftop.parking_area_id = 1
@@ -161,6 +162,7 @@ if DEBUG:
 		#creating TYPE in Area 2 in Community 1
 		response += 'Creating TYPE openair <br />'
 		openair = Type()
+		openair.name = "Open air"
 		openair.community = c1
 		openair.Area = a1
 		openair.parking_area_id = 2
@@ -171,6 +173,7 @@ if DEBUG:
 		#creating TYPE in Area 1 in Community 2
 		response += 'Creating TYPE rooftop<br />'
 		rooftop = Type()
+		rooftop.name = "Rooftop"
 		rooftop.community = c2
 		rooftop.Area = a3
 		rooftop.parking_area_id = 1
@@ -181,6 +184,7 @@ if DEBUG:
 		#creating TYPE in Area 2 in Community 2
 		response += 'Creating TYPE openair<br />'
 		openair = Type()
+		openair.name = "Open air"
 		openair.community = c2
 		openair.Area = a4
 		openair.parking_area_id = 2

@@ -19,7 +19,7 @@ class ApartmentAdmin (admin.ModelAdmin):
 	('Address information',				{'fields': ['community', 'address']}),
 	('Additional information', 				{'fields': ['note']}),
 		]
-	#We have to figure out how to search/filter apartments using city names, postal codes or streetnames
+
 class ProfileAdmin (admin.ModelAdmin):
 #class ProfileAdmin (UserAdmin):
 	list_display = ('last_name', 'first_name', 'apartment', 'plate_no')
