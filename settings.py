@@ -82,6 +82,7 @@ dirnames = os.path.dirname(globals()["__file__"])
 TEMPLATE_DIRS = (
 	os.path.join(dirnames, 'Templates'),
 )
+
 FIXTURE_DIRS = (
 	os.path.join(dirnames, 'Fixtures'),
 )
