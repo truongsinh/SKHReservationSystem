@@ -26,7 +26,7 @@ class AreaAdmin (admin.ModelAdmin):
 
 class TypeAdmin (admin.ModelAdmin):
 	list_display = ('name','note', 'price_per_month')
-	list_filter = ('name',)
+	list_filter = ('name', 'price_per_month')
 
 class QueueAdmin (admin.ModelAdmin):
 	list_display = ('community', 'user', 'register_date', 'note')
