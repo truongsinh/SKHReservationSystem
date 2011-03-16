@@ -15,8 +15,8 @@ class TransactionAdmin(admin.ModelAdmin):
 	list_filter = ('parking_queue__community__city', 'end_date', 'paid',)
 
 	fieldsets = [
-		#('Slot information',				{'fields': ['slot_name', 'community_name']}),
-		#('User information', 				{'fields': ['slot_name',]}),
+		('Slot information',				{'fields': ['parking_slot',]}),
+		('Queue information', 				{'fields': ['parking_queue',]}),
 		('Date information',				{'fields': ['end_date', ]}),  #start_date
 		('Additional information',			{'fields': ['note', 'paid']}),
 		]
@@ -47,5 +47,7 @@ admin.site.register(Area, AreaAdmin)
 admin.site.register(Type, TypeAdmin)
 admin.site.register(Slot, SlotAdmin)
 admin.site.register(Queue, QueueAdmin)
-admin.site.register(Transaction, TransactionAdmin)
+admin.site.register(Transaction,
+					TransactionAdmin
+					)
 
