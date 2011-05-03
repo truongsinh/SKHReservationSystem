@@ -4,11 +4,11 @@ from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
-    (r'^reservation/community/$', 'Common.views.community_list', {'page': '1'}),
-    (r'^reservation/community/page_(?P<page>\d+)$', 'Common.views.community_list'),
-	(r'^reservation/community/(?P<community_id>\d+)/$', 'Common.views.community_detail'),
+    (r'^reservation/community/$', 'Common.views.community_list', {'page': '1'}),#+
+    (r'^reservation/community/page_(?P<page>\d+)$', 'Common.views.community_list'),#
+	(r'^reservation/community/(?P<community_id>\d+)/$', 'Common.views.community_detail'),#+
 
-    (r'^reservation/community/(?P<community_id>\d+)/parking/$', 'Parking.views.index'),
+    (r'^reservation/community/(?P<community_id>\d+)/parking/$', 'Parking.views.index'),#
 
     (r'^reservation/community/(?P<community_id>\d+)/parking/area/$', 'Parking.views.area_list', {'page': '1'}),
     (r'^reservation/community/(?P<community_id>\d+)/parking/area/page_(?P<page>\d+)$', 'Parking.views.area_list'),
