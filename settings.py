@@ -100,6 +100,8 @@ INSTALLED_APPS = (
     'SKHReservationSystem.Common',
     'SKHReservationSystem.Parking',
     'SKHReservationSystem.Update',
+	'SKHReservationSystem.Sauna',
+
 )
 
 AUTH_PROFILE_MODULE = 'Common.Profile'
