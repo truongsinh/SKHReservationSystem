@@ -59,12 +59,14 @@ def community_detail(request, community_id):
 
 @login_required(login_url='/reservation/login/')
 def account(request, user_id):
-	return render_to_response('Common/profile.html')
+	return render_to_response('Common/account.html',
+								context_instance=RequestContext(request),)
 
 @login_required(login_url='/reservation/login/')
 def profile(request):
-	user_id = request.user.user_id
-	return account(request, user_id)
+	user_id = request.user.id
+	return render_to_response('Common/profile.html',
+								context_instance=RequestContext(request),)
 
 def logout(request, next):
 	logout(request)
@@ -78,4 +80,5 @@ def logout(request, next):
 
 @login_required(login_url='/reservation/login/')
 def index(request):
-	return render_to_response('Common/index.html')
+	return render_to_response('Common/index.html',
+								context_instance=RequestContext(request),)

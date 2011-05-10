@@ -12,6 +12,7 @@ class Community(models.Model):
 		return reverse('Common.views.community_detail', args=[self.id])
 	class Meta:
 		verbose_name_plural = "communities"
+		ordering = ['-city', 'address']
 	def __unicode__(self):
 		return u'%s %s %s' % (self.address, self.postal_code, self.city,)
 	
