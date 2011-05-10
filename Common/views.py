@@ -1,7 +1,7 @@
 # Create your views here.
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse
 from django import forms
 # 1. community_list (request, community_id, GET)
@@ -25,35 +25,54 @@ def community_list(request, page):
 
 @login_required(login_url='/reservation/login/')
 def community_detail(request, community_id):
-	c = get_object_or_404(Community, pk=community_id)
 	class queue_add_form(forms.Form):
 		community = forms.ModelChoiceField(queryset=Community.objects.all(), initial=community_id)
 		note = forms.CharField(widget=forms.Textarea)
-	f = queue_add_form()
-	if request.user.is_authenticated():
-    # Do something for authenticated users.
-		a = "Welcome %s" % request.user.last_name
-		a += "Log out"
-	else:
-		a = AuthenticationForm()
-    # Do something for anonymous users.
-	#l = reverse(Parking.views.queue_add)
-	s = 'Register'
-	r = reverse('Parking.views.reservation_list', args=[c.id])
-	q = reverse('Parking.views.queue_list', args=[c.id])
- 	return render_to_response('Common/community_detail.html',
-							  {
-								'community':c,
-								'account':a,
-								'form':f,
-								#'action':l,
-								'submit':s,
-								'reservation':r,
-								'queue':q,
-								},
-                              context_instance=RequestContext(request),
-							  )
+	if request.method != 'POST':
+		c = get_object_or_404(Community, pk=community_id)
+		f = queue_add_form()
+		# Do something for anonymous users.
+		#l = reverse(Parking.views.queue_add)
+		s = 'Register'
+		r = reverse('Parking.views.reservation_list', args=[c.id])
+		q = reverse('Parking.views.queue_list', args=[c.id])
+		return render_to_response('Common/community_detail.html',
+								  {
+									'community':c,
+									'form':f,
+									'submit':s,
+									'reservation':r,
+									'queue':q,
+									},
+								  context_instance=RequestContext(request),
+								  )
 
+	# if it is 'POST'
+	else:
+		# then, bound the request into defined form
+		f = queue_add_form(request.POST)
+		# if the requested form is valid
+		if f.is_valid():
+			# then, add the request into database
+			q = Parking.models.Queue()
+			q.objects.get(user_id=request.user.id, community_id=f.cleaned_data['community'])
+			if q is not None:
+				# what user id?
+				q.user_id = request.user.id
+				q.community = f.cleaned_data['community']
+				q.note = f.cleaned_data['note']
+				# remember to save it!
+				q.save()
+				# and then redirect the browser to the queue_detail, q.link is defined in model
+				return HttpResponseRedirect(q.link())
+			else:
+				return HttpResponse("already")
+		else:
+			# push error message to message mechanism
+			# set initial value for valid value
+			# abd redirect to the forms, for the user to refill
+			return HttpResponseRedirect(q.link())
+	#
 
 @login_required(login_url='/reservation/login/')
 def account(request, user_id):
@@ -79,4 +98,9 @@ def logout(request, next):
 @login_required(login_url='/reservation/login/')
 def index(request):
 	return render_to_response('Common/index.html',
+								context_instance=RequestContext(request),)
+
+
+def reserved(request, community_id):
+	return render_to_response('Common/reserved.html',
 								context_instance=RequestContext(request),)

@@ -8,6 +8,7 @@ urlpatterns = patterns('',
     (r'^reservation/community/$', 'Common.views.community_list', {'page': '1'}),#+
     (r'^reservation/community/page_(?P<page>\d+)$', 'Common.views.community_list'),#
 	(r'^reservation/community/(?P<community_id>\d+)/$', 'Common.views.community_detail'),#+
+	(r'^reservation/community/(?P<community_id>\d+)/$', 'Common.views.reserved'),#+
 
     (r'^reservation/community/(?P<community_id>\d+)/parking/$', 'Parking.views.index'),#
 
@@ -24,10 +25,8 @@ urlpatterns = patterns('',
 
     (r'^reservation/parking/area/(?P<area_id>\d+)/$', 'Parking.views.area_detail'),
 
-    (r'^reservation/parking/queue/add/$', 'Parking.views.queue_add'), #POST
     (r'^reservation/parking/queue/(?P<queue_id>\d+)/$', 'Parking.views.queue_detail'),
 
-    (r'^reservation/parking/reservation/add/$', 'Parking.views.reservation_add'), #POST
     (r'^reservation/parking/reservation/(?P<transaction_id>\d+)/$', 'Parking.views.reservation_detail'),
 
 
