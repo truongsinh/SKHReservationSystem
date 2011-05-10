@@ -57,7 +57,7 @@ def community_detail(request, community_id):
 			q = Parking.models.Queue()
 			Parking.models.Queue.objects.get_or_create(
 				user_id=request.user.id,
-				community_id=f.cleaned_data['community'],
+				#community_id=f.cleaned_data['community'],
 				note = f.cleaned_data['note'],
 			)
 			return HttpResponseRedirect(q.link())
