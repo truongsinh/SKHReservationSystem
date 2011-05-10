@@ -96,7 +96,7 @@ def profile(request):
 
 def logout(request):
 	auth.logout(request)
-	HttpResponseRedirect("/reservation")
+	return HttpResponseRedirect("/reservation")
 
 @login_required(login_url='/reservation/login/')
 def index(request):
