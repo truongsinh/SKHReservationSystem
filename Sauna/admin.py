@@ -13,7 +13,7 @@ class SaunaAdmin(admin.ModelAdmin):
 	  			]
 
 class TimeAdmin(admin.ModelAdmin):
-	list_display = ('name', 'sauna',)
+	list_display = ('name', 'sauna','is_free',)
 	list_filter = ('sauna__community__address', 'sauna__community__city', 'sauna__community__postal_code','name')
 	search_fields = ('sauna__community__address', 'sauna__community__city', 'sauna__community__postal_code','name')
 

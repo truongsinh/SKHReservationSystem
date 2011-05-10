@@ -19,7 +19,7 @@ class Time_slot(models.Model):
 	sauna = models.ForeignKey(Sauna)
 	note = models.TextField(blank=True)
 	def __unicode__(self):
-		return self.name
+		return u'%s - %s' % (self.name, self.sauna)
 	def is_free(self):
 		obj = self.sauna_transaction_set.exclude(end_date__lt = datetime.date.today())
 		if obj.count() > 0:

@@ -14,7 +14,7 @@ class Community(models.Model):
 		verbose_name_plural = "communities"
 		ordering = ['city', 'address']
 	def __unicode__(self):
-		return u'%s %s %s' % (self.address, self.postal_code, self.city,)
+		return u'%s %s %s' % (self.city, self.address, self.postal_code, )
 	
 class Apartment(models.Model):
 	community = models.ForeignKey(Community)
