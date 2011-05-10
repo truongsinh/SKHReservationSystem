@@ -1,9 +1,11 @@
 # Create your views here.
+import django
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
 from django.http import HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse
 from django import forms
+from django.contrib import auth
 # 1. community_list (request, community_id, GET)
 #	community_address (list)
 # 2. community_detail (request, community_id, GET)
@@ -12,7 +14,6 @@ from django import forms
 #	form to apply for parking queue (send POST request to add_queue (7))
 from Common.models import Community
 import Parking
-from  django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import login_required
 
 
@@ -57,7 +58,7 @@ def community_detail(request, community_id):
 			q = Parking.models.Queue()
 			Parking.models.Queue.objects.get_or_create(
 				user_id=request.user.id,
-				#community_id=f.cleaned_data['community'],
+				#	community_id=f.cleaned_data['community'],
 				note = f.cleaned_data['note'],
 			)
 			return HttpResponseRedirect(q.link())
@@ -93,15 +94,9 @@ def profile(request):
 	return render_to_response('Common/profile.html',
 								context_instance=RequestContext(request),)
 
-def logout(request, next):
-	logout(request)
-	if True:
-		#if anonymous can view previous page
-		HttpResponseRedirect(next)
-	else:
-		#else redirect to main page
-		HttpResponseRedirect(next)
-    # Redirect to a success page.
+def logout(request):
+	auth.logout(request)
+	HttpResponseRedirect("/reservation")
 
 @login_required(login_url='/reservation/login/')
 def index(request):
