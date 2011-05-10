@@ -13,16 +13,19 @@ from django import forms
 from Common.models import Community
 import Parking
 from  django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.decorators import login_required
 
 '''class UserForm:
 	f = AuthenticationForm
 	return f'''
 
+@login_required(login_url='/reservation/login/')
 def community_list(request, page):
 	# pagination later
 	community_list = Community.objects.all().order_by('address')
 	return render_to_response('Common/community_list.html', {'community_list': community_list })
 
+@login_required(login_url='/reservation/login/')
 def community_detail(request, community_id):
 	c = get_object_or_404(Community, pk=community_id)
 	class queue_add_form(forms.Form):
@@ -54,9 +57,11 @@ def community_detail(request, community_id):
 							  )
 
 
+@login_required(login_url='/reservation/login/')
 def account(request, user_id):
 	return render_to_response('Common/profile.html')
 
+@login_required(login_url='/reservation/login/')
 def profile(request):
 	user_id = request.user.user_id
 	return account(request, user_id)
@@ -71,6 +76,6 @@ def logout(request, next):
 		HttpResponseRedirect(next)
     # Redirect to a success page.
 
-
+@login_required(login_url='/reservation/login/')
 def index(request):
 	return render_to_response('Common/index.html')
