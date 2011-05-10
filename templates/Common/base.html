@@ -8,6 +8,7 @@
 <body id="{% block body_id %}{% endblock %}">
 	<div id="navigator" class="navigator">
 		Welcome <a href="/reservation/profile/">{{ user.username }}</a>!
+		<a href="/reservation/logout/">Log out</a>
 		<a href="/reservation/community/">Community List </a>
 	</div>
 	<div id="body">{% block body %}

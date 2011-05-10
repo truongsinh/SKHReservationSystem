@@ -15,15 +15,13 @@ import Parking
 from  django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import login_required
 
-'''class UserForm:
-	f = AuthenticationForm
-	return f'''
 
 @login_required(login_url='/reservation/login/')
 def community_list(request, page):
 	# pagination later
 	community_list = Community.objects.all().order_by('address')
-	return render_to_response('Common/community_list.html', {'community_list': community_list })
+	return render_to_response('Common/community_list.html', {'community_list': community_list },
+								context_instance=RequestContext(request),)
 
 @login_required(login_url='/reservation/login/')
 def community_detail(request, community_id):
@@ -39,7 +37,7 @@ def community_detail(request, community_id):
 	else:
 		a = AuthenticationForm()
     # Do something for anonymous users.
-	l = reverse(Parking.views.queue_add)
+	#l = reverse(Parking.views.queue_add)
 	s = 'Register'
 	r = reverse('Parking.views.reservation_list', args=[c.id])
 	q = reverse('Parking.views.queue_list', args=[c.id])
@@ -48,7 +46,7 @@ def community_detail(request, community_id):
 								'community':c,
 								'account':a,
 								'form':f,
-								'action':l,
+								#'action':l,
 								'submit':s,
 								'reservation':r,
 								'queue':q,

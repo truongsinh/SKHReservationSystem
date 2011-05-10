@@ -1,5 +1,5 @@
 {% extends "Common/base.html" %}{% block content %}
-
+<p>To reserve your parking or sauna, choose community from the list below.</p>
 <ul>{% for community in community_list %}
 	<li><a href="{{ community.link }}">{{ community.address }}</a></li>
 {%  empty %}
