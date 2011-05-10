@@ -55,6 +55,13 @@ def community_detail(request, community_id):
 		if f.is_valid():
 			# then, add the request into database
 			q = Parking.models.Queue()
+			Parking.models.Queue.objects.get_or_create(
+				user_id=request.user.id,
+				community_id=f.cleaned_data['community'],
+				note = f.cleaned_data['note'],
+			)
+			return HttpResponseRedirect(q.link())
+			'''
 			q.objects.get(user_id=request.user.id, community_id=f.cleaned_data['community'])
 			if q is not None:
 				# what user id?
@@ -67,6 +74,7 @@ def community_detail(request, community_id):
 				return HttpResponseRedirect(q.link())
 			else:
 				return HttpResponse("already")
+				'''
 		else:
 			# push error message to message mechanism
 			# set initial value for valid value
