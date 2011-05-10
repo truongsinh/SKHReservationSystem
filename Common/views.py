@@ -70,3 +70,7 @@ def logout(request, next):
 		#else redirect to main page
 		HttpResponseRedirect(next)
     # Redirect to a success page.
+
+
+def index(request):
+	return render_to_response('Common/index.html')

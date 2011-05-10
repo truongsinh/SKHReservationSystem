@@ -4,6 +4,7 @@ from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
+    (r'^reservation/$', 'Common.views.index'),#
     (r'^reservation/community/$', 'Common.views.community_list', {'page': '1'}),#+
     (r'^reservation/community/page_(?P<page>\d+)$', 'Common.views.community_list'),#
 	(r'^reservation/community/(?P<community_id>\d+)/$', 'Common.views.community_detail'),#+
@@ -32,9 +33,9 @@ urlpatterns = patterns('',
 
 	#url(r'^Area/(?P<Area_id>\d+)/$', ''),
     (r'^reservation/account/(?P<user_id>\d+)/$', 'Common.views.account'),
-    (r'^reservation/account/profile/$', 'Common.views.profile'),
-	(r'^reservation/account/login/$', 'django.contrib.auth.views.login', {'template_name': 'Common/login.html'}),
-	(r'^reservation/account/logout/$', 'Common.views.logout'),
+    (r'^reservation/profile/$', 'Common.views.profile'),
+	(r'^reservation/login/$', 'django.contrib.auth.views.login', {'template_name': 'Common/login.html'}),
+	(r'^reservation/logout/$', 'Common.views.logout'),
 
 	(r'^reservation/admin/doc/', include('django.contrib.admindocs.urls')),
 	(r'^reservation/admin/', include(admin.site.urls)),
