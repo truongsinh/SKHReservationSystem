@@ -1,6 +1,6 @@
 # Create your views here.
 import django
-from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
+from django.core.paginator import Paginator, EmptyPage
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
 from django.http import HttpResponseRedirect, HttpResponse
@@ -20,7 +20,6 @@ from django.contrib.auth.decorators import login_required
 
 @login_required(login_url='/reservation/login/')
 def community_list(request):
-	# pagination later
 	community_list = Community.objects.all()
 	paginator = Paginator(community_list, 50) # Show 25 contacts per page
 	try:
@@ -31,6 +30,7 @@ def community_list(request):
 	except:
 		page = paginator.page(1)
 	communities = page.object_list
+
 	return render_to_response('Common/community_list.html', {'page': page, 'communities': communities, },
 								context_instance=RequestContext(request),)
 
@@ -72,20 +72,6 @@ def community_detail(request, community_id):
 				note = f.cleaned_data['note'],
 			)
 			return HttpResponseRedirect(q.link())
-			'''
-			q.objects.get(user_id=request.user.id, community_id=f.cleaned_data['community'])
-			if q is not None:
-				# what user id?
-				q.user_id = request.user.id
-				q.community = f.cleaned_data['community']
-				q.note = f.cleaned_data['note']
-				# remember to save it!
-				q.save()
-				# and then redirect the browser to the queue_detail, q.link is defined in model
-				return HttpResponseRedirect(q.link())
-			else:
-				return HttpResponse("already")
-				'''
 		else:
 			# push error message to message mechanism
 			# set initial value for valid value
