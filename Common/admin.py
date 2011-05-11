@@ -12,7 +12,7 @@ class CommunityAdmin (admin.ModelAdmin):
 	]
 class ApartmentAdmin (admin.ModelAdmin):
 	list_display = ('community', 'address' )
-	list_filter = ('community__address', 'community__city', 'community__postal_code','address')
+	list_filter = ( 'community__city', 'community__postal_code',)
 	search_fields = ('community__address', 'community__city', 'community__postal_code','address')
 
 	fieldsets = [
@@ -23,6 +23,9 @@ class ApartmentAdmin (admin.ModelAdmin):
 class ProfileAdmin (admin.ModelAdmin):
 #class ProfileAdmin (UserAdmin):
 	list_display = ('last_name', 'first_name', 'apartment', 'plate_no')
+	list_filter = ('apartment__community__city', 'apartment__community__postal_code',)
+	search_fields = ('apartment__community__city', 'apartment__community__postal_code', 'apartment__community__address', 'plate_no','first_name', 'last_name', )
+
 	fieldsets = [
 					('User information',
 						{

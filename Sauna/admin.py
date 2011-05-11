@@ -3,7 +3,7 @@ from django.contrib import admin
 
 class SaunaAdmin(admin.ModelAdmin):
 	list_display = ('name', 'community',)
-	list_filter = ('community__address', 'community__city', 'community__postal_code','name')
+	list_filter = ( 'community__city', 'community__postal_code',)
 	search_fields = ('community__address', 'community__city', 'community__postal_code','name')
 
 	fieldsets = [
@@ -14,7 +14,7 @@ class SaunaAdmin(admin.ModelAdmin):
 
 class TimeAdmin(admin.ModelAdmin):
 	list_display = ('name', 'sauna','is_free',)
-	list_filter = ('sauna__community__address', 'sauna__community__city', 'sauna__community__postal_code','name')
+	list_filter = ( 'sauna__community__city', 'sauna__community__postal_code', 'sauna__name')
 	search_fields = ('sauna__community__address', 'sauna__community__city', 'sauna__community__postal_code','name')
 
 	fieldsets = [
@@ -26,7 +26,7 @@ class TimeAdmin(admin.ModelAdmin):
 
 class S_QueueAdmin(admin.ModelAdmin):
 	list_display = ('community', 'user', 'register_date', 'note')
-	list_filter = ('community__address', 'community__city', 'community__postal_code')
+	list_filter = ('community__city', 'community__postal_code')
 	search_fields = ('community__city', 'community__address', 'community__postal_code', 'user__last_name', 'user__first_name')
 
 	fieldsets = [

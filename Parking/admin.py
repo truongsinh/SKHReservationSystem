@@ -23,7 +23,7 @@ class TransactionAdmin(admin.ModelAdmin):
 	#readonly_fields = ('start_date',)
 class AreaAdmin (admin.ModelAdmin):
 	list_display = ('community', 'name', 'need_rental_agreement')
-	list_filter = ('community__address', 'community__city', 'community__postal_code')
+	list_filter = ( 'community__city', 'community__postal_code')
 	search_fields = ('community__city', 'community__address', 'community__postal_code', 'name')
 	fieldsets = [
 			('Area information',	{'fields': ['name','community',]}),
@@ -36,7 +36,7 @@ class TypeAdmin (admin.ModelAdmin):
 
 class QueueAdmin (admin.ModelAdmin):
 	list_display = ('community', 'user', 'register_date', 'note')
-	list_filter = ('community__address', 'community__city', 'community__postal_code')
+	list_filter = ( 'community__city', 'community__postal_code')
 	search_fields = ('community__city', 'community__address', 'community__postal_code', 'user__last_name', 'user__first_name')
 	fieldsets = [
 			('Queue information',	{'fields': ['user','community',]}),
