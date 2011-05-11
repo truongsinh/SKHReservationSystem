@@ -1,5 +1,6 @@
 # Create your views here.
 import django
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
 from django.http import HttpResponseRedirect, HttpResponse
@@ -18,10 +19,19 @@ from django.contrib.auth.decorators import login_required
 
 
 @login_required(login_url='/reservation/login/')
-def community_list(request, page):
+def community_list(request):
 	# pagination later
-	community_list = Community.objects.all().order_by('address')
-	return render_to_response('Common/community_list.html', {'community_list': community_list },
+	community_list = Community.objects.all()
+	paginator = Paginator(community_list, 50) # Show 25 contacts per page
+	try:
+		page = paginator.page(int(request.GET.get('page')))
+	except EmptyPage:
+		# If page is out of range (e.g. 9999), deliver last page of results.
+		page = paginator.page(paginator.num_pages)
+	except:
+		page = paginator.page(1)
+	communities = page.object_list
+	return render_to_response('Common/community_list.html', {'page': page, 'communities': communities, },
 								context_instance=RequestContext(request),)
 
 @login_required(login_url='/reservation/login/')

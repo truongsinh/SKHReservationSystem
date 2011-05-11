@@ -5,8 +5,7 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
     (r'^reservation/$', 'Common.views.index'),#
-    (r'^reservation/community/$', 'Common.views.community_list', {'page': '1'}),#+
-    (r'^reservation/community/page_(?P<page>\d+)$', 'Common.views.community_list'),#
+    (r'^reservation/community/$', 'Common.views.community_list',),#+
 	(r'^reservation/community/(?P<community_id>\d+)/$', 'Common.views.community_detail'),#+
 	(r'^reservation/community/(?P<community_id>\d+)/$', 'Common.views.reserved'),#+
 

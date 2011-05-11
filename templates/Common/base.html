@@ -15,5 +15,30 @@
 		<div>{% block content_title %}{% endblock %}</div>
 		<div class="content">{% block content %}{% endblock %}</div>
 	{% endblock %}</div>
+{% if page %}
+<div class="pagination">
+	<span class="step-links">
+		<a
+			href="."
+			{% if not page.has_previous %}style="visibility: hidden;"{% endif %}
+		>«</a>
+		<a
+			href="?page={{ page.previous_page_number }}"
+			{% if not page.has_previous %}style="visibility: hidden;"{% endif %}
+		>&lt;</a>
+
+		<span class="current">{{ page.number }} of {{ page.paginator.num_pages }}</span>
+
+		<a
+			href="?page={{ page.next_page_number }}"
+			{% if not page.has_next %} style="visibility: hidden;"{% endif %}
+		>&gt;</a>
+		<a
+			href="?page={{ page.paginator.num_pages }}"
+			{% if not page.has_next %} style="visibility: hidden;"{% endif %}
+		>»</a>
+	</span>
+</div>
+{% endif %}
 </body>
 </html>
