@@ -1,6 +1,7 @@
 # Create your views here.
 import django
 from django.core.paginator import Paginator, EmptyPage
+from django.forms.widgets import RadioSelect
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
 from django.http import HttpResponseRedirect, HttpResponse
@@ -38,6 +39,10 @@ def community_list(request):
 def community_detail(request, community_id):
 	class queue_add_form(forms.Form):
 		community = forms.ModelChoiceField(queryset=Community.objects.all(), initial=community_id)
+		service = forms.ChoiceField(
+			widget=RadioSelect,
+			choices=(('s', 'Sauna'),('p', 'Parking'),
+    	))
 		note = forms.CharField(widget=forms.Textarea)
 	if request.method != 'POST':
 		c = get_object_or_404(Community, pk=community_id)
