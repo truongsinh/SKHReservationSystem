@@ -38,6 +38,8 @@ class S_QueueAdmin(admin.ModelAdmin):
 class S_TransactionAdmin(admin.ModelAdmin):
 	#list_display = ('sauna_slot', 'sauna_queue__community__name', 'sauna_queue__user__name', 'start_date', 'end_date',)
 	list_filter = ('sauna_queue__community__city', 'end_date',)
+	search_fields = ('sauna_queue__community__city', 'sauna_queue__community__address', 'sauna_queue__community__postal_code', 'sauna_queue__user__last_name', 'sauna_queue__user__first_name')
+
 	#Display doesn't work because it sucks
 
 	fieldsets = [
