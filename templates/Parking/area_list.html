@@ -1,0 +1,9 @@
+{% extends "Common/base.html" %}{% block content %}
+
+<ul>{% for area in areas %}
+	<li><a href="{{ area.link }}">{{ area.name }}</a></li>
+{%  empty %}
+	<li>There is currently no queue.</li>
+{% endfor %}</ul>
+
+{% endblock %}

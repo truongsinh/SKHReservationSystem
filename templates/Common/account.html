@@ -1,0 +1,9 @@
+{% extends "Common/base.html" %}{% block content %}
+<p>Please note that this list can only be viewed by admin.</p>
+<ul>{% for account in accounts %}
+	<li><a href="{{ account.link }}">{{ account.last_name }}</a></li>
+{%  empty %}
+	<li>There is currently no account.</li>
+{% endfor %}</ul>
+
+{% endblock %}
