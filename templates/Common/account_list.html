@@ -1,5 +1,5 @@
-{% extends "Common/base.html" %}{% block content %}
-<p>Please note that this list can only be viewed by admin.</p>
+{% extends "Common/base.html" %}
+{% block content %}
 <ul>{% for account in accounts %}
 	<li>{{ account.last_name }}</li>
 {%  empty %}
