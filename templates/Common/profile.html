@@ -1,1 +1,15 @@
-a{{ user.username }}{{ user.id }}
+
+{% extends "Common/base.html" %} {% block content %}
+
+<h1><b>Your profile</b></h1>
+<p><b> Username:</b> {{ user.username }}{{ user.id }}</p>
+<p><b>First name:</b> {{ user.first_name }}</p>
+<p><b>Last name:</b> {{ user.last_name }}</p>
+<p><b>E-mail:</b>{{ user.email }} </p>
+<p><b>Address:</b> {{user.profile.apartment.community.address}}, {{user.profile.apartment.address }}</p>
+<p><b>Postal code:</b> {{user.profile.apartment.community.postal_code }}</p>
+<p><b>City: </b>{{user.profile.apartment.community.city }}</p>
+<p><b>Plate number:</b> {{user.profile.plate_no}} </p>
+
+<p>To change your personal information, please contact our staff 040 123456 or email skhstaff@examplemail.com</p>
+{% endblock %}

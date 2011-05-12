@@ -36,6 +36,13 @@ def community_list(request):
 	return render_to_response('Common/community_list.html', {'page': page, 'communities': communities, },
 								context_instance=RequestContext(request),)
 
+@permission_required('Common.view_profile', login_url='/reservation/login/')
+def account_list(request, page):
+	# pagination later
+	accounts = Profile.objects.all().order_by('last_name')
+	return render_to_response('Common/account.html', {'accounts': accounts},
+								context_instance=RequestContext(request),)
+
 @login_required(login_url='/reservation/login/')
 def community_detail(request, community_id):
 	class queue_add_form(forms.Form):
@@ -96,6 +103,11 @@ def community_detail(request, community_id):
 @login_required(login_url='/reservation/login/')
 def account(request, user_id):
 	return render_to_response('Common/account.html',
+								context_instance=RequestContext(request),)
+
+@login_required(login_url='/reservation/login/')
+def account_detail(request, user_id):
+	return render_to_response('Common/account_detail.html',
 								context_instance=RequestContext(request),)
 
 @login_required(login_url='/reservation/login/')

@@ -9,37 +9,38 @@
 	<div id="navigator" class="navigator">
 		Welcome <a href="/reservation/profile/">{{ user.username }}</a>!
 		<a href="/reservation/logout/">Log out</a>
-		<a href="/reservation/community/">Community List </a>
+		<a href="/reservation/community/">Community List </a> &nbsp;
+		<a href="/reservation/"> Index </a>
 	</div>
 	<div id="body">{% block body %}
 		<div>{% block content_title %}{% endblock %}</div>
 		<div class="content">{% block content %}{% endblock %}</div>
 	{% endblock %}</div>
+{% if page %}
+<div class="pagination">
+	<span class="step-links">
+		<a
+			href="."
+			{% if not page.has_previous %}style="visibility: hidden;"{% endif %}
+		>«</a>
+		<a
+			href="?page={{ page.previous_page_number }}"
+			{% if not page.has_previous %}style="visibility: hidden;"{% endif %}
+		>&lt;</a>
 
-	{% if page.has_other_pages %}
-	<div class="pagination">
-		<span class="step-links">
-			<a
-				href="."
-				{% if not page.has_previous %}style="visibility: hidden;"{% endif %}
-			>«</a>
-			<a
-				href="?page={{ page.previous_page_number }}"
-				{% if not page.has_previous %}style="visibility: hidden;"{% endif %}
-			>&lt;</a>
+		<span class="current">{{ page.number }} of {{ page.paginator.num_pages }}</span>
 
-			<span class="current">{{ page.number }} of {{ page.paginator.num_pages }}</span>
-
-			<a
-				href="?page={{ page.next_page_number }}"
-				{% if not page.has_next %} style="visibility: hidden;"{% endif %}
-			>&gt;</a>
-			<a
-				href="?page={{ page.paginator.num_pages }}"
-				{% if not page.has_next %} style="visibility: hidden;"{% endif %}
-			>»</a>
-		</span>
-	</div>
+		<a
+			href="?page={{ page.next_page_number }}"
+			{% if not page.has_next %} style="visibility: hidden;"{% endif %}
+		>&gt;</a>
+		<a
+			href="?page={{ page.paginator.num_pages }}"
+			{% if not page.has_next %} style="visibility: hidden;"{% endif %}
+		>»</a>
+	</span>
+</div>
 {% endif %}
 </body>
 </html>
+
