@@ -1,4 +1,5 @@
 # Create your views here.
+import Queue
 import django
 from django.core.paginator import Paginator, EmptyPage
 from django.forms.widgets import RadioSelect
@@ -17,6 +18,7 @@ from django.contrib import auth
 from Common.models import Community, Profile
 import Parking
 from django.contrib.auth.decorators import login_required, permission_required
+from Parking.models import Area
 import Sauna
 
 
@@ -113,7 +115,7 @@ def account_detail(request, user_id):
 
 @login_required(login_url='/reservation/login/')
 def area_list(request, community_id):
-	areas = Areas.objects.all().order_by('name')
+	areas = Area.objects.all().order_by('name')
 	return render_to_response('Common/area_list.html',
 								context_instance=RequestContext(request),)
 
@@ -122,9 +124,9 @@ def area_detail(request, community_id):
 	return render_to_response('Common/area_detail.html',
 								context_instance=RequestContext(request),)
 
-@permission_required('Common.view_profile', login_url='/reservation/login/')
+@permission_required('Common.view_queue', login_url='/reservation/login/')
 def queue_list(request, community_id):
-	queues = Queues.objects.all().order_by('user.username')
+	queues = Queue.objects.all().order_by('user.username')
 	return render_to_response('Common/queue_list.html',
 								context_instance=RequestContext(request),)
 
