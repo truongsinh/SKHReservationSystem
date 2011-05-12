@@ -10,6 +10,15 @@
 <p><b>Postal code:</b> {{user.profile.apartment.community.postal_code }}</p>
 <p><b>City: </b>{{user.profile.apartment.community.city }}</p>
 <p><b>Plate number:</b> {{user.profile.plate_no}} </p>
+<hr>
+<p><b>Additional information</b></p>
+<p><b>Date joined:</b>  {{user.date_joined}} </p>
+<p><b>Last login:</b> {{user.last_login}} </p>
+<hr>
+
+<p><b>Notes:</b> {{user.profile.note}} </p>
+
+
 
 <p>You can only change <a href="/reservation/password">your password</a>. To change your personal information, please contact our staff 040 123456 or email skhstaff@examplemail.com</p>
 {% endblock %}
