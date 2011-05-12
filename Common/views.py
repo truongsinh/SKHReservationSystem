@@ -32,6 +32,7 @@ def community_list(request):
 	except:
 		page = paginator.page(1)
 	communities = page.object_list
+
 	return render_to_response('Common/community_list.html', {'page': page, 'communities': communities, },
 								context_instance=RequestContext(request),)
 
@@ -92,23 +93,23 @@ def community_detail(request, community_id):
 			return HttpResponseRedirect("/reservation/false")
 	#
 
+@login_required(login_url='/reservation/login/')
+def account(request, user_id):
+	return render_to_response('Common/account.html',
+								context_instance=RequestContext(request),)
+
 @permission_required('Common.view_profile', login_url='/reservation/login/')
-def account_list(request):
+def account_list(request, page):
 	# pagination later
 	accounts = Profile.objects.all().order_by('last_name')
-	return render_to_response('Common/account_list.html', {'accounts': accounts},
+	return render_to_response('Common/account.html', {'accounts': accounts},
 								context_instance=RequestContext(request),)
 
 @login_required(login_url='/reservation/login/')
-def queue_list(request, community_id):
-	queues = Queues.objects.all().order_by('user.username')
-	return render_to_response('Common/queue_list.html',
+def account_detail(request, user_id):
+	return render_to_response('Common/account_detail.html',
 								context_instance=RequestContext(request),)
 
-@login_required(login_url='/reservation/login/')
-def queue_detail(request, community_id):
-	return render_to_response('Common/queue_detail.html',
-								context_instance=RequestContext(request),)
 
 @login_required(login_url='/reservation/login/')
 def area_list(request, community_id):
@@ -121,6 +122,16 @@ def area_detail(request, community_id):
 	return render_to_response('Common/area_detail.html',
 								context_instance=RequestContext(request),)
 
+@permission_required('Common.view_profile', login_url='/reservation/login/')
+def queue_list(request, community_id):
+	queues = Queues.objects.all().order_by('user.username')
+	return render_to_response('Common/queue_list.html',
+								context_instance=RequestContext(request),)
+
+@login_required(login_url='/reservation/login/')
+def queue_detail(request, community_id):
+	return render_to_response('Common/queue_detail.html',
+								context_instance=RequestContext(request),)
 
 @login_required(login_url='/reservation/login/')
 def profile(request):
