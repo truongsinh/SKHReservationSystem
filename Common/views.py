@@ -14,9 +14,9 @@ from django.contrib import auth
 #	link to reservation list (3)
 #	link to queue list (4)
 #	form to apply for parking queue (send POST request to add_queue (7))
-from Common.models import Community
+from Common.models import Community, Profile
 import Parking
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, permission_required
 import Sauna
 
 
