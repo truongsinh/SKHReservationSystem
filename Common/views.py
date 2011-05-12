@@ -17,6 +17,7 @@ from django.contrib import auth
 from Common.models import Community
 import Parking
 from django.contrib.auth.decorators import login_required
+import Sauna
 
 
 @login_required(login_url='/reservation/login/')
@@ -70,18 +71,26 @@ def community_detail(request, community_id):
 		# if the requested form is valid
 		if f.is_valid():
 			# then, add the request into database
-			q = Parking.models.Queue()
-			Parking.models.Queue.objects.get_or_create(
-				user_id=request.user.id,
-				#	community_id=f.cleaned_data['community'],
-				note = f.cleaned_data['note'],
-			)
-			return HttpResponseRedirect(q.link())
+			if f.cleaned_data['service'] == 'p':
+				#Parking
+				Parking.models.Queue.objects.get_or_create(
+					user_id=request.user.id,
+					community_id=f.cleaned_data['community'],
+					note = f.cleaned_data['note'],
+				)
+			elif f.cleaned_data['service'] == 's':
+				#Sauna
+				Sauna.models.Sauna_queue.objects.get_or_create(
+					user_id=request.user.id,
+					community_id=f.cleaned_data['community'],
+					note = f.cleaned_data['note'],
+				)
+			return HttpResponseRedirect("/reservation")
 		else:
 			# push error message to message mechanism
 			# set initial value for valid value
 			# abd redirect to the forms, for the user to refill
-			return HttpResponseRedirect(q.link())
+			return HttpResponseRedirect("/reservation/false")
 	#
 
 @login_required(login_url='/reservation/login/')
