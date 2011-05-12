@@ -32,7 +32,6 @@ def community_list(request):
 	except:
 		page = paginator.page(1)
 	communities = page.object_list
-
 	return render_to_response('Common/community_list.html', {'page': page, 'communities': communities, },
 								context_instance=RequestContext(request),)
 

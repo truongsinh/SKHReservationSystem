@@ -33,6 +33,8 @@ urlpatterns = patterns('',
     (r'^reservation/account/(?P<user_id>\d+)/$', 'Common.views.account'),
     (r'^reservation/profile/$', 'Common.views.profile'),
 	(r'^reservation/login/$', 'django.contrib.auth.views.login', {'template_name': 'Common/login.html'}),
+	(r'^reservation/password/$', 'django.contrib.auth.views.password_change', {'template_name': 'Common/password.html'}),
+	(r'^reservation/password/changed/$', 'django.contrib.auth.views.password_change_done', {'template_name': 'Common/password_changed.html'}),
 	(r'^reservation/logout/$', 'Common.views.logout'),
 
 	(r'^reservation/admin/doc/', include('django.contrib.admindocs.urls')),
