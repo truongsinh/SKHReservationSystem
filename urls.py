@@ -11,21 +11,17 @@ urlpatterns = patterns('',
 
     #(r'^reservation/community/(?P<community_id>\d+)/parking/$', 'Parking.views.index'),#
 
-    (r'^reservation/community/(?P<community_id>\d+)/area/$', 'Parking.views.area_list', {'page': '1'}),
-    (r'^reservation/community/(?P<community_id>\d+)/area/page_(?P<page>\d+)$', 'Parking.views.area_list'),
-	(r'^reservation/community/(?P<community_id>\d+)/area/(?P<area_id>\d+)/$', 'Parking.views.area_detail'), #+
-    (r'^reservation/community/(?P<community_id>\d+)/queue/$', 'Parking.views.queue_list', {'page': '1'}),
+    #(r'^reservation/areas/$', 'Common.views.area_list'),
+    #(r'^reservation/community/(?P<community_id>\d+)/area/page_(?P<page>\d+)$', 'Parking.views.area_list'),
+	#(r'^reservation/community/(?P<community_id>\d+)/area/(?P<area_id>\d+)/$', 'Parking.views.area_detail'), #+
+	#(r'^reservation/community/area/(?P<area_id>\d+)/$', 'Parking.views.area_detail'),
+
+    (r'^reservation/community/(?P<community_id>\d+)/queue/$', 'Common.views.queue_list', {'page': '1'}),
     (r'^reservation/community/(?P<community_id>\d+)/queue/page_(?P<page>\d+)$', 'Parking.views.queue_list'),
-	
+	(r'^reservation/community/queue/(?P<queue_id>\d+)/$', 'Common.views.queue_detail'),
+
     (r'^reservation/community/(?P<community_id>\d+)/parking/reservation/$', 'Parking.views.reservation_list', {'page': '1'}),
     (r'^reservation/community/(?P<community_id>\d+)/parking/reservation/page_(?P<page>\d+)$', 'Parking.views.reservation_list'),
-
-
-
-    (r'^reservation/area/(?P<area_id>\d+)/$', 'Parking.views.area_detail'),
-
-    (r'^reservation/queue/(?P<queue_id>\d+)/$', 'Parking.views.queue_detail'),
-
     (r'^reservation/parking/reservation/(?P<transaction_id>\d+)/$', 'Parking.views.reservation_detail'),
 
 

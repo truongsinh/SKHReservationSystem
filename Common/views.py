@@ -56,7 +56,7 @@ def community_detail(request, community_id):
 		#l = reverse(Parking.views.queue_add)
 		s = 'Register'
 		r = reverse('Parking.views.reservation_list', args=[c.id])
-		q = reverse('Parking.views.queue_list', args=[c.id])
+		q = reverse('Common.views.queue_list', args=[c.id])
 		return render_to_response('Common/community_detail.html',
 								  {
 									'community':c,
@@ -120,7 +120,7 @@ def account_detail(request, user_id):
 	return render_to_response('Common/account_detail.html',
 								context_instance=RequestContext(request),)
 
-
+'''
 @login_required(login_url='/reservation/login/')
 def area_list(request, community_id):
 	areas = Area.objects.all().order_by('name')
@@ -131,11 +131,11 @@ def area_list(request, community_id):
 def area_detail(request, community_id):
 	return render_to_response('Common/area_detail.html',
 								context_instance=RequestContext(request),)
-
+'''
 @permission_required('Common.view_queue', login_url='/reservation/login/')
 def queue_list(request, community_id):
 	queues = Queue.objects.all().order_by('queue.user.last_name')
-	return render_to_response('Common/queue_list.html',{'queues': queues},
+	return render_to_response('Parking/queue_list.html',{'queues': queues},
 								context_instance=RequestContext(request),)
 
 @login_required(login_url='/reservation/login/')
