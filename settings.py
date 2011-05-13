@@ -105,3 +105,7 @@ INSTALLED_APPS = (
 )
 
 AUTH_PROFILE_MODULE = 'Common.Profile'
+EMAILS=[
+	'staff', 'truongsinh.tran@gmail.com',
+	'system', 'truongsinh.tran@gmail.com',
+]

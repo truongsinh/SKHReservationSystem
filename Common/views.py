@@ -1,6 +1,8 @@
 # Create your views here.
 import Queue
 import django
+from django.conf import settings
+from django.core.mail import send_mass_mail
 from django.core.paginator import Paginator, EmptyPage
 from django.forms.widgets import RadioSelect
 from django.shortcuts import render_to_response, get_object_or_404
@@ -74,20 +76,31 @@ def community_detail(request, community_id):
 		if f.is_valid():
 			# then, add the request into database
 			if f.cleaned_data['service'] == 'p':
-				#Parking
-				Parking.models.Queue.objects.get_or_create(
-					user_id=request.user.id,
-					community_id=f.cleaned_data['community'],
-					note = f.cleaned_data['note'],
-				)
-			elif f.cleaned_data['service'] == 's':
-				#Sauna
-				Sauna.models.Sauna_queue.objects.get_or_create(
-					user_id=request.user.id,
-					community_id=f.cleaned_data['community'],
-					note = f.cleaned_data['note'],
-				)
-			return HttpResponseRedirect("/reservation")
+				service = "parking"
+				reservedObject = Parking.models.Queue.objects
+			else:
+				service = "sauna"
+				reservedObject = Parking.models.Queue.objects
+			reserved, created = reservedObject.get_or_create(
+				user_id=request.user.id,
+				community_id=f.cleaned_data['community'],
+				defaults={'note': f.cleaned_data['note']},
+			)
+			if created:
+				toResident = (
+					'Reservation confirmed',
+					'Dear %s,\nThis email is to confirm your reservation of %s in community %s. We will contact you when the service is available.\n Best regards,\nSKH Staff' % (request.user.get_full_name, service, Community.objects.get(id=f.cleaned_data['community'])),
+					settings.EMAILS['staff'],
+					[request.user.email])
+				toManager = (
+					'New reservation',
+					'Dear staff,\nThis email is to inform new reservation of %s in community %s.\n Best regards,\nSKH System' % (service, Community.objects.get(id=f.cleaned_data['community'])),
+					settings.EMAILS['system'],
+					['staff@skh.fi'])
+				send_mass_mail((toResident, toManager), fail_silently=False)
+				return HttpResponseRedirect("/reservation/reserved")
+			else:
+				pass
 		else:
 			# push error message to message mechanism
 			# set initial value for valid value
