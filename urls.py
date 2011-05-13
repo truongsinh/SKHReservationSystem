@@ -1,5 +1,6 @@
 from django.conf.urls.defaults import *
 from django.contrib import admin
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 admin.autodiscover()
 
@@ -39,3 +40,4 @@ urlpatterns = patterns('',
 	(r'^reservation/admin/', include(admin.site.urls)),
 	(r'^reservation/update/$', 'Update.views.update'),
 )
+urlpatterns += staticfiles_urlpatterns()

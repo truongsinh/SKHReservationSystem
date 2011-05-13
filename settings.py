@@ -47,12 +47,13 @@ USE_L10N = True
 # Example: "/home/media/media.lawrence.com/"
 import os
 dirnames = os.path.dirname(globals()["__file__"])
-MEDIA_ROOT = os.path.join(os.path.join(dirnames, 'Templates'), "Resources")
-
+MEDIA_ROOT = ''
+STATIC_ROOT = os.path.join(os.path.join(dirnames, 'Templates'), "Resources")
+STATIC_URL = '/resources/'
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash if there is a path component (optional in other cases).
 # Examples: "http://media.lawrence.com", "http://example.com/media/"
-MEDIA_URL = '/resources/'
+MEDIA_URL = ''
 
 # URL prefix for admin media -- CSS, JavaScript and images. Make sure to use a
 # trailing slash.
@@ -92,6 +93,7 @@ INSTALLED_APPS = (
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     #'django.contrib.sites',
+	'django.contrib.staticfiles',
     'django.contrib.messages',
     # Uncomment the next line to enable the admin:
     'django.contrib.admin',
