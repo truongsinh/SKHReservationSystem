@@ -1,6 +1,8 @@
 # Create your views here.
 import Queue
 import django
+from django.conf import settings
+from django.core.mail import send_mass_mail
 from django.core.paginator import Paginator, EmptyPage
 from django.forms.widgets import RadioSelect
 from django.shortcuts import render_to_response, get_object_or_404
@@ -47,53 +49,55 @@ def community_detail(request, community_id):
 			choices=(('s', 'Sauna'),('p', 'Parking'),
     	))
 		note = forms.CharField(widget=forms.Textarea)
-	if request.method != 'POST':
-		c = get_object_or_404(Community, pk=community_id)
-		f = queue_add_form()
-		# Do something for anonymous users.
-		#l = reverse(Parking.views.queue_add)
-		s = 'Register'
-		r = reverse('Parking.views.reservation_list', args=[c.id])
-		q = reverse('Parking.views.queue_list', args=[c.id])
-		return render_to_response('Common/community_detail.html',
-								  {
-									'community':c,
-									'form':f,
-									'submit':s,
-									'reservation':r,
-									'queue':q,
-									},
-								  context_instance=RequestContext(request),
-								  )
-
-	# if it is 'POST'
-	else:
+	if request.method == 'POST':
 		# then, bound the request into defined form
 		f = queue_add_form(request.POST)
 		# if the requested form is valid
 		if f.is_valid():
 			# then, add the request into database
 			if f.cleaned_data['service'] == 'p':
-				#Parking
-				Parking.models.Queue.objects.get_or_create(
-					user_id=request.user.id,
-					community_id=f.cleaned_data['community'],
-					note = f.cleaned_data['note'],
-				)
-			elif f.cleaned_data['service'] == 's':
-				#Sauna
-				Sauna.models.Sauna_queue.objects.get_or_create(
-					user_id=request.user.id,
-					community_id=f.cleaned_data['community'],
-					note = f.cleaned_data['note'],
-				)
-			return HttpResponseRedirect("/reservation")
-		else:
-			# push error message to message mechanism
-			# set initial value for valid value
-			# abd redirect to the forms, for the user to refill
-			return HttpResponseRedirect("/reservation/false")
-	#
+				service = "parking"
+				reservedObject = Parking.models.Queue.objects
+			else:
+				service = "sauna"
+				reservedObject = Parking.models.Queue.objects
+			reserved, created = reservedObject.get_or_create(
+				user_id=request.user.id,
+				community=f.cleaned_data['community'],
+				defaults={'note': f.cleaned_data['note']},
+			)
+			if created:
+				fclean = f.data['community']
+				toResident = (
+					'Reservation confirmed',
+					'Dear %s,\nThis email is to confirm your reservation of %s in community %s. We will contact you when the service is available.\n Best regards,\nSKH Staff' % (request.user.get_full_name, service, Community.objects.get(id=f.cleaned_data['community'])),
+					settings.EMAILS['staff'],
+					[request.user.email])
+				toManager = (
+					'New reservation',
+					'Dear staff,\nThis email is to inform new reservation of %s in community %s.\n Best regards,\nSKH System' % (service, Community.objects.get(id=f.cleaned_data['community'].id)),
+					settings.EMAILS['system'],
+					['staff@skh.fi'])
+				send_mass_mail((toResident, toManager), fail_silently=False)
+				return HttpResponseRedirect(reverse('Common.views.reserved'))
+				error = True
+
+		c = get_object_or_404(Community, pk=community_id)
+		f = queue_add_form()
+		s = 'Register'
+		#r = reverse('Parking.views.reservation_list', args=[c.id])
+		#q = reverse('Parking.views.queue_list', args=[c.id])
+		return render_to_response('Common/community_detail.html',
+								  {
+									'community':c,
+									'form':f,
+									'submit':s,
+									#'reservation':r,
+									#'queue':q,
+									},
+								  context_instance=RequestContext(request),
+								  )
+
 
 @permission_required('Common.view_profile', login_url='/reservation/permissions_warning/')
 def account_list(request):
@@ -107,22 +111,22 @@ def account_detail(request, user_id):
 	return render_to_response('Common/account_detail.html',
 								context_instance=RequestContext(request),)
 
-
+'''
 @login_required(login_url='/reservation/login/')
 def area_list(request, community_id):
 	areas = Area.objects.all().order_by('name')
-	return render_to_response('Common/area_list.html',
+	return render_to_response('Common/area_list.html', {'areas': areas},
 								context_instance=RequestContext(request),)
 
 @login_required(login_url='/reservation/login/')
 def area_detail(request, community_id):
 	return render_to_response('Common/area_detail.html',
 								context_instance=RequestContext(request),)
-
+'''
 @permission_required('Common.view_queue', login_url='/reservation/login/')
 def queue_list(request, community_id):
-	queues = Queue.objects.all().order_by('user.username')
-	return render_to_response('Common/queue_list.html',
+	queues = Queue.objects.all().order_by('queue.user.last_name')
+	return render_to_response('Parking/queue_list.html',{'queues': queues},
 								context_instance=RequestContext(request),)
 
 @login_required(login_url='/reservation/login/')
@@ -146,7 +150,7 @@ def index(request):
 								context_instance=RequestContext(request),)
 
 @login_required(login_url='/reservation/login/')
-def reserved(request, community_id):
+def reserved(request):
 	return render_to_response('Common/reserved.html',
 								context_instance=RequestContext(request),)
 

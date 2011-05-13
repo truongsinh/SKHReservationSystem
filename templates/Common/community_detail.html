@@ -1,5 +1,10 @@
-{% extends "Common/base.html" %}{% block content %}
+{% extends "Common/base.html" %}
+{% block content %}
+<a href="/reservation/community/(?P<community_id>\d+)/queue/">Queue List</a>
 <h1>Reservation</h1>
+{% if error %}
+<p>You have already reserved that service</p>
+{% endif %}
 <form action="" method="post">
 	{% csrf_token %}
 	{{ form.as_p }}
