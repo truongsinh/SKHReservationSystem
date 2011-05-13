@@ -319,7 +319,7 @@ if DEBUG:
 
 		#creating permissions for community model
 		view_community	= Permission.objects.get(codename='view_community')
-		'''
+
 		change_community = Permission.objects.get_or_create(name='Can change community', codename='change_community',
                        content_type=community_per)[0]
 
@@ -408,7 +408,7 @@ if DEBUG:
 		g4.permissions.add(view_slot)
 		g4.permissions.add(view_queue)
 		g4.permissions.add(view_transaction)
-		'''		# Group 5 - Guests
+		# Group 5 - Guests
 		#assigning users to each group
 		u1.groups.add(g1)
 		u2.groups.add(g1)

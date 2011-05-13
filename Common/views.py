@@ -21,7 +21,7 @@ from django.contrib import auth
 from Common.models import Community, Profile
 import Parking
 from django.contrib.auth.decorators import login_required, permission_required
-from Parking.models import Area
+from Parking.models import Queue
 import Sauna
 
 
@@ -142,9 +142,9 @@ def area_detail(request, community_id):
 	return render_to_response('Common/area_detail.html',
 								context_instance=RequestContext(request),)
 '''
-@permission_required('Common.view_queue', login_url='/reservation/login/')
-def queue_list(request, community_id):
-	queues = Queue.objects.all().order_by('queue.user.last_name')
+#@permission_required('Common.view_queue', login_url='/reservation/login/')
+def queue_list(request):
+	queues = Queue.objects.all().order_by('register_date')
 	return render_to_response('Parking/queue_list.html',{'queues': queues},
 								context_instance=RequestContext(request),)
 

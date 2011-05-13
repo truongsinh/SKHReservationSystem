@@ -17,8 +17,8 @@ urlpatterns = patterns('',
 	#(r'^reservation/community/(?P<community_id>\d+)/area/(?P<area_id>\d+)/$', 'Parking.views.area_detail'), #+
 	#(r'^reservation/community/area/(?P<area_id>\d+)/$', 'Parking.views.area_detail'),
 
-    (r'^reservation/community/(?P<community_id>\d+)/queue/$', 'Common.views.queue_list',),
-	(r'^reservation/community/queue/(?P<queue_id>\d+)/$', 'Common.views.queue_detail'),
+    (r'^reservation/queue/$', 'Common.views.queue_list',),
+	(r'^reservation/queue/(?P<queue_id>\d+)/$', 'Common.views.queue_detail'),
 
     (r'^reservation/community/(?P<community_id>\d+)/parking/reservation/$', 'Parking.views.reservation_list',),
     (r'^reservation/community/(?P<community_id>\d+)/parking/reservation/page_(?P<page>\d+)$', 'Parking.views.reservation_list'),
