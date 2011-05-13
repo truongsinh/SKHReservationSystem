@@ -49,27 +49,7 @@ def community_detail(request, community_id):
 			choices=(('s', 'Sauna'),('p', 'Parking'),
     	))
 		note = forms.CharField(widget=forms.Textarea)
-	if request.method != 'POST':
-		c = get_object_or_404(Community, pk=community_id)
-		f = queue_add_form()
-		# Do something for anonymous users.
-		#l = reverse(Parking.views.queue_add)
-		s = 'Register'
-		r = reverse('Parking.views.reservation_list', args=[c.id])
-		q = reverse('Parking.views.queue_list', args=[c.id])
-		return render_to_response('Common/community_detail.html',
-								  {
-									'community':c,
-									'form':f,
-									'submit':s,
-									'reservation':r,
-									'queue':q,
-									},
-								  context_instance=RequestContext(request),
-								  )
-
-	# if it is 'POST'
-	else:
+	if request.method == 'POST':
 		# then, bound the request into defined form
 		f = queue_add_form(request.POST)
 		# if the requested form is valid
@@ -120,7 +100,6 @@ def community_detail(request, community_id):
 								  context_instance=RequestContext(request),
 								  )
 
-	# if it is 'POST'
 
 @permission_required('Common.view_profile', login_url='/reservation/permissions_warning/')
 def account_list(request):
