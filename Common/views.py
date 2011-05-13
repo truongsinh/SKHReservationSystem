@@ -56,7 +56,7 @@ def community_detail(request, community_id):
 		#l = reverse(Parking.views.queue_add)
 		s = 'Register'
 		r = reverse('Parking.views.reservation_list', args=[c.id])
-		q = reverse('Common.views.queue_list', args=[c.id])
+		q = reverse('Parking.views.queue_list', args=[c.id])
 		return render_to_response('Common/community_detail.html',
 								  {
 									'community':c,
@@ -98,15 +98,29 @@ def community_detail(request, community_id):
 					settings.EMAILS['system'],
 					['staff@skh.fi'])
 				send_mass_mail((toResident, toManager), fail_silently=False)
-				return HttpResponseRedirect("/reservation/reserved")
+				return HttpResponseRedirect(reverse('Common.views.reserved'))
 			else:
 				pass
 		else:
-			# push error message to message mechanism
-			# set initial value for valid value
-			# abd redirect to the forms, for the user to refill
-			return HttpResponseRedirect("/reservation/false")
-	#
+			pass
+	else:
+		c = get_object_or_404(Community, pk=community_id)
+		f = queue_add_form()
+		s = 'Register'
+		r = reverse('Parking.views.reservation_list', args=[c.id])
+		q = reverse('Parking.views.queue_list', args=[c.id])
+		return render_to_response('Common/community_detail.html',
+								  {
+									'community':c,
+									'form':f,
+									'submit':s,
+									'reservation':r,
+									'queue':q,
+									},
+								  context_instance=RequestContext(request),
+								  )
+
+	# if it is 'POST'
 
 @permission_required('Common.view_profile', login_url='/reservation/permissions_warning/')
 def account_list(request):
@@ -159,7 +173,7 @@ def index(request):
 								context_instance=RequestContext(request),)
 
 @login_required(login_url='/reservation/login/')
-def reserved(request, community_id):
+def reserved(request):
 	return render_to_response('Common/reserved.html',
 								context_instance=RequestContext(request),)
 
