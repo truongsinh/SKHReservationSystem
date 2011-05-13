@@ -63,10 +63,11 @@ def community_detail(request, community_id):
 				reservedObject = Parking.models.Queue.objects
 			reserved, created = reservedObject.get_or_create(
 				user_id=request.user.id,
-				community_id=f.cleaned_data['community'],
+				community=f.cleaned_data['community'],
 				defaults={'note': f.cleaned_data['note']},
 			)
 			if created:
+				fclean = f.data['community']
 				toResident = (
 					'Reservation confirmed',
 					'Dear %s,\nThis email is to confirm your reservation of %s in community %s. We will contact you when the service is available.\n Best regards,\nSKH Staff' % (request.user.get_full_name, service, Community.objects.get(id=f.cleaned_data['community'])),
@@ -74,28 +75,25 @@ def community_detail(request, community_id):
 					[request.user.email])
 				toManager = (
 					'New reservation',
-					'Dear staff,\nThis email is to inform new reservation of %s in community %s.\n Best regards,\nSKH System' % (service, Community.objects.get(id=f.cleaned_data['community'])),
+					'Dear staff,\nThis email is to inform new reservation of %s in community %s.\n Best regards,\nSKH System' % (service, Community.objects.get(id=f.cleaned_data['community'].id)),
 					settings.EMAILS['system'],
 					['staff@skh.fi'])
 				send_mass_mail((toResident, toManager), fail_silently=False)
 				return HttpResponseRedirect(reverse('Common.views.reserved'))
-			else:
-				pass
-		else:
-			pass
-	else:
+				error = True
+
 		c = get_object_or_404(Community, pk=community_id)
 		f = queue_add_form()
 		s = 'Register'
-		r = reverse('Parking.views.reservation_list', args=[c.id])
-		q = reverse('Parking.views.queue_list', args=[c.id])
+		#r = reverse('Parking.views.reservation_list', args=[c.id])
+		#q = reverse('Parking.views.queue_list', args=[c.id])
 		return render_to_response('Common/community_detail.html',
 								  {
 									'community':c,
 									'form':f,
 									'submit':s,
-									'reservation':r,
-									'queue':q,
+									#'reservation':r,
+									#'queue':q,
 									},
 								  context_instance=RequestContext(request),
 								  )

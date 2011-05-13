@@ -16,11 +16,10 @@ urlpatterns = patterns('',
 	#(r'^reservation/community/(?P<community_id>\d+)/area/(?P<area_id>\d+)/$', 'Parking.views.area_detail'), #+
 	#(r'^reservation/community/area/(?P<area_id>\d+)/$', 'Parking.views.area_detail'),
 
-    (r'^reservation/community/(?P<community_id>\d+)/queue/$', 'Common.views.queue_list', {'page': '1'}),
-    (r'^reservation/community/(?P<community_id>\d+)/queue/page_(?P<page>\d+)$', 'Parking.views.queue_list'),
+    (r'^reservation/community/(?P<community_id>\d+)/queue/$', 'Common.views.queue_list',),
 	(r'^reservation/community/queue/(?P<queue_id>\d+)/$', 'Common.views.queue_detail'),
 
-    (r'^reservation/community/(?P<community_id>\d+)/parking/reservation/$', 'Parking.views.reservation_list', {'page': '1'}),
+    (r'^reservation/community/(?P<community_id>\d+)/parking/reservation/$', 'Parking.views.reservation_list',),
     (r'^reservation/community/(?P<community_id>\d+)/parking/reservation/page_(?P<page>\d+)$', 'Parking.views.reservation_list'),
     (r'^reservation/parking/reservation/(?P<transaction_id>\d+)/$', 'Parking.views.reservation_detail'),
 
