@@ -1,4 +1,10 @@
 {% extends "Common/base.html" %}{% block content %}
+
+<p></p>
+
+<a href="/reservation/community/(?P<community_id>\d+)/area/">Area</a>
+<a href="/reservation/community/(?P<community_id>\d+)/queue/">Queue</a>
+	
 <h1>Reservation</h1>
 <form action="" method="post">
 	{% csrf_token %}
