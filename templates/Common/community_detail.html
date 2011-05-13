@@ -1,9 +1,11 @@
 {% extends "Common/base.html" %}
 {% block content %}
-<a href="/reservation/community/(?P<community_id>\d+)/queue/">Queue List</a>
 <h1>Reservation</h1>
-{% if error %}
-<p>You have already reserved that service. You can reserve another service and/or community or wait until contacted.</p>
+{% if error_reserved %}
+<p style="color:#ff0000">You have already reserved that service. You can reserve another service and/or community or wait until contacted.</p>
+{% endif %}
+{% if error_invalid %}
+<p style="color:#ff0000">Please choose your service.</p>
 {% endif %}
 <form action="" method="post">
 	{% csrf_token %}

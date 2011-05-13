@@ -43,14 +43,14 @@ def community_list(request):
 
 @login_required(login_url='/reservation/login/')
 def community_detail(request, community_id):
-	error = False
+	error_reserved = error_invalid = False
 	class queue_add_form(forms.Form):
 		community = forms.ModelChoiceField(queryset=Community.objects.all(), initial=community_id)
 		service = forms.ChoiceField(
 			widget=RadioSelect,
 			choices=(('s', 'Sauna'),('p', 'Parking'),
     	))
-		note = forms.CharField(widget=forms.Textarea)
+		note = forms.CharField(widget=forms.Textarea, required=False)
 	if request.method == 'POST':
 		# then, bound the request into defined form
 		f = queue_add_form(request.POST)
@@ -75,10 +75,9 @@ def community_detail(request, community_id):
 				to_emails = [request.user.email]
 				msg = EmailMultiAlternatives(subject, text_content, from_email, to_emails)
 				html_content = '''
-					Dear %s,<br />
-					This email is to confirm your reservation of <b>%s</b> in community <b>%s</b>. We will contact you when the service is available.<br />
-					Best regards, <br/>
-					SKH Staff''' % (request.user.get_full_name(), service, f.cleaned_data['community'])
+					<p>Dear %s,</p>
+					<p>This email is to confirm your reservation of <b>%s</b> in community <b>%s</b>. We will contact you when the service is available.</p>
+					<p>Best regards, <br/>SKH Staff</p>''' % (request.user.get_full_name(), service, f.cleaned_data['community'])
 				msg.attach_alternative(html_content, "text/html")
 				msg.send()
 
@@ -87,17 +86,19 @@ def community_detail(request, community_id):
 				from_email = settings.EMAILS['system']
 				to_emails = [settings.EMAILS['staff']]
 				msg = EmailMultiAlternatives(subject, text_content, from_email, to_emails)
-				html_content = '''Dear staff,
-					This email is to inform new reservation of <b>%s</b> in community <b>%s</b> with note:<br />
-					<i>%s</i><br />
-					Best regards,<br />
-					SKH System''' % (service, f.cleaned_data['community'], f.cleaned_data['note'])
+				html_content = '''
+					<p>Dear staff,</p>
+					<p>This email is to inform new reservation of <b>%s</b> in community <b>%s</b> with note:</p>
+					<p><i>%s</i></p>
+					<p>Best regards,<br />SKH System</p>''' % (service, f.cleaned_data['community'], f.cleaned_data['note'])
 				msg.attach_alternative(html_content, "text/html")
 				msg.send()
 
 				return HttpResponseRedirect(reverse('Common.views.reserved'))
 			else:
-				error = True
+				error_reserved = True
+		else:
+			error_invalid = True
 	c = get_object_or_404(Community, pk=community_id)
 	f = queue_add_form()
 	s = 'Register'
@@ -108,7 +109,8 @@ def community_detail(request, community_id):
 								'community':c,
 								'form':f,
 								'submit':s,
-								'error':error,
+								'error_reserved':error_reserved,
+								'error_invalid':error_invalid,
 								#'reservation':r,
 								#'queue':q,
 								},
