@@ -4,6 +4,7 @@ from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
+    (r'^/$', 'Common.views.home'),#
     (r'^reservation/$', 'Common.views.index'),#
     (r'^reservation/community/$', 'Common.views.community_list',),#+
 	(r'^reservation/community/(?P<community_id>\d+)/$', 'Common.views.community_detail'),#+

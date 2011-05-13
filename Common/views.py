@@ -175,3 +175,7 @@ def reserved(request):
 def permissions_warning(request):
 		return render_to_response('Common/permissions_warning.html',
 								context_instance=RequestContext(request),)
+
+
+def home(request):
+	return render_to_response('home.html')
