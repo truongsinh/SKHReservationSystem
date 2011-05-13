@@ -3,6 +3,7 @@ import Queue
 import django
 from django.conf import settings
 from django.core.mail import send_mass_mail
+from django.core.mail.message import EmailMultiAlternatives
 from django.core.paginator import Paginator, EmptyPage
 from django.forms.widgets import RadioSelect
 from django.shortcuts import render_to_response, get_object_or_404
@@ -42,6 +43,7 @@ def community_list(request):
 
 @login_required(login_url='/reservation/login/')
 def community_detail(request, community_id):
+	error = False
 	class queue_add_form(forms.Form):
 		community = forms.ModelChoiceField(queryset=Community.objects.all(), initial=community_id)
 		service = forms.ChoiceField(
@@ -67,36 +69,51 @@ def community_detail(request, community_id):
 				defaults={'note': f.cleaned_data['note']},
 			)
 			if created:
-				fclean = f.data['community']
-				toResident = (
-					'Reservation confirmed',
-					'Dear %s,\nThis email is to confirm your reservation of %s in community %s. We will contact you when the service is available.\n Best regards,\nSKH Staff' % (request.user.get_full_name, service, Community.objects.get(id=f.cleaned_data['community'])),
-					settings.EMAILS['staff'],
-					[request.user.email])
-				toManager = (
-					'New reservation',
-					'Dear staff,\nThis email is to inform new reservation of %s in community %s.\n Best regards,\nSKH System' % (service, Community.objects.get(id=f.cleaned_data['community'].id)),
-					settings.EMAILS['system'],
-					['staff@skh.fi'])
-				send_mass_mail((toResident, toManager), fail_silently=False)
-				return HttpResponseRedirect(reverse('Common.views.reserved'))
-				error = True
+				subject = 'Reservation confirmed'
+				text_content = 'Dear %s,\nThis email is to confirm your reservation of *%s* in community *%s*. We will contact you when the service is available.\n Best regards,\nSKH Staff' % (request.user.get_full_name(), service, f.cleaned_data['community'])
+				from_email = settings.EMAILS['staff']
+				to_emails = [request.user.email]
+				msg = EmailMultiAlternatives(subject, text_content, from_email, to_emails)
+				html_content = '''
+					Dear %s,<br />
+					This email is to confirm your reservation of <b>%s</b> in community <b>%s</b>. We will contact you when the service is available.<br />
+					Best regards, <br/>
+					SKH Staff''' % (request.user.get_full_name(), service, f.cleaned_data['community'])
+				msg.attach_alternative(html_content, "text/html")
+				msg.send()
 
-		c = get_object_or_404(Community, pk=community_id)
-		f = queue_add_form()
-		s = 'Register'
-		#r = reverse('Parking.views.reservation_list', args=[c.id])
-		#q = reverse('Parking.views.queue_list', args=[c.id])
-		return render_to_response('Common/community_detail.html',
-								  {
-									'community':c,
-									'form':f,
-									'submit':s,
-									#'reservation':r,
-									#'queue':q,
-									},
-								  context_instance=RequestContext(request),
-								  )
+				subject = 'New reservation'
+				text_content = 'Dear staff,\nThis email is to inform new reservation of *%s* in community *%s* with note:\n%s\n.\n Best regards,\nSKH System' % (service, f.cleaned_data['community'], f.cleaned_data['note'])
+				from_email = settings.EMAILS['system']
+				to_emails = [settings.EMAILS['staff']]
+				msg = EmailMultiAlternatives(subject, text_content, from_email, to_emails)
+				html_content = '''Dear staff,
+					This email is to inform new reservation of <b>%s</b> in community <b>%s</b> with note:<br />
+					<i>%s</i><br />
+					Best regards,<br />
+					SKH System''' % (service, f.cleaned_data['community'], f.cleaned_data['note'])
+				msg.attach_alternative(html_content, "text/html")
+				msg.send()
+
+				return HttpResponseRedirect(reverse('Common.views.reserved'))
+			else:
+				error = True
+	c = get_object_or_404(Community, pk=community_id)
+	f = queue_add_form()
+	s = 'Register'
+	#r = reverse('Parking.views.reservation_list', args=[c.id])
+	#q = reverse('Parking.views.queue_list', args=[c.id])
+	return render_to_response('Common/community_detail.html',
+							  {
+								'community':c,
+								'form':f,
+								'submit':s,
+								'error':error,
+								#'reservation':r,
+								#'queue':q,
+								},
+							  context_instance=RequestContext(request),
+							  )
 
 
 @permission_required('Common.view_profile', login_url='/reservation/permissions_warning/')

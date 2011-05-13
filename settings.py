@@ -105,7 +105,12 @@ INSTALLED_APPS = (
 )
 
 AUTH_PROFILE_MODULE = 'Common.Profile'
-EMAILS=[
-	'staff', 'truongsinh.tran@gmail.com',
-	'system', 'truongsinh.tran@gmail.com',
-]
+EMAILS={
+	'staff': 'truongsinh.tran@gmail.com',
+	'system': 'truongsinh.tran@gmail.com',
+}
+EMAIL_HOST = "smtp.gmail.com"
+EMAIL_HOST_USER = "truongsinh.tran@gmail.com"
+EMAIL_HOST_PASSWORD = "xo8hk7xx"
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True

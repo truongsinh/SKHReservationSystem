@@ -3,7 +3,7 @@
 <a href="/reservation/community/(?P<community_id>\d+)/queue/">Queue List</a>
 <h1>Reservation</h1>
 {% if error %}
-<p>You have already reserved that service</p>
+<p>You have already reserved that service. You can reserve another service and/or community or wait until contacted.</p>
 {% endif %}
 <form action="" method="post">
 	{% csrf_token %}
