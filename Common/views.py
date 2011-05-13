@@ -95,16 +95,11 @@ def community_detail(request, community_id):
 			return HttpResponseRedirect("/reservation/false")
 	#
 
-@login_required(login_url='/reservation/login/')
-def account(request, user_id):
-	return render_to_response('Common/account.html',
-								context_instance=RequestContext(request),)
-
-@permission_required('Common.view_profile', login_url='/reservation/login/')
-def account_list(request, page):
+@permission_required('Common.view_profile', login_url='/reservation/permissions_warning/')
+def account_list(request):
 	# pagination later
 	accounts = Profile.objects.all().order_by('last_name')
-	return render_to_response('Common/account.html', {'accounts': accounts},
+	return render_to_response('Common/account_list.html', {'accounts': accounts},
 								context_instance=RequestContext(request),)
 
 @login_required(login_url='/reservation/login/')
@@ -153,4 +148,9 @@ def index(request):
 @login_required(login_url='/reservation/login/')
 def reserved(request, community_id):
 	return render_to_response('Common/reserved.html',
+								context_instance=RequestContext(request),)
+
+@login_required(login_url='/reservation/login/')
+def permissions_warning(request):
+		return render_to_response('Common/permissions_warning.html',
 								context_instance=RequestContext(request),)
