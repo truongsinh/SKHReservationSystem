@@ -47,18 +47,18 @@ USE_L10N = True
 # Example: "/home/media/media.lawrence.com/"
 import os
 dirnames = os.path.dirname(globals()["__file__"])
-MEDIA_ROOT = ''
-STATIC_ROOT = os.path.join(os.path.join(dirnames, 'Templates'), "Resources")
-STATIC_URL = '/resources/'
+MEDIA_ROOT = os.path.join(dirnames, 'Media')
+#os.path.join(os.path.join(dirnames, 'Templates'), "Resources")
+
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash if there is a path component (optional in other cases).
 # Examples: "http://media.lawrence.com", "http://example.com/media/"
-MEDIA_URL = ''
+MEDIA_URL = '/media/'
 
 # URL prefix for admin media -- CSS, JavaScript and images. Make sure to use a
 # trailing slash.
 # Examples: "http://foo.com/media/", "/media/".
-ADMIN_MEDIA_PREFIX = '/media/'
+ADMIN_MEDIA_PREFIX = '/resources/admin/'
 
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = 'b6sknjt_*7d+8v#)3@is9=+5h2u@=*fb8j6*o!psdgax7auxq_'
@@ -92,8 +92,8 @@ INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
-    #'django.contrib.sites',
 	'django.contrib.staticfiles',
+    #'django.contrib.sites',
     'django.contrib.messages',
     # Uncomment the next line to enable the admin:
     'django.contrib.admin',
@@ -120,3 +120,8 @@ def decrypt (ss):
     key = cycle(SECRET_KEY)
     return ''.join(chr(ord(x) ^ ord(y)) for (x,y) in izip(ss, key))
 EMAIL_HOST_PASSWORD = decrypt("\x1aYK\x03\x05]\x0c'")
+
+STATIC_URL = '/resources/'
+STATICFILES_DIRS = (
+	os.path.join(os.path.join(dirnames, 'templates'),"Resources"),
+)
