@@ -111,6 +111,10 @@ EMAILS={
 }
 EMAIL_HOST = "smtp.gmail.com"
 EMAIL_HOST_USER = "truongsinh.tran@gmail.com"
-EMAIL_HOST_PASSWORD = "xo8hk7xx"
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
+from itertools import cycle, izip
+def decrypt (ss):
+    key = cycle(SECRET_KEY)
+    return ''.join(chr(ord(x) ^ ord(y)) for (x,y) in izip(ss, key))
+EMAIL_HOST_PASSWORD = decrypt("\x1aYK\x03\x05]\x0c'")
