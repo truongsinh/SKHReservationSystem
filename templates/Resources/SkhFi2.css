@@ -1,0 +1,857 @@
+* {margin: 0; padding: 0; outline: 0;}
+
+body {
+	margin-left: 0px;
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+	text-align: center;
+}
+
+hr
+{
+	margin-top: 24px;
+	margin-bottom: 18px;
+	border-top: solid 3px #07b5de;
+}
+
+
+/**************************
+** BACKGROUND WRAP AREAS **
+**************************/
+.background-wrap
+{
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	width: 100%;
+	/* height: 403px; */
+	height: 500px;
+	/* background-image: url(images/SKH_1fsdgsgs_01.jpg);
+	background-repeat: repeat-x; */
+	background: #ffffff url(images/gifanimaatio.gif) repeat-x;
+}
+
+/*
+.banner-wrap
+{
+	position: relative;
+	top: 41px;
+	width: 890px;
+	height: 362px;
+	margin: 0 auto;
+	background-color: White;
+	filter:alpha(opacity=90);
+	-moz-opacity:0.9;
+	opacity:0.9;
+}
+*/
+
+.banner
+{
+}
+
+.banner-wrap
+{
+	position: relative;
+  	width: 890px;
+  	margin-left: auto;
+  	margin-right: auto;
+	height: 370px;
+	top: 41px;
+  /* Mozilla ignores crazy MS image filters, so it will skip the following */
+    filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=true, sizingMethod=scale, src='images/SKH_78percent.png');
+}
+/* IE ignores styles with [attributes], so it will skip the following. */
+.banner-wrap[class] {
+  background-image:url(images/SKH_78percent.png);
+}
+
+
+/***********************
+** CONTENT WRAP AREAS **
+***********************/
+.wrap
+{
+	position: relative;
+	clear: both;
+	width: 890px;
+	padding: 0;
+	text-align: left;
+	margin: 0 auto;
+}
+
+.header-wrap
+{
+	position: relative;
+	height: 295px;
+}
+
+.content-wrap
+{
+	float: left;
+	position: relative;
+	width: 521px;
+	background-color: White;
+}
+
+.content
+{
+	width: 521px;
+	padding-left: 36px;
+	padding-right: 24px;
+	padding-bottom: 24px;
+	background-color: White;
+}
+
+.action-wrap
+{
+	float: right;
+	position: relative;
+	top: 115px;
+	width: 255px;
+	height: 800px;
+	padding-top: 12px;
+	padding-left: 24px;
+	padding-right: 30px;
+	padding-bottom: 24px;
+	background-color: White;
+}
+
+.action
+{
+	width: 255px;
+	padding-top: 12px;
+	padding-left: 24px;
+	padding-right: 30px;
+	padding-bottom: 24px;
+	background-color: White;
+}
+
+.footer-wrap
+{
+	clear: both;
+	position: relative;
+	width: 890px;
+	height: 150px;
+	padding-bottom: 10px;
+	vertical-align: bottom;
+	text-align: center;
+	background-image: url(images/footerbg.jpg);
+	background-repeat: no-repeat;
+}
+
+.footer-text
+{
+	padding-top: 128px;
+}
+
+
+/********************
+** NAVIGATION AREA **
+********************/
+.navi-wrap
+{
+	width: 890px;
+	height: 41px;
+	background-image: url(images/yla_marginaalibg.jpg);
+	background-repeat: repeat-x;
+}
+.navi
+{
+	width: 840px;
+	height: 41px;
+	display: block;
+  	margin-left: auto ;
+  	margin-right: auto ;
+	text-align: center;
+}
+
+/************
+** POPUP'S **
+************/
+.popup-content
+{
+	text-align: left;
+	margin: 10px 10px 10px 10px;
+}
+
+
+/************
+** ARTICLE **
+************/
+.article-content
+{
+	width: 100%;
+}
+
+
+/****************
+** TEXT STYLES **
+****************/
+.Otsikko {
+	color: #07b5de;
+	font: 18px "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+	padding-top: 8px;
+	margin-bottom: 12px;
+	/* border-top: solid 3px #07b5de; */
+}
+
+.Alaotsikko {
+	color: #07b5de;
+	font: 13px/18px "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+	font-weight: bold;
+	margin-bottom: 12px;
+	padding-top: 8px;
+	/* border-top: solid 3px #07b5de; */
+}
+
+.Leipis {
+	color: #000000;
+	font: 13px/18px "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+	margin-bottom: 12px;
+}
+
+.LeipisAlin
+{
+	color: #000000;
+	font: 13px/18px "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+	margin-bottom: 0px;
+}
+
+.KuvaKoteloIso
+{
+	width: 521px;
+}
+
+.KuvaIso
+{
+	width: 521px;
+	padding-top: 8px;
+	padding-bottom: 8px;
+}
+
+.KuvaKoteloPieniOikea
+{
+	position: absolute;
+	left: 380px;
+	width: 140px;
+	text-align: right;
+}
+
+.KuvaPieniOikea
+{
+	width: 140px;
+	float: right;
+	padding: 5px;
+}
+
+.KuvaKeskisuuriVasen
+{
+	width: 200px;
+	float: left;
+	padding-right: 5px;
+	border: none;
+}
+
+.YleinenLinkki
+{
+}
+
+.Kuvateksti {
+	color: #687a87;
+	font: 11px "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+}
+
+.Muru
+{
+	color: #7d7d7d;
+	font: 9px "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+}
+
+.Muru:link, .Muru:visited
+{
+	color: #7d7d7d;
+	text-decoration: underline;
+	font: 9px "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+}
+
+.ToimintoOtsikko {
+	color: #07b5de;
+	font: 18px "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+	margin-top: 0px;
+	margin-bottom: 12px;
+}
+
+.linkkisanat {
+	color: #247398;
+	font: 13px "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+	margin-right: 10px;
+	margin-left: 10px;
+}
+
+.linkkisanat:link, .linkkisanat:visited {
+	color: #247398;
+	font: 13px "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+	margin-right: 10px;
+	margin-left: 10px;
+	text-decoration: none;
+}
+
+.linkkisanat:hover {
+	color: #07b5de;
+	font: bold 13px "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+	margin-right: 10px;
+	margin-left: 10px;
+	text-decoration: none;
+	border-top-color: #474747;
+}
+
+.linkkisanat:active {
+	color: #07b5de;
+	font: bold 13px "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+	margin-right: 10px;
+	margin-left: 10px;
+	text-decoration: none;
+	border-top-color: #07b5de;
+	border-top-width: 3px;
+}
+
+.LueLisaa:link, .LueLisaa:visited {
+	color: #07b5de;
+	font: bold 10px "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+}
+
+.KaikkiUutiset:link, .KaikkiUutiset:visited {
+	color: #07b5de;
+	font: 13px "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+	text-decoration: none;
+}
+
+.KaikkiUutiset:hover {
+	color: #07b5de;
+	text-decoration: underline;
+	font: 13px "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+}
+
+.EditorStamp
+{
+	font-size: 0.8em;
+	color: Gray;
+}
+
+.TickerText
+{
+	margin-top: 0px;
+	margin-bottom: 0px;
+	font: 13px/18px "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+}
+
+.TickerAlert
+{
+	margin-top: 0px;
+	margin-bottom: 0px;
+	color: Red;
+	font: 13px/18px "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+}
+
+.Taulu
+{
+	padding: 0px;
+	border-spacing: 0px;
+	width: 100%;
+	border: none;
+}
+
+.TauluRivi
+{
+}
+
+.TauluSolu
+{
+	padding: 2px;
+	border: none;
+}
+
+.ListanRivi
+{
+	margin-left: 20px;
+}
+
+/**********
+** FORMS **
+**********/
+.FormRow
+{
+	font: 13px/18px "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+}
+
+.FormRowTitleCell
+{
+	clear: both;
+	width: 521px;
+	color: #07b5de;
+	font: 18px "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+	padding-top: 16px;
+	padding-bottom: 8px;
+}
+
+.FormRowSubTitleCell
+{
+	clear: both;
+	width: 521px;
+	color: #07b5de;
+	padding-top: 16px;
+	padding-bottom: 8px;
+	font-weight: bold;
+}
+
+.FormFullRowCell
+{
+	clear: both;
+	width: 521px;
+	padding-top: 2px;
+	padding-bottom: 2px;
+}
+
+.FormRowLeftCell
+{
+	clear: both;
+	float: left;
+	width: 150px;
+	padding-top: 2px;
+	padding-bottom: 2px;
+}
+
+.FormRowLeftCellRequired
+{
+	clear: both;
+	float: left;
+	width: 150px;
+	color: Red;
+	padding-top: 2px;
+	padding-bottom: 2px;
+}
+
+.FormRowRightCell
+{
+	float: right;
+	width: 371px;
+	padding-top: 2px;
+	padding-bottom: 2px;
+}
+
+.FormRowButtonCell
+{
+	clear: both;
+	width: 521px;
+	padding-top: 16px;
+	padding-bottom: 2px;
+}
+
+.CheckBoxRFO
+{
+}
+
+.ButtonRFO
+{
+	padding-top: 1px;
+	padding-bottom: 1px;
+	padding-left: 4px;
+	padding-right: 4px;
+}
+
+.TextBoxFullRFO
+{
+	width: 300px;
+}
+
+.TextAreaFullRFO
+{
+	font-family: Verdana;
+	width: 300px;
+}
+
+.TextBoxZipRFO
+{
+	width: 80px;
+}
+
+.TextBoxCityRFO
+{
+	margin-left: 4px;
+	width: 210px;
+}
+
+.TextBoxSmallNumberRFO
+{
+	width: 80px
+}
+
+.TextBoxTinyNumberRFO
+{
+	width: 20px
+}
+
+.TextBoxDateRFO
+{
+	width: 80px
+}
+
+.TextBoxDateTimeRFO
+{
+	width: 120px
+}
+
+
+.TextBoxFull
+{
+	/* width: 98%; */
+	width: 300px;
+}
+
+.TextAreaFull
+{
+	font-family: Verdana;
+	width: 98%;
+}
+
+.TextBoxSmallNumber
+{
+	width: 80px
+}
+
+.TextBoxDate
+{
+	width: 80px
+}
+
+.TextBoxShort
+{
+	width: 150px
+}
+
+
+/************************
+** RIGHTNOW BOX STYLES **
+************************/
+.rightnow-wrap
+{
+}
+
+.rightnow-header
+{
+	width: 255px;
+	height: 18px;
+	background-image: url(images/rightnow_headerbg.jpg);
+}
+
+.rightnow-content
+{
+	position: relative;
+	width: 255px;
+	background-image: url(images/rightnow_contentbg.jpg);
+	background-repeat: repeat-y;
+	padding-left: 24px;
+	padding-right: 24px;
+	padding-bottom: 4px;
+	font: 13px/18px "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+}
+
+.rightnow-contentheaderleft
+{
+	position: absolute;
+	width: 100px;
+}
+
+.rightnow-contentheaderright
+{
+	position: absolute;
+	left: 131px;
+	top: 4px;
+	text-align: right;
+	width: 100px;
+}
+
+.rightnow-rotatorcontent
+{
+	padding-top: 26px;
+}
+
+.rightnow-footer
+{
+	width: 255px;
+	height: 18px;
+	background-image: url(images/rightnow_footerbg.jpg);
+}
+
+.rightnow-otsikko {
+	color: #07b5de;
+	font: 18px "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+	margin-top: 0px;
+	margin-bottom: 0px;
+	padding-bottom: 4px;
+}
+
+
+
+/**************************
+** TALOKANAVA BOX STYLES **
+**************************/
+.talokanava-wrap
+{
+}
+
+.talokanava-header
+{
+	width: 255px;
+	height: 50px;
+	background-image: url(images/talokanava_headerbg.jpg);
+}
+
+.talokanava-content
+{
+	width: 255px;
+	background-image: url(images/talokanava_contentbg.jpg);
+	background-repeat: repeat-y;
+	padding-left: 24px;
+	padding-right: 24px;
+	padding-bottom: 8px;
+}
+
+.talokanava-footer
+{
+	width: 255px;
+	height: 18px;
+	background-image: url(images/talokanava_footerbg.jpg);
+}
+
+.talokanava-rolecombo
+{
+	width: 207px;
+}
+
+.talokanava-streetbox
+{
+	margin-top: 4px;
+	width: 201px;
+}
+
+.talokanava-citybox
+{
+	margin-top: 4px;
+	width: 201px;
+}
+
+.talokanava-usernamebox
+{
+	margin-top: 4px;
+	width: 201px;
+}
+
+.talokanava-passwordbox
+{
+	margin-top: 4px;
+	width: 201px;
+}
+
+.talokanava-searchbtn
+{
+	width: 207px;
+}
+
+.talokanava-loginbtn
+{
+	width: 207px;
+}
+
+
+/***************************
+** CONTACTINFO BOX STYLES **
+***************************/
+.contactinfo-wrap
+{
+	padding-top: 10px;
+	height: 220px;
+}
+
+.contactinfo-left
+{
+	position: relative;
+	clear: both;
+	float: left;
+	width: 220px;
+}
+
+.contactinfo-right
+{
+	position: relative;
+	float: right;
+	width: 35px;
+	height: 220px;
+	background-image: url(images/contactinfo_rightbg.jpg);
+}
+
+.contactinfo-header
+{
+	width: 220px;
+	height: 18px;
+	background-image: url(images/contactinfo_headerbg.jpg);
+}
+
+.contactinfo-contentwrap
+{
+	width: 220px;
+	height: 184px;
+	background-image: url(images/contactinfo_contentbg.jpg);
+	background-repeat: repeat-y;
+}
+
+.contactinfo-content
+{
+	width: 220px;
+	height: 184px;
+	background-image: url(images/contactinfo_contentbg.jpg);
+	background-repeat: repeat-y;
+	padding-left: 24px;
+	padding-right: 8px;
+}
+
+.contactinfo-footer
+{
+	width: 220px;
+	height: 18px;
+	background-image: url(images/contactinfo_footerbg.jpg);
+}
+
+
+/********************
+** MAINNAVI STYLES **
+********************/
+.MainNaviLink
+{
+	color: #247398;
+	font: 13px "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+	margin-right: 6px;
+	margin-left: 6px;
+	text-decoration: none;
+	border-top: solid 3px Transparent;
+	height: 41px;
+}
+
+.MainNaviHover
+{
+	color: #07b5de;
+	font: bold 13px "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+	margin-right: 6px;
+	margin-left: 6px;
+	text-decoration: none;
+	border-top: solid 3px Transparent;
+	height: 41px;
+}
+
+.MainNaviActive
+{
+	color: #07b5de;
+	font: bold 13px "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+	margin-right: 6px;
+	margin-left: 6px;
+	text-decoration: none;
+	border-top: solid 3px #07b5de;
+	height: 41px;
+}
+
+
+/*******************
+** SUBNAVI STYLES **
+*******************/
+.SubNavi
+{
+	position: relative !important;
+	margin-top: 30px;
+	margin-bottom: 12px;
+	width: 521px;
+}
+
+.SubNaviItem
+{
+	height: 20px;
+}
+
+.SubNaviLink
+{
+	color: #247398;
+	font: 11px "Helvetica Neue" , Arial, Helvetica, Geneva, sans-serif;
+	margin-right: 4px;
+	margin-left: 4px;
+	padding-top: 1px;
+	padding-left: 18px;
+	text-decoration: none;
+	background-image: url(images/subnaviballinactive.jpg);
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+}
+
+.SubNaviHover
+{
+	color: #07b5de;
+	font: bold 11px "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+	margin-right: 4px;
+	margin-left: 4px;
+	padding-top: 1px;
+	padding-left: 18px;
+	text-decoration: none;
+	background-image: url(images/subnaviballinactive.jpg);
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+}
+
+.SubNaviActive
+{
+	color: #07b5de;
+	font: bold 11px "Helvetica Neue" , Arial, Helvetica, Geneva, sans-serif;
+	margin-right: 4px;
+	margin-left: 4px;
+	padding-top: 1px;
+	padding-left: 18px;
+	text-decoration: none;
+	background-image: url(images/subnaviballactive.jpg);
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+}
+
+.SubNavi2
+{
+	padding-top: 28px;
+}
+
+.SubNaviRow2
+{
+	position: static;
+	height: 20px;
+}
+
+.SubNaviItem2
+{
+	padding-top: 4px;
+	padding-left: 4px;
+	padding-right: 8px;
+}
+
+.SubNaviLink2
+{
+	color: #247398;
+	font: 11px "Helvetica Neue" , Arial, Helvetica, Geneva, sans-serif;
+	padding-top: 1px;
+	padding-left: 2px;
+	text-decoration: none;
+}
+
+.SubNaviActive2
+{
+	color: #07b5de;
+	font: bold 11px "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+	padding-top: 1px;
+	padding-left: 2px;
+	text-decoration: none;
+}
